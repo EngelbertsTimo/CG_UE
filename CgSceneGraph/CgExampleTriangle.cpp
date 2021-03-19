@@ -28,7 +28,7 @@ m_id(id)
     m_vertices.push_back(glm::vec3(-0.5,0.0,0.0));
     m_vertices.push_back(glm::vec3(0.0,-0.5,0.0));
     m_vertices.push_back(glm::vec3(0.0,0.5,0.0));
-    m_vertices.push_back(glm::vec3(0.5,0.0,0.0));
+    m_vertices.push_back(glm::vec3(0.7,0.0,0.0));
 
     m_triangle_indices.push_back(0);
     m_triangle_indices.push_back(1);
