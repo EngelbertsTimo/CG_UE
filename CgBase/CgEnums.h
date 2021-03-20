@@ -25,9 +25,9 @@ namespace Cg{
     WindowResizeEvent               = 0x0000100,
     LoadObjFileEvent                = 0x0000200,
     CgTrackballEvent                = 0x0000400,
-
+    ColorChangeEvent                = 0x0001000,
     // unused, may be changed to whatever
-    CgSomeSpecialEvent1             = 0x0001000,
+
     CgSomeSpecialEvent2             = 0x0002000,
     CgSomeSpecialEvent3             = 0x0004000,
     CgSomeSpecialEvent4             = 0x0008000,

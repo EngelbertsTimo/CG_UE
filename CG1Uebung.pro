@@ -5,6 +5,7 @@ QMAKE_CXXFLAGS += -std=c++11
 CONFIG += c++11
 
 SOURCES += main.cpp \
+    CgEvents/CgColorChangeEvent.cpp \
     CgQtViewer/CGQtGLRenderWidget.cpp \
     CgQtViewer/CgQtGui.cpp \
     CgBase/CgObservable.cpp \
@@ -17,10 +18,12 @@ SOURCES += main.cpp \
     CgQtViewer/CgTrackball.cpp \
     CgEvents/CgWindowResizeEvent.cpp \
     CgEvents/CgLoadObjFileEvent.cpp \
+    CgSceneGraph/cgtricube.cpp \
     CgUtils/ObjLoader.cpp \
     CgEvents/CgTrackballEvent.cpp
 
 HEADERS += \
+    CgEvents/CgColorChangeEvent.h \
     CgQtViewer/CgQtGLRenderWidget.h \
     CgQtViewer/CgQtGui.h \
     CgBase/CgObserver.h \
@@ -43,6 +46,7 @@ HEADERS += \
     CgQtViewer/CgTrackball.h \
     CgEvents/CgWindowResizeEvent.h \
     CgEvents/CgLoadObjFileEvent.h \
+    CgSceneGraph/cgtricube.h \
     CgUtils/ObjLoader.h \
     CgBase/CgBaseImage.h \
     CgEvents/CgTrackballEvent.h

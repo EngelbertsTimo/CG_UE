@@ -102,6 +102,9 @@ private:
     QButtonGroup* myButtonGroup;
     QCheckBox* myCheckBox1;
     QSpinBox* mySpinBox1;
+     QSpinBox* colorSpinBoxred;
+      QSpinBox* colorSpinBoxgreen;
+       QSpinBox* colorSpinBoxblue;
 
 
 private slots:
@@ -114,6 +117,7 @@ private slots:
     void slotTrackballChanged();
 
     /* slots example qt gui elements */
+    void slotChangeColorButton();
     void slotMySpinBox1Changed();
     void slotMyCheckBox1Changed();
     void slotMyButton1Pressed();

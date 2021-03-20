@@ -9,6 +9,7 @@
 #include "../CgEvents/CgWindowResizeEvent.h"
 #include "../CgEvents/CgLoadObjFileEvent.h"
 #include "../CgEvents/CgTrackballEvent.h"
+#include "../CgEvents/CgColorChangeEvent.h"
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -160,9 +161,39 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     mySpinBox1->setMaximum(50);
     mySpinBox1->setValue(3);
    // mySpinBox1->setSuffix("   suffix");
-   // mySpinBox1->setPrefix("Prefix:  ");
+    mySpinBox1->setPrefix("Prefix:  ");
     connect(mySpinBox1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
     tab1_control->addWidget(mySpinBox1);
+
+
+    colorSpinBoxred = new QSpinBox();
+    tab1_control->addWidget(colorSpinBoxred);
+    colorSpinBoxred->setMinimum(1);
+    colorSpinBoxred->setMaximum(256);
+    colorSpinBoxred->setValue(125);
+     colorSpinBoxred->setPrefix("red:    1/");
+
+    colorSpinBoxgreen = new QSpinBox();
+    tab1_control->addWidget(colorSpinBoxgreen);
+    colorSpinBoxgreen->setMinimum(1);
+    colorSpinBoxgreen->setMaximum(256);
+    colorSpinBoxgreen->setValue(125);
+ colorSpinBoxgreen->setPrefix("green:  1/");
+
+
+    colorSpinBoxblue = new QSpinBox();
+    tab1_control->addWidget(colorSpinBoxblue);
+    colorSpinBoxblue->setMinimum(1);
+    colorSpinBoxblue->setMaximum(256);
+    colorSpinBoxblue->setValue(125);
+ colorSpinBoxblue->setPrefix("blue:   1/");
+
+
+ QPushButton* colorButton = new QPushButton("change Color");
+ tab1_control->addWidget(colorButton);
+
+ connect(colorButton, SIGNAL( clicked() ), this, SLOT(slotChangeColorButton()) );
+
 
 
     /*Example for using a checkbox */
@@ -243,7 +274,10 @@ void CgQtGui::slotButtonGroupSelectionChanged()
 
 void CgQtGui::slotMySpinBox1Changed()
 {
+   /* std::cout << "CgQtGui: " << "spinnbox to " <<mySpinBox1->value() << std::endl;
+    CgBaseEvent* e = new CgColorChangeEvent(mySpinBox1->value());
 
+    notifyObserver(e);*/
 }
 
 void CgQtGui::slotMyCheckBox1Changed()
@@ -251,6 +285,12 @@ void CgQtGui::slotMyCheckBox1Changed()
 
 }
 
+void CgQtGui::slotChangeColorButton()
+{
+    CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,colorSpinBoxred->value(),colorSpinBoxgreen->value(),colorSpinBoxblue->value());
+
+    notifyObserver(e);
+}
 
 void CgQtGui::slotLoadMeshFile()
 {
@@ -274,7 +314,7 @@ void CgQtGui::slotTrackballChanged()
 
 void CgQtGui::slotMyButton1Pressed()
 {
-   std::cout << "button 1 pressed " << std::endl;
+   std::cout << "CgQtGui: " << "button 1 pressed " << std::endl;
 
 }
 
@@ -282,10 +322,10 @@ void CgQtGui::slotMyButton1Pressed()
 void CgQtGui::mouseEvent(QMouseEvent* event)
 {
 
-   // std::cout << QApplication::keyboardModifiers() << std::endl;
+   // std::cout << "CgQtGui: " << QApplication::keyboardModifiers() << std::endl;
 
   //  if(QApplication::keyboardModifiers().testFlag(Qt::ControlModifier)==true)
-    //    std::cout << Cg::ControlModifier << endl;
+    //    std::cout << "CgQtGui: " << Cg::ControlModifier << endl;
 
 
    if(event->type()==QEvent::MouseButtonPress)
