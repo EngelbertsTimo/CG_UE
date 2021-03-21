@@ -71,7 +71,7 @@ void CgSceneControl::renderObjects()
     // sollte ja eigentlich pro Objekt unterschiedlich sein können, naja bekommen sie schon hin....
 
 
-    m_renderer->setUniformValue("mycolor",glm::vec4(0.0,0.0,1.0,1.0));
+    m_renderer->setUniformValue("mycolor",glm::vec4(0.5,0.0,1.0,1.0));
 
 
     m_renderer->setUniformValue("matDiffuseColor",glm::vec4(0.35,0.31,0.09,1.0));
