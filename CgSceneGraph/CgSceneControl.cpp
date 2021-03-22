@@ -71,7 +71,7 @@ void CgSceneControl::renderObjects()
     // sollte ja eigentlich pro Objekt unterschiedlich sein können, naja bekommen sie schon hin....
 
 
-    m_renderer->setUniformValue("mycolor",glm::vec4(0.5,0.0,1.0,1.0));
+    m_renderer->setUniformValue("mycolor",glm::vec4(0.0,0.0,1.0,1.0));
 
 
     m_renderer->setUniformValue("matDiffuseColor",glm::vec4(0.35,0.31,0.09,1.0));
@@ -116,10 +116,14 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
     {
          CgColorChangeEvent* ev = (CgColorChangeEvent*)e;
 
-         double redPart=1/ev->getGreen();;
-        double greenPart=1/ev->getGreen();
-        double bluePart=1/ev->getBlue();
-        std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; red: " << redPart <<"; green: " << greenPart<<"; blue: " << bluePart <<std::endl;
+         double redPart;
+         redPart=ev->getRed()/256.0;
+        double greenPart;
+        greenPart=ev->getGreen()/256.0;
+        double bluePart;
+        bluePart=ev->getBlue()/256.0;
+        std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; Modifier: red: " << ev->getRed() <<"; green: " << ev->getGreen()<<"; blue: " << ev->getBlue() <<std::endl;
+        std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; Ergebnis: red: " << redPart <<"; green: " << greenPart<<"; blue: " << bluePart <<std::endl;
 
          m_renderer->setUniformValue("mycolor",glm::vec4(0.0,1.0,0.0,1.0));
          m_renderer->redraw();

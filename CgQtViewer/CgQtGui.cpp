@@ -29,6 +29,7 @@
 #include <QActionGroup>
 #include <QFileDialog>
 #include <iostream>
+#include <QLineEdit>
 
 
 
@@ -166,27 +167,28 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     tab1_control->addWidget(mySpinBox1);
 
 
+
     colorSpinBoxred = new QSpinBox();
     tab1_control->addWidget(colorSpinBoxred);
-    colorSpinBoxred->setMinimum(1);
+    colorSpinBoxred->setMinimum(0);
     colorSpinBoxred->setMaximum(256);
-    colorSpinBoxred->setValue(125);
-     colorSpinBoxred->setPrefix("red:    1/");
+    colorSpinBoxred->setValue(128);
+     colorSpinBoxred->setPrefix("red: ");
 
     colorSpinBoxgreen = new QSpinBox();
     tab1_control->addWidget(colorSpinBoxgreen);
     colorSpinBoxgreen->setMinimum(1);
     colorSpinBoxgreen->setMaximum(256);
-    colorSpinBoxgreen->setValue(125);
- colorSpinBoxgreen->setPrefix("green:  1/");
+    colorSpinBoxgreen->setValue(128);
+ colorSpinBoxgreen->setPrefix("green: ");
 
 
     colorSpinBoxblue = new QSpinBox();
     tab1_control->addWidget(colorSpinBoxblue);
     colorSpinBoxblue->setMinimum(1);
     colorSpinBoxblue->setMaximum(256);
-    colorSpinBoxblue->setValue(125);
- colorSpinBoxblue->setPrefix("blue:   1/");
+    colorSpinBoxblue->setValue(128);
+ colorSpinBoxblue->setPrefix("blue: ");
 
 
  QPushButton* colorButton = new QPushButton("change Color");
@@ -287,7 +289,11 @@ void CgQtGui::slotMyCheckBox1Changed()
 
 void CgQtGui::slotChangeColorButton()
 {
-    CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,colorSpinBoxred->value(),colorSpinBoxgreen->value(),colorSpinBoxblue->value());
+    int16_t redValue = colorSpinBoxred->value();
+    int16_t greenValue = colorSpinBoxgreen->value();
+    int16_t blueValue = colorSpinBoxblue->value();
+    std::cout << "CgQtGui: " << "colorSpinBoxred value " <<redValue << std::endl;
+    CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,redValue,greenValue,blueValue);
 
     notifyObserver(e);
 }

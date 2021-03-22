@@ -14,13 +14,13 @@ class CgColorChangeEvent: public CgBaseEvent
 public:
     CgColorChangeEvent();
 
-    CgColorChangeEvent(Cg::EventType type, int8_t red,int8_t green,int8_t blue );
+    CgColorChangeEvent(Cg::EventType type, int16_t red,int16_t green,int16_t blue );
 
     //inherited
     Cg::EventType getType();
     CgBaseEvent* clone();
 
-    int getRed(){return m_red;}
+    int getRed(){return m_red;};
     int getGreen(){return m_green;}
     int getBlue(){return m_blue;}
 

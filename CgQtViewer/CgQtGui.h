@@ -44,6 +44,7 @@
 #include <QWidget>
 #include "../CgBase/CgObservable.h"
 
+
 QT_BEGIN_NAMESPACE
 class QSlider;
 class QPushButton;
@@ -105,6 +106,8 @@ private:
      QSpinBox* colorSpinBoxred;
       QSpinBox* colorSpinBoxgreen;
        QSpinBox* colorSpinBoxblue;
+      // QLineEdit* testinput;
+
 
 
 private slots:
