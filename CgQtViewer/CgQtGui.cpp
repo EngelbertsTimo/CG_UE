@@ -10,6 +10,7 @@
 #include "../CgEvents/CgLoadObjFileEvent.h"
 #include "../CgEvents/CgTrackballEvent.h"
 #include "../CgEvents/CgColorChangeEvent.h"
+#include "../CgEvents/CgButtonEvent.h"
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -171,22 +172,22 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     colorSpinBoxred = new QSpinBox();
     tab1_control->addWidget(colorSpinBoxred);
     colorSpinBoxred->setMinimum(0);
-    colorSpinBoxred->setMaximum(256);
+    colorSpinBoxred->setMaximum(255);
     colorSpinBoxred->setValue(128);
      colorSpinBoxred->setPrefix("red: ");
 
     colorSpinBoxgreen = new QSpinBox();
     tab1_control->addWidget(colorSpinBoxgreen);
-    colorSpinBoxgreen->setMinimum(1);
-    colorSpinBoxgreen->setMaximum(256);
+    colorSpinBoxgreen->setMinimum(0);
+    colorSpinBoxgreen->setMaximum(255);
     colorSpinBoxgreen->setValue(128);
  colorSpinBoxgreen->setPrefix("green: ");
 
 
     colorSpinBoxblue = new QSpinBox();
     tab1_control->addWidget(colorSpinBoxblue);
-    colorSpinBoxblue->setMinimum(1);
-    colorSpinBoxblue->setMaximum(256);
+    colorSpinBoxblue->setMinimum(0);
+    colorSpinBoxblue->setMaximum(255);
     colorSpinBoxblue->setValue(128);
  colorSpinBoxblue->setPrefix("blue: ");
 
@@ -209,7 +210,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
 
     /*Example for using a button */
 
-    QPushButton* myButton1 = new QPushButton("&drueck mich");
+    QPushButton* myButton1 = new QPushButton("change mode");
     tab1_control->addWidget(myButton1);
 
     connect(myButton1, SIGNAL( clicked() ), this, SLOT(slotMyButton1Pressed()) );
@@ -321,7 +322,8 @@ void CgQtGui::slotTrackballChanged()
 void CgQtGui::slotMyButton1Pressed()
 {
    std::cout << "CgQtGui: " << "button 1 pressed " << std::endl;
-
+   CgBaseEvent* e = new CgButtonEvent(Cg::ButtonEvent);
+   notifyObserver(e);
 }
 
 

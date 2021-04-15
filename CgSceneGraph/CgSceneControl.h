@@ -32,6 +32,7 @@ private:
     glm::mat4 m_trackball_rotation;
     glm::mat4 m_lookAt_matrix;
     glm::mat4 m_proj_matrix;
+    glm::vec4 m_color;
 
 };
 

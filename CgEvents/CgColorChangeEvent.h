@@ -6,7 +6,6 @@
 
 #include <iostream>
 #include <string>
-//#include <glm/glm.hpp>
 
 class CgColorChangeEvent: public CgBaseEvent
         //class CgColorChangeEvent
