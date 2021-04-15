@@ -56,7 +56,7 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
     createOptionPanelExample2(otheropt);
 
     QTabWidget* m_tabs = new QTabWidget();
-    m_tabs->addTab(opt,"&My Tab1");
+    m_tabs->addTab(opt,"Aufgabe 3");
     m_tabs->addTab(otheropt,"&My Tab2");
     container->addWidget(m_tabs);
 
@@ -172,14 +172,14 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     colorSpinBoxred = new QSpinBox();
     tab1_control->addWidget(colorSpinBoxred);
     colorSpinBoxred->setMinimum(0);
-    colorSpinBoxred->setMaximum(255);
+    colorSpinBoxred->setMaximum(256);
     colorSpinBoxred->setValue(128);
      colorSpinBoxred->setPrefix("red: ");
 
     colorSpinBoxgreen = new QSpinBox();
     tab1_control->addWidget(colorSpinBoxgreen);
     colorSpinBoxgreen->setMinimum(0);
-    colorSpinBoxgreen->setMaximum(255);
+    colorSpinBoxgreen->setMaximum(256);
     colorSpinBoxgreen->setValue(128);
  colorSpinBoxgreen->setPrefix("green: ");
 
@@ -187,7 +187,7 @@ void CgQtGui::createOptionPanelExample1(QWidget* parent)
     colorSpinBoxblue = new QSpinBox();
     tab1_control->addWidget(colorSpinBoxblue);
     colorSpinBoxblue->setMinimum(0);
-    colorSpinBoxblue->setMaximum(255);
+    colorSpinBoxblue->setMaximum(256);
     colorSpinBoxblue->setValue(128);
  colorSpinBoxblue->setPrefix("blue: ");
 
