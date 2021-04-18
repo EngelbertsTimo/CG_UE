@@ -27,9 +27,9 @@ namespace Cg{
     CgTrackballEvent                = 0x0000400,
     ColorChangeEvent                = 0x0001000,
     ButtonEvent                     = 0x0002000,
+    AufagbenStatusEvent             = 0x0004000,
     // unused, may be changed to whatever
 
-    CgSomeSpecialEvent3             = 0x0004000,
     CgSomeSpecialEvent4             = 0x0008000,
     CgEventGroup1                   = 0x000f000,
 

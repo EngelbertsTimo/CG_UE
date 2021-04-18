@@ -24,10 +24,49 @@ public:
 
 private:
 
+  // A3 Hilfsmethoden
+  void a3_object_initiation();
+  void a3_Renderer_render();
+  void a3_Renderer_init();
+  void a3_Renderer_reset();
+
+
+  // A4 Hilfsmethoden
+  void a4_object_initiation();
+  void a4_Renderer_render();
+  void a4_Renderer_init();
+  void a4_Renderer_reset();
+
+  // A5 Hilfsmethoden
+  void a5_object_initiation();
+  void a5_Renderer_render();
+  void a5_Renderer_init();
+  void a5_Renderer_reset();
+
+  // A6 Hilfsmethoden
+  void a6_object_initiation();
+  void a6_Renderer_render();
+  void a6_Renderer_init();
+  void a6_Renderer_reset();
+
+  // A7 Hilfsmethoden
+  void a7_object_initiation();
+  void a7_Renderer_render();
+  void a7_Renderer_init();
+  void a7_Renderer_reset();
+
+  // A8 Hilfsmethoden
+  void a8_object_initiation();
+  void a8_Renderer_render();
+  void a8_Renderer_init();
+  void a8_Renderer_reset();
+
+
+
   int mode;
 
   CgBaseRenderer* m_renderer;
-
+  // A3 Objekte
   CgExampleTriangle* m_triangle;
   CgTriCube* m_tricube;
   CgPolyline* m_polyline1;
@@ -42,6 +81,25 @@ private:
   CgPolyline* m_polyline10;
   CgPolyline* m_polyline11;
   CgPolyline* m_polyline12;
+
+  // A4 Objekte
+
+  // A5 Objekte
+
+  // A6 Objekte
+
+  // A7 Objekte
+
+  // A8 Objekte
+
+
+  // Globale Objekte
+  bool a3_active;
+  bool a4_active;
+  bool a5_active;
+  bool a6_active;
+  bool a7_active;
+  bool a8_active;
 
   glm::mat4 m_current_transformation;
   glm::mat4 m_trackball_rotation;

@@ -64,49 +64,63 @@ class CgBaseRenderer;
 
 class CgQtGui : public QWidget,public CgObservable
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    CgQtGui(CgQtMainApplication *mw);
-    CgBaseRenderer* getRenderer();
+  CgQtGui(CgQtMainApplication *mw);
+  CgBaseRenderer* getRenderer();
 
 
 protected:
-    void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
+  void keyPressEvent(QKeyEvent *event) Q_DECL_OVERRIDE;
 
 
 private:
-    QSlider *createSlider();
+  QSlider *createSlider();
 
-    // parts of the view
-    CgQtGLRenderWidget*    m_glRenderWidget;
-    CgQtMainApplication*        m_mainWindow;
-    QTabWidget*            m_exercises_tabWidget;
-    QWidget*			   m_scene_tree_view;
-    QTextEdit*             m_log_browser;
-    QMenuBar *             m_menuBar;
+  // parts of the view
+  CgQtGLRenderWidget*    m_glRenderWidget;
+  CgQtMainApplication*        m_mainWindow;
+  QTabWidget*            m_exercises_tabWidget;
+  QWidget*			   m_scene_tree_view;
+  QTextEdit*             m_log_browser;
+  QMenuBar *             m_menuBar;
 
-    CgQtGuiEventHandler*   m_event_handler;
-
-
-
-    QWidget*               m_option_panel_ex1;
-    QWidget*               m_option_panel_ex2;
-    QWidget*               m_option_panel_ex3;
-    QWidget*               m_option_panel_ex4;
-    QWidget*               m_option_panel_ex5;
+  CgQtGuiEventHandler*   m_event_handler;
 
 
-    /* example for usage of qt gui elements, feel free to add what you like */
-    void createOptionPanelExample1(QWidget* panel);
-    void createOptionPanelExample2(QWidget* panel);
-    QButtonGroup* myButtonGroup;
-    QCheckBox* myCheckBox1;
-    QSpinBox* mySpinBox1;
-     QSpinBox* colorSpinBoxred;
-      QSpinBox* colorSpinBoxgreen;
-       QSpinBox* colorSpinBoxblue;
-      // QLineEdit* testinput;
+
+  QWidget*               m_option_panel_ex1;
+  QWidget*               m_option_panel_ex2;
+  QWidget*               m_option_panel_ex3;
+  QWidget*               m_option_panel_ex4;
+  QWidget*               m_option_panel_ex5;
+
+
+  /* example for usage of qt gui elements, feel free to add what you like */
+  void createOptionPanelA3(QWidget* panel);
+  void createOptionPanelA4(QWidget* panel);
+  void createOptionPanelA5(QWidget* panel);
+  void createOptionPanelA6(QWidget* panel);
+  void createOptionPanelA7(QWidget* panel);
+  void createOptionPanelA8(QWidget* panel);
+
+  QButtonGroup* myButtonGroup;
+  QCheckBox* myCheckBox1;
+  QSpinBox* mySpinBox1;
+  QSpinBox* colorSpinBoxred;
+  QSpinBox* colorSpinBoxgreen;
+  QSpinBox* colorSpinBoxblue;
+  // QLineEdit* testinput;
+
+  // Aufgaben Status CheckBox
+  QCheckBox* a3StatusCheckBox;
+  QCheckBox* a4StatusCheckBox;
+  QCheckBox* a5StatusCheckBox;
+  QCheckBox* a6StatusCheckBox;
+  QCheckBox* a7StatusCheckBox;
+  QCheckBox* a8StatusCheckBox;
+
 
 
 
@@ -114,20 +128,27 @@ private slots:
 
 
 
-    /* slots to catch events directly from renderer */
-    void mouseEvent(QMouseEvent* event);
-    void viewportChanged(int,int);
-    void slotTrackballChanged();
+  /* slots to catch events directly from renderer */
+  void mouseEvent(QMouseEvent* event);
+  void viewportChanged(int,int);
+  void slotTrackballChanged();
 
-    /* slots example qt gui elements */
-    void slotChangeColorButton();
-    void slotMySpinBox1Changed();
-    void slotMyCheckBox1Changed();
-    void slotMyButton1Pressed();
-    void slotButtonGroupSelectionChanged();
-    void slotLoadMeshFile();
+  /* slots example qt gui elements */
+  void slotChangeColorButton();
+  void slotMySpinBox1Changed();
+  void slotMyCheckBox1Changed();
+  void slotMyButton1Pressed();
+  void slotButtonGroupSelectionChanged();
+  void slotLoadMeshFile();
 
 
+  // Aufgaben Status Slots
+  void slotA3StatusCheckBoxChanged();
+  void slotA4StatusCheckBoxChanged();
+  void slotA5StatusCheckBoxChanged();
+  void slotA6StatusCheckBoxChanged();
+  void slotA7StatusCheckBoxChanged();
+  void slotA8StatusCheckBoxChanged();
 
 
 

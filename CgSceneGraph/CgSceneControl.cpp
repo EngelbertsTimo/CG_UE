@@ -7,6 +7,7 @@
 #include "CgEvents/CgTrackballEvent.h"
 #include "CgEvents/CgColorChangeEvent.h"
 #include "CgEvents/CgButtonEvent.h"
+#include "CgEvents/CgAufgabenStatusEvent.h"
 #include "CgBase/CgBaseRenderer.h"
 #include "CgExampleTriangle.h"
 #include "cgtricube.h"
@@ -42,19 +43,25 @@ CgSceneControl::CgSceneControl()
 
 
   m_triangle= new CgExampleTriangle(21);
-  m_tricube = new CgTriCube();
-  m_polyline1 = new CgPolyline(1,m_tricube->getTriangleGravities()[0],m_tricube->getVertexNormals()[0]);
-  m_polyline2 = new CgPolyline(2,m_tricube->getTriangleGravities()[1],m_tricube->getVertexNormals()[1]);
-  m_polyline3 = new CgPolyline(3,m_tricube->getTriangleGravities()[2],m_tricube->getVertexNormals()[2]);
-  m_polyline4 = new CgPolyline(4,m_tricube->getTriangleGravities()[3],m_tricube->getVertexNormals()[3]);
-  m_polyline5 = new CgPolyline(5,m_tricube->getTriangleGravities()[4],m_tricube->getVertexNormals()[4]);
-  m_polyline6 = new CgPolyline(6,m_tricube->getTriangleGravities()[5],m_tricube->getVertexNormals()[5]);
-  m_polyline7 = new CgPolyline(7,m_tricube->getTriangleGravities()[6],m_tricube->getVertexNormals()[6]);
-  m_polyline8 = new CgPolyline(8,m_tricube->getTriangleGravities()[7],m_tricube->getVertexNormals()[7]);
-  m_polyline9 = new CgPolyline(9,m_tricube->getTriangleGravities()[8],m_tricube->getVertexNormals()[8]);
-  m_polyline10 = new CgPolyline(10,m_tricube->getTriangleGravities()[9],m_tricube->getVertexNormals()[9]);
-  m_polyline11 = new CgPolyline(11,m_tricube->getTriangleGravities()[10],m_tricube->getVertexNormals()[10]);
-  m_polyline12 = new CgPolyline(12,m_tricube->getTriangleGravities()[11],m_tricube->getVertexNormals()[11]);
+
+  //Aufgaben status initierieren
+  a3_active = false;
+  a4_active = false;
+  a5_active = false;
+  a6_active = false;
+  a7_active = false;
+  a8_active = false;
+
+
+  //Objecte Erstellen
+  a3_object_initiation();
+  a4_object_initiation();
+  a5_object_initiation();
+  a6_object_initiation();
+  a7_object_initiation();
+  a8_object_initiation();
+
+
 }
 
 
@@ -65,29 +72,29 @@ CgSceneControl::~CgSceneControl()
   if(m_tricube!=NULL)
     delete m_tricube;
   if(m_polyline1!=NULL)
-      delete m_polyline1;
+    delete m_polyline1;
   if(m_polyline2!=NULL)
-      delete m_polyline2;
+    delete m_polyline2;
   if(m_polyline3!=NULL)
-      delete m_polyline3;
+    delete m_polyline3;
   if(m_polyline4!=NULL)
-      delete m_polyline4;
+    delete m_polyline4;
   if(m_polyline5!=NULL)
-      delete m_polyline5;
+    delete m_polyline5;
   if(m_polyline6!=NULL)
-      delete m_polyline6;
+    delete m_polyline6;
   if(m_polyline7!=NULL)
-      delete m_polyline7;
+    delete m_polyline7;
   if(m_polyline8!=NULL)
-      delete m_polyline8;
+    delete m_polyline8;
   if(m_polyline9!=NULL)
-      delete m_polyline9;
+    delete m_polyline9;
   if(m_polyline10!=NULL)
-      delete m_polyline10;
+    delete m_polyline10;
   if(m_polyline11!=NULL)
-      delete m_polyline11;
+    delete m_polyline11;
   if(m_polyline12!=NULL)
-      delete m_polyline12;
+    delete m_polyline12;
 
 
 }
@@ -96,37 +103,26 @@ void CgSceneControl::setRenderer(CgBaseRenderer* r)
 {
   m_renderer=r;
   m_renderer->setSceneControl(this);
-  if (mode==1){
+  /*if (mode==1){
       if(m_triangle!=NULL)
         m_renderer->init(m_triangle);
     } else if(mode==2){
-      if(m_tricube!=NULL)
-        m_renderer->init(m_tricube);
-      if(m_polyline1!=NULL)
-        m_renderer->init(m_polyline1);
-      if(m_polyline2!=NULL)
-        m_renderer->init(m_polyline2);
-      if(m_polyline3!=NULL)
-        m_renderer->init(m_polyline3);
-      if(m_polyline4!=NULL)
-        m_renderer->init(m_polyline4);
-      if(m_polyline5!=NULL)
-        m_renderer->init(m_polyline5);
-      if(m_polyline6!=NULL)
-        m_renderer->init(m_polyline6);
-      if(m_polyline7!=NULL)
-        m_renderer->init(m_polyline7);
-      if(m_polyline8!=NULL)
-        m_renderer->init(m_polyline8);
-      if(m_polyline9!=NULL)
-        m_renderer->init(m_polyline9);
-      if(m_polyline10!=NULL)
-        m_renderer->init(m_polyline10);
-      if(m_polyline11!=NULL)
-        m_renderer->init(m_polyline11);
-      if(m_polyline12!=NULL)
-        m_renderer->init(m_polyline12);
-    }
+      a3_Renderer_init();
+    }*/
+
+  if(a3_active)
+    a3_Renderer_init();
+  if(a4_active)
+    a4_Renderer_init();
+  if(a5_active)
+    a5_Renderer_init();
+  if(a6_active)
+    a6_Renderer_init();
+  if(a7_active)
+    a7_Renderer_init();
+  if(a8_active)
+    a8_Renderer_init();
+
 }
 
 
@@ -165,37 +161,18 @@ void CgSceneControl::renderObjects()
   m_renderer->setUniformValue("modelviewMatrix",mv_matrix);
   m_renderer->setUniformValue("normalMatrix",normal_matrix);
 
-  if(mode==1){
-      if(m_triangle!=NULL)
-        m_renderer->render(m_triangle);
-    } else if(mode==2){
-      if(m_tricube!=NULL)
-        m_renderer->render(m_tricube);
-      if(m_polyline1!=NULL)
-        m_renderer->render(m_polyline1);
-      if(m_polyline2!=NULL)
-        m_renderer->render(m_polyline2);
-      if(m_polyline3!=NULL)
-        m_renderer->render(m_polyline3);
-      if(m_polyline4!=NULL)
-        m_renderer->render(m_polyline4);
-      if(m_polyline5!=NULL)
-        m_renderer->render(m_polyline5);
-      if(m_polyline6!=NULL)
-        m_renderer->render(m_polyline6);
-      if(m_polyline7!=NULL)
-        m_renderer->render(m_polyline7);
-      if(m_polyline8!=NULL)
-        m_renderer->render(m_polyline8);
-      if(m_polyline9!=NULL)
-        m_renderer->render(m_polyline9);
-      if(m_polyline10!=NULL)
-        m_renderer->render(m_polyline10);
-      if(m_polyline11!=NULL)
-        m_renderer->render(m_polyline11);
-      if(m_polyline12!=NULL)
-        m_renderer->render(m_polyline12);
-    }
+  if(a3_active)
+    a3_Renderer_render();
+  if(a4_active)
+    a4_Renderer_render();
+  if(a5_active)
+    a5_Renderer_render();
+  if(a6_active)
+    a6_Renderer_render();
+  if(a7_active)
+    a7_Renderer_render();
+  if(a8_active)
+    a8_Renderer_render();
 }
 
 
@@ -204,6 +181,74 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
 {
   // die Enums sind so gebaut, dass man alle Arten von MausEvents über CgEvent::CgMouseEvent abprüfen kann,
   // siehe dazu die CgEvent enums im CgEnums.h
+
+
+  if(e->getType() & Cg::AufagbenStatusEvent)
+    {
+      CgAufgabenStatusEvent* ev =(CgAufgabenStatusEvent*)e;
+      bool aufgaben_status=ev->getAufgabenStatus();
+
+      std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; Aufgabe "<<ev->getAufagbenNummer()<<" | Statusänderung zu "<<aufgaben_status <<std::endl;
+
+
+      switch (ev->getAufagbenNummer()) {
+        case 3:
+          if(aufgaben_status){
+              a3_active=true;
+              a3_Renderer_init();
+            }
+          else
+            a3_active=false;
+          break;
+        case 4:
+          if(aufgaben_status){
+              a4_active=true;
+              a4_Renderer_init();
+            }
+          else
+            a4_active=false;
+          break;
+        case 5:
+          if(aufgaben_status){
+              a5_active=true;
+              a5_Renderer_init();
+            }
+          else
+            a5_active=false;
+          break;
+        case 6:
+          if(aufgaben_status){
+              a6_active=true;
+              a6_Renderer_init();
+            }
+          else
+            a6_active=false;
+          break;
+        case 7:
+          if(aufgaben_status){
+              a7_active=true;
+              a7_Renderer_init();
+            }
+          else
+            a7_active=false;
+          break;
+        case 8:
+
+          if(aufgaben_status){
+              a8_active=true;
+              a8_Renderer_init();
+            }
+          else
+            a8_active=false;
+          break;
+        default:
+          break;
+        }
+
+      a3_Renderer_init();
+      m_renderer->redraw();
+    }
+
 
   if(e->getType() & Cg::ButtonEvent)
     {
@@ -214,38 +259,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
       else
         mode=1;
 
-
-      if (mode==1){
-          if(m_triangle!=NULL)
-            m_renderer->init(m_triangle);
-        } else if(mode==2){
-          if(m_tricube!=NULL)
-            m_renderer->init(m_tricube);
-          if(m_polyline1!=NULL)
-            m_renderer->init(m_polyline1);
-          if(m_polyline2!=NULL)
-            m_renderer->init(m_polyline2);
-          if(m_polyline3!=NULL)
-            m_renderer->init(m_polyline3);
-          if(m_polyline4!=NULL)
-            m_renderer->init(m_polyline4);
-          if(m_polyline5!=NULL)
-            m_renderer->init(m_polyline5);
-          if(m_polyline6!=NULL)
-            m_renderer->init(m_polyline6);
-          if(m_polyline7!=NULL)
-            m_renderer->init(m_polyline7);
-          if(m_polyline8!=NULL)
-            m_renderer->init(m_polyline8);
-          if(m_polyline9!=NULL)
-            m_renderer->init(m_polyline9);
-          if(m_polyline10!=NULL)
-            m_renderer->init(m_polyline10);
-          if(m_polyline11!=NULL)
-            m_renderer->init(m_polyline11);
-          if(m_polyline12!=NULL)
-            m_renderer->init(m_polyline12);
-        }
+      a3_Renderer_init();
       m_renderer->redraw();
     }
 
@@ -370,5 +384,195 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
   // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
   delete e;
 
+
+}
+
+// A3 Hilfsmethoden
+void CgSceneControl::a3_object_initiation()
+{
+  m_tricube = new CgTriCube();
+  m_polyline1 = new CgPolyline(1,m_tricube->getTriangleGravities()[0],m_tricube->getVertexNormals()[0]);
+  m_polyline2 = new CgPolyline(2,m_tricube->getTriangleGravities()[1],m_tricube->getVertexNormals()[1]);
+  m_polyline3 = new CgPolyline(3,m_tricube->getTriangleGravities()[2],m_tricube->getVertexNormals()[2]);
+  m_polyline4 = new CgPolyline(4,m_tricube->getTriangleGravities()[3],m_tricube->getVertexNormals()[3]);
+  m_polyline5 = new CgPolyline(5,m_tricube->getTriangleGravities()[4],m_tricube->getVertexNormals()[4]);
+  m_polyline6 = new CgPolyline(6,m_tricube->getTriangleGravities()[5],m_tricube->getVertexNormals()[5]);
+  m_polyline7 = new CgPolyline(7,m_tricube->getTriangleGravities()[6],m_tricube->getVertexNormals()[6]);
+  m_polyline8 = new CgPolyline(8,m_tricube->getTriangleGravities()[7],m_tricube->getVertexNormals()[7]);
+  m_polyline9 = new CgPolyline(9,m_tricube->getTriangleGravities()[8],m_tricube->getVertexNormals()[8]);
+  m_polyline10 = new CgPolyline(10,m_tricube->getTriangleGravities()[9],m_tricube->getVertexNormals()[9]);
+  m_polyline11 = new CgPolyline(11,m_tricube->getTriangleGravities()[10],m_tricube->getVertexNormals()[10]);
+  m_polyline12 = new CgPolyline(12,m_tricube->getTriangleGravities()[11],m_tricube->getVertexNormals()[11]);
+}
+
+void CgSceneControl::a3_Renderer_render()
+{
+  if(m_tricube!=NULL)
+    m_renderer->render(m_tricube);
+  if(m_polyline1!=NULL)
+    m_renderer->render(m_polyline1);
+  if(m_polyline2!=NULL)
+    m_renderer->render(m_polyline2);
+  if(m_polyline3!=NULL)
+    m_renderer->render(m_polyline3);
+  if(m_polyline4!=NULL)
+    m_renderer->render(m_polyline4);
+  if(m_polyline5!=NULL)
+    m_renderer->render(m_polyline5);
+  if(m_polyline6!=NULL)
+    m_renderer->render(m_polyline6);
+  if(m_polyline7!=NULL)
+    m_renderer->render(m_polyline7);
+  if(m_polyline8!=NULL)
+    m_renderer->render(m_polyline8);
+  if(m_polyline9!=NULL)
+    m_renderer->render(m_polyline9);
+  if(m_polyline10!=NULL)
+    m_renderer->render(m_polyline10);
+  if(m_polyline11!=NULL)
+    m_renderer->render(m_polyline11);
+  if(m_polyline12!=NULL)
+    m_renderer->render(m_polyline12);
+}
+
+void CgSceneControl::a3_Renderer_init()
+{
+  if(m_tricube!=NULL)
+    m_renderer->init(m_tricube);
+  if(m_polyline1!=NULL)
+    m_renderer->init(m_polyline1);
+  if(m_polyline2!=NULL)
+    m_renderer->init(m_polyline2);
+  if(m_polyline3!=NULL)
+    m_renderer->init(m_polyline3);
+  if(m_polyline4!=NULL)
+    m_renderer->init(m_polyline4);
+  if(m_polyline5!=NULL)
+    m_renderer->init(m_polyline5);
+  if(m_polyline6!=NULL)
+    m_renderer->init(m_polyline6);
+  if(m_polyline7!=NULL)
+    m_renderer->init(m_polyline7);
+  if(m_polyline8!=NULL)
+    m_renderer->init(m_polyline8);
+  if(m_polyline9!=NULL)
+    m_renderer->init(m_polyline9);
+  if(m_polyline10!=NULL)
+    m_renderer->init(m_polyline10);
+  if(m_polyline11!=NULL)
+    m_renderer->init(m_polyline11);
+  if(m_polyline12!=NULL)
+    m_renderer->init(m_polyline12);
+}
+
+void CgSceneControl::a3_Renderer_reset()
+{
+
+}
+
+
+// A4 Hilfsmethoden
+void CgSceneControl::a4_object_initiation()
+{
+
+}
+
+void CgSceneControl::a4_Renderer_render()
+{
+
+}
+
+void CgSceneControl::a4_Renderer_init()
+{
+
+}
+
+void CgSceneControl::a4_Renderer_reset()
+{
+
+}
+
+
+// A5 Hilfsmethoden
+void CgSceneControl::a5_object_initiation()
+{
+
+}
+
+void CgSceneControl::a5_Renderer_render()
+{
+
+}
+
+void CgSceneControl::a5_Renderer_init()
+{
+
+}
+
+void CgSceneControl::a5_Renderer_reset()
+{
+
+}
+
+// A6 Hilfsmethoden
+void CgSceneControl::a6_object_initiation()
+{
+
+}
+
+void CgSceneControl::a6_Renderer_render()
+{
+
+}
+
+void CgSceneControl::a6_Renderer_init()
+{
+
+}
+
+void CgSceneControl::a6_Renderer_reset()
+{
+
+}
+
+// A7 Hilfsmethoden
+void CgSceneControl::a7_object_initiation()
+{
+
+}
+
+void CgSceneControl::a7_Renderer_render()
+{
+
+}
+
+void CgSceneControl::a7_Renderer_init()
+{
+
+}
+
+void CgSceneControl::a7_Renderer_reset()
+{
+
+}
+
+// A8 Hilfsmethoden
+void CgSceneControl::a8_object_initiation()
+{
+
+}
+
+void CgSceneControl::a8_Renderer_render()
+{
+
+}
+
+void CgSceneControl::a8_Renderer_init()
+{
+
+}
+
+void CgSceneControl::a8_Renderer_reset()
+{
 
 }

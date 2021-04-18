@@ -4,10 +4,9 @@
 
 CgColorChangeEvent::CgColorChangeEvent(Cg::EventType type, std::int16_t red,std::int16_t green,std::int16_t blue)
 {
-    std::cout << "CgColorCHangeEvent: " << "red input Value  " <<red << std::endl;
+
     m_type=type;
-    m_red = red;
-    std::cout << "CgColorCHangeEvent: " << "red stored Value  " <<m_red << std::endl;
+    m_red = red;   
     m_green = green;
     m_blue = blue;
 }

@@ -5,6 +5,7 @@ QMAKE_CXXFLAGS += -std=c++11
 CONFIG += c++11
 
 SOURCES += main.cpp \
+    CgEvents/CgAufgabenStatusEvent.cpp \
     CgEvents/CgButtonEvent.cpp \
     CgEvents/CgColorChangeEvent.cpp \
     CgQtViewer/CGQtGLRenderWidget.cpp \
@@ -25,6 +26,7 @@ SOURCES += main.cpp \
     CgEvents/CgTrackballEvent.cpp
 
 HEADERS += \
+    CgEvents/CgAufgabenStatusEvent.h \
     CgEvents/CgButtonEvent.h \
     CgEvents/CgColorChangeEvent.h \
     CgQtViewer/CgQtGLRenderWidget.h \
