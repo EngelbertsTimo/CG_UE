@@ -108,10 +108,31 @@ private:
   QButtonGroup* myButtonGroup;
   QCheckBox* myCheckBox1;
   QSpinBox* mySpinBox1;
-  QSpinBox* colorSpinBoxred;
-  QSpinBox* colorSpinBoxgreen;
-  QSpinBox* colorSpinBoxblue;
-  // QLineEdit* testinput;
+  // Farbwahl Boxen
+  QSpinBox* colorSpinBoxredA3;
+  QSpinBox* colorSpinBoxgreenA3;
+  QSpinBox* colorSpinBoxblueA3;
+
+  QSpinBox* colorSpinBoxredA4;
+  QSpinBox* colorSpinBoxgreenA4;
+  QSpinBox* colorSpinBoxblueA4;
+
+  QSpinBox* colorSpinBoxredA5;
+  QSpinBox* colorSpinBoxgreenA5;
+  QSpinBox* colorSpinBoxblueA5;
+
+  QSpinBox* colorSpinBoxredA6;
+  QSpinBox* colorSpinBoxgreenA6;
+  QSpinBox* colorSpinBoxblueA6;
+
+  QSpinBox* colorSpinBoxredA7;
+  QSpinBox* colorSpinBoxgreenA7;
+  QSpinBox* colorSpinBoxblueA7;
+
+  QSpinBox* colorSpinBoxredA8;
+  QSpinBox* colorSpinBoxgreenA8;
+  QSpinBox* colorSpinBoxblueA8;
+
 
   // Aufgaben Status CheckBox
   QCheckBox* a3StatusCheckBox;
@@ -134,13 +155,20 @@ private slots:
   void slotTrackballChanged();
 
   /* slots example qt gui elements */
-  void slotChangeColorButton();
+
   void slotMySpinBox1Changed();
   void slotMyCheckBox1Changed();
   void slotMyButton1Pressed();
   void slotButtonGroupSelectionChanged();
   void slotLoadMeshFile();
 
+  // Aufgaben Farbe Wechsel Slots
+  void slotChangeColorButtonA3();
+  void slotChangeColorButtonA4();
+  void slotChangeColorButtonA5();
+  void slotChangeColorButtonA6();
+  void slotChangeColorButtonA7();
+  void slotChangeColorButtonA8();
 
   // Aufgaben Status Slots
   void slotA3StatusCheckBoxChanged();
@@ -150,6 +178,13 @@ private slots:
   void slotA7StatusCheckBoxChanged();
   void slotA8StatusCheckBoxChanged();
 
+  // Aufagben Reset Slots
+  void slotA3Reset();
+  void slotA4Reset();
+  void slotA5Reset();
+  void slotA6Reset();
+  void slotA7Reset();
+  void slotA8Reset();
 
 
 

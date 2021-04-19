@@ -66,6 +66,7 @@ private:
   int mode;
 
   CgBaseRenderer* m_renderer;
+
   // A3 Objekte
   CgExampleTriangle* m_triangle;
   CgTriCube* m_tricube;
@@ -83,6 +84,7 @@ private:
   CgPolyline* m_polyline12;
 
   // A4 Objekte
+  CgPolyline* m_polyline;
 
   // A5 Objekte
 
@@ -105,7 +107,13 @@ private:
   glm::mat4 m_trackball_rotation;
   glm::mat4 m_lookAt_matrix;
   glm::mat4 m_proj_matrix;
-  glm::vec4 m_color;
+
+  glm::vec4 m_color_a3;
+  glm::vec4 m_color_a4;
+  glm::vec4 m_color_a5;
+  glm::vec4 m_color_a6;
+  glm::vec4 m_color_a7;
+  glm::vec4 m_color_a8;
   std::vector<CgPolyline*> m_render_lines;
 
 };

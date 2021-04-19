@@ -33,6 +33,20 @@ CgPolyline::CgPolyline(int id,glm::vec3 startPoint,glm::vec3 direction):
 
 }
 
+CgPolyline::CgPolyline(int id,std::vector<glm::vec3> vectors):
+  m_type(Cg::Polyline),
+   m_id(id)
+{
+  for(int i=0;i<vectors.size();i++){
+       m_vertices.push_back(vectors[i]);
+    }
+
+
+
+  m_lineWidth =1;
+
+}
+
 
 CgPolyline::~CgPolyline()
 {

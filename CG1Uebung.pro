@@ -8,6 +8,7 @@ SOURCES += main.cpp \
     CgEvents/CgAufgabenStatusEvent.cpp \
     CgEvents/CgButtonEvent.cpp \
     CgEvents/CgColorChangeEvent.cpp \
+    CgEvents/CgResetEvent.cpp \
     CgQtViewer/CGQtGLRenderWidget.cpp \
     CgQtViewer/CgQtGui.cpp \
     CgBase/CgObservable.cpp \
@@ -21,6 +22,7 @@ SOURCES += main.cpp \
     CgQtViewer/CgTrackball.cpp \
     CgEvents/CgWindowResizeEvent.cpp \
     CgEvents/CgLoadObjFileEvent.cpp \
+    CgSceneGraph/CgTriangleShape.cpp \
     CgSceneGraph/cgtricube.cpp \
     CgUtils/ObjLoader.cpp \
     CgEvents/CgTrackballEvent.cpp
@@ -29,6 +31,7 @@ HEADERS += \
     CgEvents/CgAufgabenStatusEvent.h \
     CgEvents/CgButtonEvent.h \
     CgEvents/CgColorChangeEvent.h \
+    CgEvents/CgResetEvent.h \
     CgQtViewer/CgQtGLRenderWidget.h \
     CgQtViewer/CgQtGui.h \
     CgBase/CgObserver.h \
@@ -52,6 +55,7 @@ HEADERS += \
     CgQtViewer/CgTrackball.h \
     CgEvents/CgWindowResizeEvent.h \
     CgEvents/CgLoadObjFileEvent.h \
+    CgSceneGraph/CgTriangleShape.h \
     CgSceneGraph/cgtricube.h \
     CgUtils/ObjLoader.h \
     CgBase/CgBaseImage.h \

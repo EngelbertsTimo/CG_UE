@@ -1,8 +1,93 @@
+#include "CgTriangleShape.h"
 #include "cgtricube.h"
 #include "CgBase/CgEnums.h"
 #include "CgUtils/ObjLoader.h"
 #include <iostream>
+CgTriangleShape::CgTriangleShape(int id):
+  m_type(Cg::TriangleMesh),
+  m_id(id)
+{
 
+}
+
+CgTriangleShape::~CgTriangleShape()
+{
+  m_vertices.clear();
+  m_vertex_normals.clear();
+  m_vertex_colors.clear();
+  m_tex_coords.clear();
+  m_triangle_indices.clear();
+  m_face_normals.clear();
+  m_face_colors.clear();
+}
+
+void CgTriangleShape::init( std::vector<glm::vec3> arg_verts,  std::vector<glm::vec3> arg_normals, std::vector<unsigned int> arg_triangle_indices)
+{
+  m_vertices.clear();
+  m_vertex_normals.clear();
+  m_triangle_indices.clear();
+  m_vertices=arg_verts;
+  m_vertex_normals=arg_normals;
+  m_triangle_indices=arg_triangle_indices;
+}
+
+void CgTriangleShape::init( std::string filename)
+{
+  m_vertices.clear();
+  m_vertex_normals.clear();
+  m_triangle_indices.clear();
+
+  ObjLoader loader;
+  loader.load(filename);
+
+  loader.getPositionData(m_vertices);
+  loader.getNormalData(m_vertex_normals);
+  loader.getFaceIndexData(m_triangle_indices);
+}
+
+
+const std::vector<glm::vec3>& CgTriangleShape::getVertices() const
+{
+  return m_vertices;
+}
+
+const std::vector<glm::vec3>& CgTriangleShape::getVertexNormals() const
+{
+  return m_vertex_normals;
+}
+
+const std::vector<glm::vec3>& CgTriangleShape::getVertexColors() const
+{
+  return m_vertex_colors;
+}
+
+const std::vector<glm::vec2>& CgTriangleShape:: getVertexTexCoords() const
+{
+  return m_tex_coords;
+}
+
+const std::vector<unsigned int>& CgTriangleShape::getTriangleIndices() const
+{
+  return m_triangle_indices;
+}
+
+const std::vector<glm::vec3>& CgTriangleShape::getFaceNormals() const
+{
+  return m_face_normals;
+}
+
+const std::vector<glm::vec3>& CgTriangleShape::getTriangleGravities() const
+{
+  return m_triangle_gravities;
+}
+
+const std::vector<glm::vec3>& CgTriangleShape::getFaceColors() const
+{
+  return m_face_colors;
+}
+////////////////////////////////
+
+/*
 CgTriCube::CgTriCube(int id):
   m_type(Cg::TriangleMesh),
   m_id(id)
@@ -321,84 +406,8 @@ CgTriCube::CgTriCube(int id):
   m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[33]]-m_vertices[m_triangle_indices[34]],m_vertices[m_triangle_indices[33]]-m_vertices[m_triangle_indices[35]]));
 
 
-  /*std::cout << "CgTriCube.cpp: punkte"<< <<std::endl;
-  std::cout << "CgTriCube.cpp: schwerpunkt"<< <<std::endl;
-  std::cout << "CgTriCube.cpp: normal vektor"<< <<std::endl;*/
+
 
 }
 
-CgTriCube::~CgTriCube()
-{
-  m_vertices.clear();
-  m_vertex_normals.clear();
-  m_vertex_colors.clear();
-  m_tex_coords.clear();
-  m_triangle_indices.clear();
-  m_face_normals.clear();
-  m_face_colors.clear();
-}
-
-void CgTriCube::init( std::vector<glm::vec3> arg_verts,  std::vector<glm::vec3> arg_normals, std::vector<unsigned int> arg_triangle_indices)
-{
-  m_vertices.clear();
-  m_vertex_normals.clear();
-  m_triangle_indices.clear();
-  m_vertices=arg_verts;
-  m_vertex_normals=arg_normals;
-  m_triangle_indices=arg_triangle_indices;
-}
-
-void CgTriCube::init( std::string filename)
-{
-  m_vertices.clear();
-  m_vertex_normals.clear();
-  m_triangle_indices.clear();
-
-  ObjLoader loader;
-  loader.load(filename);
-
-  loader.getPositionData(m_vertices);
-  loader.getNormalData(m_vertex_normals);
-  loader.getFaceIndexData(m_triangle_indices);
-}
-
-
-const std::vector<glm::vec3>& CgTriCube::getVertices() const
-{
-  return m_vertices;
-}
-
-const std::vector<glm::vec3>& CgTriCube::getVertexNormals() const
-{
-  return m_vertex_normals;
-}
-
-const std::vector<glm::vec3>& CgTriCube::getVertexColors() const
-{
-  return m_vertex_colors;
-}
-
-const std::vector<glm::vec2>& CgTriCube:: getVertexTexCoords() const
-{
-  return m_tex_coords;
-}
-
-const std::vector<unsigned int>& CgTriCube::getTriangleIndices() const
-{
-  return m_triangle_indices;
-}
-
-const std::vector<glm::vec3>& CgTriCube::getFaceNormals() const
-{
-  return m_face_normals;
-}
-
-const std::vector<glm::vec3>& CgTriCube::getTriangleGravities() const
-{
-  return m_triangle_gravities;
-}
-
-const std::vector<glm::vec3>& CgTriCube::getFaceColors() const
-{
-  return m_face_colors;
-}
+*/

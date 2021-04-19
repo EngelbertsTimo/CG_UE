@@ -1,16 +1,15 @@
-#ifndef CGTRICUBE_H
-#define CGTRICUBE_H
-
+#ifndef CGTRIANGLESHAPE_H
+#define CGTRIANGLESHAPE_H
 #include <vector>
 #include <glm/glm.hpp>
 #include <string>
 #include "CgBase/CgBaseTriangleMesh.h"
 
-class CgTriCube : public CgBaseTriangleMesh
+class CgTriangleShape: public CgBaseTriangleMesh
 {
 public:
-  CgTriCube(int id);
-  ~CgTriCube();
+  CgTriangleShape(int id);
+  ~CgTriangleShape();
 
   //inherited from CgBaseRenderableObject
   Cg::ObjectType getType() const;
@@ -48,9 +47,13 @@ private:
   const unsigned int m_id;
 
 };
+inline Cg::ObjectType  CgTriangleShape::getType() const {return m_type;}
+inline unsigned int CgTriangleShape::getID() const {return m_id;}
 
+#endif // CGTRIANGLESHAPE_H
 
-inline Cg::ObjectType  CgTriCube::getType() const {return m_type;}
-inline unsigned int CgTriCube::getID() const {return m_id;}
+/////////////////////////////////////////////////////////
+#ifndef CGTRICUBE_H
+#define CGTRICUBE_H
 
 #endif // CGTRICUBE_H

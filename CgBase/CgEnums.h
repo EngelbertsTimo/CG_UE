@@ -28,9 +28,9 @@ namespace Cg{
     ColorChangeEvent                = 0x0001000,
     ButtonEvent                     = 0x0002000,
     AufagbenStatusEvent             = 0x0004000,
+    ResetEvent                      = 0x0008000,
     // unused, may be changed to whatever
 
-    CgSomeSpecialEvent4             = 0x0008000,
     CgEventGroup1                   = 0x000f000,
 
     // feel free to add whatever you like

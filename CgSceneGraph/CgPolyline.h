@@ -11,6 +11,7 @@ class CgPolyline : public CgBasePolyline
 public:
   CgPolyline();
   CgPolyline(int id,glm::vec3 startPoint,glm::vec3 direction);
+  CgPolyline(int id,std::vector<glm::vec3> vectors);
   ~CgPolyline();
 
   //inherited from CgBaseRenderableObject
