@@ -29,9 +29,12 @@ namespace Cg{
     ButtonEvent                     = 0x0002000,
     AufagbenStatusEvent             = 0x0004000,
     ResetEvent                      = 0x0008000,
+    LRAglaetenEvent                 = 0x0010000,
+    RotationEvent                   = 0x0020000,
+
     // unused, may be changed to whatever
 
-    CgEventGroup1                   = 0x000f000,
+    //CgEventGroup1                   = 0x000f000,
 
     // feel free to add whatever you like
     }EventType;

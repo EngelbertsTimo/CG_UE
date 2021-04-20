@@ -13,6 +13,8 @@
 #include "../CgEvents/CgButtonEvent.h"
 #include "../CgEvents/CgAufgabenStatusEvent.h"
 #include "../CgEvents/CgResetEvent.h"
+#include "../CgEvents/CgLRAglaetenEvent.h"
+#include "../CgEvents/CgRotationEvent.h"
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -178,7 +180,7 @@ void CgQtGui::createOptionPanelA3(QWidget* parent)
   options_label->setAlignment(Qt::AlignCenter);
 
 
-  /*Example for using a spinbox */
+  /*Example for using a spinbox
 
   mySpinBox1 = new QSpinBox();
   a3_control->addWidget(mySpinBox1);
@@ -188,10 +190,50 @@ void CgQtGui::createOptionPanelA3(QWidget* parent)
   // mySpinBox1->setSuffix("   suffix");
   mySpinBox1->setPrefix("Prefix:  ");
   connect(mySpinBox1, SIGNAL(valueChanged(int) ), this, SLOT(slotMySpinBox1Changed()) );
-  a3_control->addWidget(mySpinBox1);
+  a3_control->addWidget(mySpinBox1);*/
+
+  /*
+  QHBoxLayout *subBox = new QHBoxLayout();
+    QGroupBox* myGroupBox = new QGroupBox("Radiobutton Group Example ");
+
+    myButtonGroup = new QButtonGroup(subBox);
+    myButtonGroup->setExclusive(true);
+
+    QRadioButton* radiobutton1 = new QRadioButton( "&Option1");
+    QRadioButton* radiobutton2 = new QRadioButton( "&Option2");
+    QRadioButton* radiobutton3 = new QRadioButton( "&Option3");
+    QRadioButton* radiobutton4 = new QRadioButton( "&Option4");
+    QRadioButton* radiobutton5 = new QRadioButton( "&Option5");
+
+    radiobutton2->setChecked(true);
+
+    myButtonGroup->addButton(radiobutton1,0);
+    myButtonGroup->addButton(radiobutton2,1);
+    myButtonGroup->addButton(radiobutton3,2);
+    myButtonGroup->addButton(radiobutton4,3);
+    myButtonGroup->addButton(radiobutton5,4);
+
+
+    QVBoxLayout *vbox = new QVBoxLayout;
+    vbox->addWidget(radiobutton1);
+    vbox->addWidget(radiobutton2);
+    vbox->addWidget(radiobutton3);
+    vbox->addWidget(radiobutton4);
+    vbox->addWidget(radiobutton5);
+    vbox->addStretch(1);
+    myGroupBox->setLayout(vbox);
+    subBox->addWidget(myGroupBox);
+    a3_control->addLayout(subBox);
+
+    connect(myButtonGroup, SIGNAL( buttonClicked(int) ), this, SLOT( slotButtonGroupSelectionChanged() ) );
+
+*/
 
 
   //Farb wahl
+  QLabel *farb_label = new QLabel("Farbwahl");
+  a3_control->addWidget(farb_label);
+
   colorSpinBoxredA3 = new QSpinBox();
   a3_control->addWidget(colorSpinBoxredA3);
   colorSpinBoxredA3->setMinimum(0);
@@ -227,7 +269,7 @@ void CgQtGui::createOptionPanelA3(QWidget* parent)
 
 
 
-  /*Example for using a checkbox */
+  /*Example for using a checkbox
 
   myCheckBox1 = new QCheckBox("enable Option 1");
   myCheckBox1->setCheckable(true);
@@ -235,41 +277,7 @@ void CgQtGui::createOptionPanelA3(QWidget* parent)
   connect(myCheckBox1, SIGNAL( clicked() ), this, SLOT(slotMyCheckBox1Changed()) );
   a3_control->addWidget(myCheckBox1);
 
-  /*Example for using a button group */
-QHBoxLayout *subBox = new QHBoxLayout();
-  QGroupBox* myGroupBox = new QGroupBox("Radiobutton Group Example ");
-
-  myButtonGroup = new QButtonGroup(subBox);
-  myButtonGroup->setExclusive(true);
-
-  QRadioButton* radiobutton1 = new QRadioButton( "&Option1");
-  QRadioButton* radiobutton2 = new QRadioButton( "&Option2");
-  QRadioButton* radiobutton3 = new QRadioButton( "&Option3");
-  QRadioButton* radiobutton4 = new QRadioButton( "&Option4");
-  QRadioButton* radiobutton5 = new QRadioButton( "&Option5");
-
-  radiobutton2->setChecked(true);
-
-  myButtonGroup->addButton(radiobutton1,0);
-  myButtonGroup->addButton(radiobutton2,1);
-  myButtonGroup->addButton(radiobutton3,2);
-  myButtonGroup->addButton(radiobutton4,3);
-  myButtonGroup->addButton(radiobutton5,4);
-
-
-  QVBoxLayout *vbox = new QVBoxLayout;
-  vbox->addWidget(radiobutton1);
-  vbox->addWidget(radiobutton2);
-  vbox->addWidget(radiobutton3);
-  vbox->addWidget(radiobutton4);
-  vbox->addWidget(radiobutton5);
-  vbox->addStretch(1);
-  myGroupBox->setLayout(vbox);
-  subBox->addWidget(myGroupBox);
-  a3_control->addLayout(subBox);
-
-  connect(myButtonGroup, SIGNAL( buttonClicked(int) ), this, SLOT( slotButtonGroupSelectionChanged() ) );
-
+  Example for using a button group */
 
   parent->setLayout(a3_control);
 
@@ -293,10 +301,50 @@ void CgQtGui::createOptionPanelA4(QWidget* parent)
   connect(colorButton, SIGNAL( clicked() ), this, SLOT(slotChangeColorButtonA4()) );
 */
 
+  QLabel *LRA_label = new QLabel("Lane-Risenfeld Unterteilungsalgorthmus");
+  a4_control->addWidget(LRA_label);
 
+  a4_LRA_Mittlunsgschritte = new QSpinBox();;
+  a4_LRA_Iterationen = new QSpinBox();
+  a4_rotation_segmente= new QSpinBox();
+
+
+  a4_control->addWidget(a4_LRA_Mittlunsgschritte);
+  a4_LRA_Mittlunsgschritte->setMinimum(1);
+  a4_LRA_Mittlunsgschritte->setMaximum(10);
+  a4_LRA_Mittlunsgschritte->setValue(1);
+  a4_LRA_Mittlunsgschritte->setPrefix("Mittlungsschritte: ");
+
+  a4_control->addWidget(a4_LRA_Iterationen);
+  a4_LRA_Iterationen->setMinimum(1);
+  a4_LRA_Iterationen->setMaximum(10);
+  a4_LRA_Iterationen->setValue(1);
+  a4_LRA_Iterationen->setPrefix("Iterationen: ");
+
+  QPushButton* LRAglatenButtonA4 = new QPushButton("glaeten");
+  a4_control->addWidget(LRAglatenButtonA4);
+  connect(LRAglatenButtonA4, SIGNAL( clicked() ), this, SLOT(soltA4LRAglaetenButton()) );
+
+  QLabel *rotation_lable = new QLabel("Rotationskörper");
+  a4_control->addWidget(rotation_lable);
+
+  a4_control->addWidget(a4_rotation_segmente);
+  a4_rotation_segmente->setMinimum(0);
+  a4_rotation_segmente->setMaximum(100);
+  a4_rotation_segmente->setValue(1);
+  a4_rotation_segmente->setPrefix("Rotation Segmente: ");
+
+
+
+  QPushButton* rotationButtonA4 = new QPushButton("rotieren");
+  a4_control->addWidget(rotationButtonA4);
+  connect(rotationButtonA4, SIGNAL( clicked() ), this, SLOT(slotA4RotationButton()) );
 
 
   //Farb wahl
+  QLabel *farb_label = new QLabel("Farbwahl");
+  a4_control->addWidget(farb_label);
+
   colorSpinBoxredA4 = new QSpinBox();
   a4_control->addWidget(colorSpinBoxredA4);
   colorSpinBoxredA4->setMinimum(0);
@@ -345,6 +393,9 @@ void CgQtGui::createOptionPanelA5(QWidget* parent)
   a5_control->addWidget(a5StatusCheckBox);
 
   //Farb wahl
+  QLabel *farb_label = new QLabel("Farbwahl");
+  a5_control->addWidget(farb_label);
+
   colorSpinBoxredA5 = new QSpinBox();
   a5_control->addWidget(colorSpinBoxredA5);
   colorSpinBoxredA5->setMinimum(0);
@@ -393,6 +444,9 @@ void CgQtGui::createOptionPanelA6(QWidget* parent)
   a6_control->addWidget(a6StatusCheckBox);
 
   //Farb wahl
+  QLabel *farb_label = new QLabel("Farbwahl");
+  a6_control->addWidget(farb_label);
+
   colorSpinBoxredA6 = new QSpinBox();
   a6_control->addWidget(colorSpinBoxredA6);
   colorSpinBoxredA6->setMinimum(0);
@@ -442,6 +496,9 @@ void CgQtGui::createOptionPanelA7(QWidget* parent)
   a7_control->addWidget(a7StatusCheckBox);
 
   //Farb wahl
+  QLabel *farb_label = new QLabel("Farbwahl");
+  a7_control->addWidget(farb_label);
+
   colorSpinBoxredA7 = new QSpinBox();
   a7_control->addWidget(colorSpinBoxredA7);
   colorSpinBoxredA7->setMinimum(0);
@@ -491,6 +548,9 @@ void CgQtGui::createOptionPanelA8(QWidget* parent)
   a8_control->addWidget(a8StatusCheckBox);
 
   //Farb wahl
+  QLabel *farb_label = new QLabel("Farbwahl");
+  a8_control->addWidget(farb_label);
+
   colorSpinBoxredA8 = new QSpinBox();
   a8_control->addWidget(colorSpinBoxredA8);
   colorSpinBoxredA8->setMinimum(0);
@@ -546,7 +606,7 @@ void CgQtGui::slotChangeColorButtonA3()
   int16_t redValue = colorSpinBoxredA3->value();
   int16_t greenValue = colorSpinBoxgreenA3->value();
   int16_t blueValue = colorSpinBoxblueA3->value();
-  std::cout << "CgQtGui: " << "colorSpinBoxred value " <<redValue << std::endl;
+  std::cout << "CgQtGui: " << "Color Changed"<< std::endl;
   CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,3,redValue,greenValue,blueValue);
 
   notifyObserver(e);
@@ -572,7 +632,7 @@ void CgQtGui::slotChangeColorButtonA4()
   int16_t redValue = colorSpinBoxredA4->value();
   int16_t greenValue = colorSpinBoxgreenA4->value();
   int16_t blueValue = colorSpinBoxblueA4->value();
-  std::cout << "CgQtGui: " << "colorSpinBoxred value " <<redValue << std::endl;
+  std::cout << "CgQtGui: " << "Color Changed"<< std::endl;
   CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,4,redValue,greenValue,blueValue);
 
   notifyObserver(e);
@@ -583,6 +643,26 @@ void CgQtGui::slotA4Reset()
   CgBaseEvent* e = new CgResetEvent(Cg::ResetEvent,4);
   notifyObserver(e);
 }
+
+
+void CgQtGui::soltA4LRAglaetenButton()
+{
+  int iterationen = a4_LRA_Iterationen->value();
+  int mittlungsschritte =a4_LRA_Mittlunsgschritte->value();
+  std::cout << "CgQtGui: " << "A4 LRA glätten " << std::endl;
+  CgBaseEvent* e = new CgLRAglaetenEvent(Cg::LRAglaetenEvent,4,mittlungsschritte,iterationen);
+  notifyObserver(e);
+}
+
+void CgQtGui::slotA4RotationButton()
+{
+  int rotation_Segemente = a4_rotation_segmente->value();
+  std::cout << "CgQtGui: " << "A4 Rotieren " << std::endl;
+  CgBaseEvent* e = new CgRotationEvent(Cg::RotationEvent,4,rotation_Segemente);
+  notifyObserver(e);
+}
+
+
 // A5
 void CgQtGui::slotA5StatusCheckBoxChanged()
 {
@@ -596,7 +676,7 @@ void CgQtGui::slotChangeColorButtonA5()
   int16_t redValue = colorSpinBoxredA5->value();
   int16_t greenValue = colorSpinBoxgreenA5->value();
   int16_t blueValue = colorSpinBoxblueA5->value();
-  std::cout << "CgQtGui: " << "colorSpinBoxred value " <<redValue << std::endl;
+  std::cout << "CgQtGui: " << "Color Changed"<< std::endl;
   CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,5,redValue,greenValue,blueValue);
 
   notifyObserver(e);
@@ -620,7 +700,7 @@ void CgQtGui::slotChangeColorButtonA6()
   int16_t redValue = colorSpinBoxredA6->value();
   int16_t greenValue = colorSpinBoxgreenA6->value();
   int16_t blueValue = colorSpinBoxblueA6->value();
-  std::cout << "CgQtGui: " << "colorSpinBoxred value " <<redValue << std::endl;
+  std::cout << "CgQtGui: " << "Color Changed"<< std::endl;
   CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,6,redValue,greenValue,blueValue);
 
   notifyObserver(e);
@@ -644,7 +724,7 @@ void CgQtGui::slotChangeColorButtonA7()
   int16_t redValue = colorSpinBoxredA7->value();
   int16_t greenValue = colorSpinBoxgreenA7->value();
   int16_t blueValue = colorSpinBoxblueA7->value();
-  std::cout << "CgQtGui: " << "colorSpinBoxred value " <<redValue << std::endl;
+  std::cout << "CgQtGui: " << "Color Changed"<< std::endl;
   CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,7,redValue,greenValue,blueValue);
 
   notifyObserver(e);
@@ -668,7 +748,7 @@ void CgQtGui::slotChangeColorButtonA8()
   int16_t redValue = colorSpinBoxredA8->value();
   int16_t greenValue = colorSpinBoxgreenA8->value();
   int16_t blueValue = colorSpinBoxblueA8->value();
-  std::cout << "CgQtGui: " << "colorSpinBoxred value " <<redValue << std::endl;
+  std::cout << "CgQtGui: " << "Color Changed"<< std::endl;
   CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,8,redValue,greenValue,blueValue);
 
   notifyObserver(e);

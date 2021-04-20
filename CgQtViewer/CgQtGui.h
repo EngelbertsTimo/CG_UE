@@ -143,6 +143,10 @@ private:
   QCheckBox* a8StatusCheckBox;
 
 
+  // Aufgabe4 Tab
+  QSpinBox* a4_LRA_Mittlunsgschritte;
+  QSpinBox* a4_LRA_Iterationen;
+  QSpinBox* a4_rotation_segmente;
 
 
 private slots:
@@ -186,6 +190,9 @@ private slots:
   void slotA7Reset();
   void slotA8Reset();
 
+  //Aufagbe 4 Slots
+  void soltA4LRAglaetenButton();
+  void slotA4RotationButton();
 
 
 };

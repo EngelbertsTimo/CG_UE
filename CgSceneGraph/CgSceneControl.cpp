@@ -9,6 +9,8 @@
 #include "CgEvents/CgButtonEvent.h"
 #include "CgEvents/CgAufgabenStatusEvent.h"
 #include "CgEvents/CgResetEvent.h"
+#include "CgEvents/CgLRAglaetenEvent.h"
+#include "CgEvents/CgRotationEvent.h"
 #include "CgBase/CgBaseRenderer.h"
 #include "CgExampleTriangle.h"
 #include "cgtricube.h"
@@ -22,7 +24,7 @@ CgSceneControl::CgSceneControl()
 {
   m_triangle=nullptr;
   m_tricube=nullptr;
-
+  m_polyline=nullptr;
   // ?
   m_current_transformation=glm::mat4(1.);
 
@@ -39,12 +41,19 @@ CgSceneControl::CgSceneControl()
   mode = 2;
 
   // Aufgaben Fraben vorbestimmen
-  m_color_a3 = glm::vec4(1.0,0.0,0.0,1.0);
-  m_color_a4 = glm::vec4(0.0,1.0,0.0,1.0);
-  m_color_a5 = glm::vec4(0.0,0.0,1.0,1.0);
-  m_color_a6 = glm::vec4(1.0,0.0,1.0,1.0);
-  m_color_a7 = glm::vec4(0.0,1.0,1.0,1.0);
-  m_color_a8 = glm::vec4(0.5,0.5,1.0,1.0);
+  m_initial_color_a3 = glm::vec4(1.0,0.0,0.0,1.0);
+  m_initial_color_a4 = glm::vec4(0.0,1.0,0.0,1.0);
+  m_initial_color_a5 = glm::vec4(0.0,0.0,1.0,1.0);
+  m_initial_color_a6 = glm::vec4(1.0,0.0,1.0,1.0);
+  m_initial_color_a7 = glm::vec4(0.0,1.0,1.0,1.0);
+  m_initial_color_a8 = glm::vec4(0.5,0.5,1.0,1.0);
+
+  m_color_a3 = m_initial_color_a3;
+  m_color_a4 = m_initial_color_a4;
+  m_color_a5 = m_initial_color_a5;
+  m_color_a6 = m_initial_color_a6;
+  m_color_a7 = m_initial_color_a7;
+  m_color_a8 = m_initial_color_a8;
 
 
 
@@ -347,6 +356,27 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
       m_renderer->redraw();
     }
 
+  if(e->getType() & Cg::LRAglaetenEvent)
+    {
+      CgLRAglaetenEvent* ev =(CgLRAglaetenEvent*)e;
+      std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; LRA Glätten: Aufgabe "<< ev->getAufgabe()<<" | Mittungsschritte: "<<ev->getSchritte()<<"; Iterationen: "<<ev->getIterationen()  <<std::endl;
+
+      switch (ev->getAufgabe()) {
+        case 4:
+          a4_LRA_mitteln(ev->getSchritte(),ev->getIterationen());
+          break;
+        default:
+          break;
+        }
+    }
+
+  if(e->getType() & Cg::RotationEvent)
+    {
+      CgRotationEvent* ev =(CgRotationEvent*)e;
+      std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; Roteieren: Aufgabe "<< ev->getAufgabe() <<" | Rotations Segmente: "<<ev->getSegmente() <<std::endl;
+
+    }
+
   if(e->getType() & Cg::ButtonEvent)
     {
       CgButtonEvent* ev =(CgButtonEvent*)e;
@@ -366,7 +396,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
   if(e->getType() & Cg::CgMouseEvent)
     {
       CgMouseEvent* ev = (CgMouseEvent*)e;
-      std::cout << "CgSCeneControl: " << *ev << std::endl;
+      std::cout << "CgSCeneControl: " << *ev << "Mouse Event"<< std::endl;
 
       // hier kommt jetzt die Abarbeitung des Events hin...
     }
@@ -455,22 +485,22 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
 
 }
 
-// A3 Hilfsmethoden id:0-19
+// A3 Hilfsmethoden id:3000-3999
 void CgSceneControl::a3_object_initiation()
 {
-  m_tricube = new CgTriCube(1);
-  m_polyline1 = new CgPolyline(2,m_tricube->getTriangleGravities()[0],m_tricube->getVertexNormals()[0]);
-  m_polyline2 = new CgPolyline(3,m_tricube->getTriangleGravities()[1],m_tricube->getVertexNormals()[1]);
-  m_polyline3 = new CgPolyline(4,m_tricube->getTriangleGravities()[2],m_tricube->getVertexNormals()[2]);
-  m_polyline4 = new CgPolyline(5,m_tricube->getTriangleGravities()[3],m_tricube->getVertexNormals()[3]);
-  m_polyline5 = new CgPolyline(6,m_tricube->getTriangleGravities()[4],m_tricube->getVertexNormals()[4]);
-  m_polyline6 = new CgPolyline(7,m_tricube->getTriangleGravities()[5],m_tricube->getVertexNormals()[5]);
-  m_polyline7 = new CgPolyline(8,m_tricube->getTriangleGravities()[6],m_tricube->getVertexNormals()[6]);
-  m_polyline8 = new CgPolyline(9,m_tricube->getTriangleGravities()[7],m_tricube->getVertexNormals()[7]);
-  m_polyline9 = new CgPolyline(10,m_tricube->getTriangleGravities()[8],m_tricube->getVertexNormals()[8]);
-  m_polyline10 = new CgPolyline(11,m_tricube->getTriangleGravities()[9],m_tricube->getVertexNormals()[9]);
-  m_polyline11 = new CgPolyline(12,m_tricube->getTriangleGravities()[10],m_tricube->getVertexNormals()[10]);
-  m_polyline12 = new CgPolyline(13,m_tricube->getTriangleGravities()[11],m_tricube->getVertexNormals()[11]);
+  m_tricube = new CgTriCube(3001);
+  m_polyline1 = new CgPolyline(3002,m_tricube->getTriangleGravities()[0],m_tricube->getVertexNormals()[0]);
+  m_polyline2 = new CgPolyline(3003,m_tricube->getTriangleGravities()[1],m_tricube->getVertexNormals()[1]);
+  m_polyline3 = new CgPolyline(3004,m_tricube->getTriangleGravities()[2],m_tricube->getVertexNormals()[2]);
+  m_polyline4 = new CgPolyline(3005,m_tricube->getTriangleGravities()[3],m_tricube->getVertexNormals()[3]);
+  m_polyline5 = new CgPolyline(3006,m_tricube->getTriangleGravities()[4],m_tricube->getVertexNormals()[4]);
+  m_polyline6 = new CgPolyline(3007,m_tricube->getTriangleGravities()[5],m_tricube->getVertexNormals()[5]);
+  m_polyline7 = new CgPolyline(3008,m_tricube->getTriangleGravities()[6],m_tricube->getVertexNormals()[6]);
+  m_polyline8 = new CgPolyline(3009,m_tricube->getTriangleGravities()[7],m_tricube->getVertexNormals()[7]);
+  m_polyline9 = new CgPolyline(30010,m_tricube->getTriangleGravities()[8],m_tricube->getVertexNormals()[8]);
+  m_polyline10 = new CgPolyline(3011,m_tricube->getTriangleGravities()[9],m_tricube->getVertexNormals()[9]);
+  m_polyline11 = new CgPolyline(3012,m_tricube->getTriangleGravities()[10],m_tricube->getVertexNormals()[10]);
+  m_polyline12 = new CgPolyline(3013,m_tricube->getTriangleGravities()[11],m_tricube->getVertexNormals()[11]);
 }
 
 void CgSceneControl::a3_Renderer_render()
@@ -535,23 +565,28 @@ void CgSceneControl::a3_Renderer_init()
 
 void CgSceneControl::a3_Renderer_reset()
 {
-  m_color_a3 = glm::vec4(1.0,0.0,0.0,1.0);
+  m_color_a3=m_initial_color_a3;
+  a3_object_initiation();
+  a3_Renderer_init();
   m_renderer->redraw();
 }
 
 
-// A4 Hilfsmethoden id:20-39
+// A4 Hilfsmethoden id:4000-4999
 void CgSceneControl::a4_object_initiation()
 {
-  std::vector<glm::vec3> test;
-  test.push_back(glm::vec3(0.5,-1.0,0.0));
-  test.push_back(glm::vec3(-0.5,-0.5,0.0));
-  test.push_back(glm::vec3(-0.5,0.0,0.0));
-  test.push_back(glm::vec3(0.5,0.5,0.0));
-  test.push_back(glm::vec3(-0.5,1.0,0.0));
+  a4_workvector.clear();
+  a4_workvector.push_back(glm::vec3(-1.0,-1.0,0.0));
+  a4_workvector.push_back(glm::vec3(0.5,-0.5,0.0));
+  a4_workvector.push_back(glm::vec3(0.5,0.5,0.0));
+  a4_workvector.push_back(glm::vec3(-1.0,1.0,0.0));
+  a4_workvector.push_back(glm::vec3(-0.5,1.0,0.0));
 
+  for (int i = 0; i < a4_workvector.size(); ++i) {
+      std::cout << "CgSCeneControl: a4_workvector(reseted) v"<<i<<": " <<a4_workvector[i][0] <<" | "<<a4_workvector[i][1] <<" | "<<a4_workvector[i][2] <<std::endl;
+    }
 
-  m_polyline = new CgPolyline(20,test);
+  m_polyline = new CgPolyline(4000,a4_workvector);
 }
 
 void CgSceneControl::a4_Renderer_render()
@@ -567,12 +602,61 @@ void CgSceneControl::a4_Renderer_init()
 }
 
 void CgSceneControl::a4_Renderer_reset()
-{
+{  
+
+  m_color_a4=m_initial_color_a4;
+  a4_object_initiation();
+  a4_Renderer_init();
+  m_renderer->redraw();
+}
+
+void CgSceneControl::a4_LRA_mitteln(int schritte, int iterationen){
+
+  if(schritte<(a4_workvector.size()*2)){
+      int initial_length;
+      double x1,x2,y1,y2,z1,z2;
+
+      std::cout << "CgSCeneControl: glätten: schritte: "<<schritte<<"; iterationen: "<<iterationen <<std::endl;
+
+      for (int j = 0; j < iterationen; ++j) {
+          std::cout << "CgSCeneControl: glätten: iteration: "<<j+1 <<std::endl;
+          initial_length=a4_workvector.size();
+          for (int x = 0; x < initial_length; ++x) {
+              a4_workvector.insert(a4_workvector.begin()+(x*2)+1,a4_workvector[x*2]);
+            }
+          for (int y = 0; y < schritte; ++y) {
+              std::cout << "CgSCeneControl: glätten: schritt: "<<y+1 <<std::endl;
+              for (int i = 0; i < a4_workvector.size()-1; ++i) {
+                  x1=a4_workvector[i][0];
+                  x2=a4_workvector[i+1][0];
+
+                  y1=a4_workvector[i][1];
+                  y2=a4_workvector[i+1][1];
+
+                  z1=a4_workvector[i][2];
+                  z2=a4_workvector[i+1][2];
+                  a4_workvector[i]=glm::vec3((x1+x2)/2,(y1+y2)/2,(z1+z2)/2);
+                }
+              a4_workvector.erase(a4_workvector.begin()+a4_workvector.size()-1);
+            }
+          std::cout << "CgSCeneControl: glätten: Gesamtzahl Unterpunkte: "<<a4_workvector.size() <<std::endl;
+          m_polyline = new CgPolyline(4000,a4_workvector);
+          a4_Renderer_init();
+          a4_Renderer_render();
+          m_renderer->redraw();
+          //test[5]=glm::vec3(-1.5,1.0,0.0);
+
+          //test.erase(test.begin()+test.size()-1);
+          //  test.insert (1,glm::vec3(-0.5,-1.5,0.0));
+
+        }
+    } else {
+       std::cout << "CgSCeneControl: glätten: schritte: zu viele Mittelschritte("<<schritte<<")  angegeben; Maximale Mittlungschrittanzahl = "<<(a4_workvector.size()*2)-1 <<std::endl;
+    }
 
 }
 
-
-// A5 Hilfsmethoden id:40-59
+// A5 Hilfsmethoden id:5000-5999
 void CgSceneControl::a5_object_initiation()
 {
 
@@ -590,10 +674,13 @@ void CgSceneControl::a5_Renderer_init()
 
 void CgSceneControl::a5_Renderer_reset()
 {
-
+  m_color_a5=m_initial_color_a5;
+  a5_object_initiation();
+  a5_Renderer_init();
+  m_renderer->redraw();
 }
 
-// A6 Hilfsmethoden id:60-79
+// A6 Hilfsmethoden id:6000-6999
 void CgSceneControl::a6_object_initiation()
 {
 
@@ -611,10 +698,13 @@ void CgSceneControl::a6_Renderer_init()
 
 void CgSceneControl::a6_Renderer_reset()
 {
-
+  m_color_a6=m_initial_color_a6;
+  a6_object_initiation();
+  a6_Renderer_init();
+  m_renderer->redraw();
 }
 
-// A7 Hilfsmethoden id:80-99
+// A7 Hilfsmethoden id:7000-7999
 void CgSceneControl::a7_object_initiation()
 {
 
@@ -632,10 +722,13 @@ void CgSceneControl::a7_Renderer_init()
 
 void CgSceneControl::a7_Renderer_reset()
 {
-
+  m_color_a7=m_initial_color_a7;
+  a7_object_initiation();
+  a7_Renderer_init();
+  m_renderer->redraw();
 }
 
-// A8 Hilfsmethoden id:100-119
+// A8 Hilfsmethoden id:8000-8999
 void CgSceneControl::a8_object_initiation()
 {
 
@@ -653,5 +746,9 @@ void CgSceneControl::a8_Renderer_init()
 
 void CgSceneControl::a8_Renderer_reset()
 {
-
+  m_color_a8=m_initial_color_a8;
+  a8_object_initiation();
+  a8_Renderer_init();
+  m_renderer->redraw();
 }
+

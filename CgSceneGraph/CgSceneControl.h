@@ -36,6 +36,7 @@ private:
   void a4_Renderer_render();
   void a4_Renderer_init();
   void a4_Renderer_reset();
+  void a4_LRA_mitteln(int schritte, int iterationen);
 
   // A5 Hilfsmethoden
   void a5_object_initiation();
@@ -85,6 +86,7 @@ private:
 
   // A4 Objekte
   CgPolyline* m_polyline;
+  std::vector<glm::vec3> a4_workvector;
 
   // A5 Objekte
 
@@ -114,6 +116,13 @@ private:
   glm::vec4 m_color_a6;
   glm::vec4 m_color_a7;
   glm::vec4 m_color_a8;
+
+  glm::vec4 m_initial_color_a3;
+  glm::vec4 m_initial_color_a4;
+  glm::vec4 m_initial_color_a5;
+  glm::vec4 m_initial_color_a6;
+  glm::vec4 m_initial_color_a7;
+  glm::vec4 m_initial_color_a8;
   std::vector<CgPolyline*> m_render_lines;
 
 };

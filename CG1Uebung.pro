@@ -8,7 +8,9 @@ SOURCES += main.cpp \
     CgEvents/CgAufgabenStatusEvent.cpp \
     CgEvents/CgButtonEvent.cpp \
     CgEvents/CgColorChangeEvent.cpp \
+    CgEvents/CgLRAglaetenEvent.cpp \
     CgEvents/CgResetEvent.cpp \
+    CgEvents/CgRotationEvent.cpp \
     CgQtViewer/CGQtGLRenderWidget.cpp \
     CgQtViewer/CgQtGui.cpp \
     CgBase/CgObservable.cpp \
@@ -31,7 +33,9 @@ HEADERS += \
     CgEvents/CgAufgabenStatusEvent.h \
     CgEvents/CgButtonEvent.h \
     CgEvents/CgColorChangeEvent.h \
+    CgEvents/CgLRAglaetenEvent.h \
     CgEvents/CgResetEvent.h \
+    CgEvents/CgRotationEvent.h \
     CgQtViewer/CgQtGLRenderWidget.h \
     CgQtViewer/CgQtGui.h \
     CgBase/CgObserver.h \
