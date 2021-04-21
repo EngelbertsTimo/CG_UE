@@ -31,6 +31,7 @@ CgSceneControl::CgSceneControl()
   // Blickwinkel
   m_lookAt_matrix= glm::lookAt(glm::vec3(0.0,0.0,2.0),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
 
+
   // Projekt Einstellungen
   m_proj_matrix= glm::mat4x4(glm::vec4(1.792591, 0.0, 0.0, 0.0), glm::vec4(0.0, 1.792591, 0.0, 0.0), glm::vec4(0.0, 0.0, -1.0002, -1.0), glm::vec4(0.0, 0.0, -0.020002, 0.0));
 
@@ -61,7 +62,7 @@ CgSceneControl::CgSceneControl()
 
   //Aufgaben status initierieren
   a3_active = false;
-  a4_active = true;
+  a4_active = false;
   a5_active = false;
   a6_active = false;
   a7_active = false;
@@ -651,7 +652,7 @@ void CgSceneControl::a4_LRA_mitteln(int schritte, int iterationen){
 
         }
     } else {
-       std::cout << "CgSCeneControl: glätten: schritte: zu viele Mittelschritte("<<schritte<<")  angegeben; Maximale Mittlungschrittanzahl = "<<(a4_workvector.size()*2)-1 <<std::endl;
+      std::cout << "CgSCeneControl: glätten: schritte: zu viele Mittelschritte("<<schritte<<")  angegeben; Maximale Mittlungschrittanzahl = "<<(a4_workvector.size()*2)-1 <<std::endl;
     }
 
 }
@@ -660,16 +661,107 @@ void CgSceneControl::a4_LRA_mitteln(int schritte, int iterationen){
 void CgSceneControl::a5_object_initiation()
 {
 
+  a5_rotationvector.clear();
+  a5_workvector.clear();
+  a5_workvector.push_back(glm::vec3(-0.5,0.0,0.75));
+  a5_rotationvector.push_back(a5_workvector[0]);
+  a5_workvector.push_back(glm::vec3(-0.5,0.0,0.25));
+  a5_rotationvector.push_back(a5_workvector[1]);
+  a5_workvector.push_back(glm::vec3(-0.5,0.0,-0.25));
+  a5_rotationvector.push_back(a5_workvector[2]);
+  a5_workvector.push_back(glm::vec3(-0.5,0.0,-0.75));
+  a5_rotationvector.push_back(a5_workvector[3]);
+  //m_A5_1_polyline = new CgPolyline(5000,a5_workvector);
+
+
+  a5_workvector.clear();
+  a5_workvector.push_back(glm::vec3(-0.25,0.25,0.75));
+  a5_rotationvector.push_back(a5_workvector[0]);
+  a5_workvector.push_back(glm::vec3(-0.25,0.25,0.25));
+  a5_rotationvector.push_back(a5_workvector[1]);
+  a5_workvector.push_back(glm::vec3(-0.25,0.25,-0.25));
+  a5_rotationvector.push_back(a5_workvector[2]);
+  a5_workvector.push_back(glm::vec3(-0.25,0.25,-0.75));
+  a5_rotationvector.push_back(a5_workvector[3]);
+  //m_A5_2_polyline = new CgPolyline(5001,a5_workvector);
+
+
+  a5_workvector.clear();
+  a5_workvector.push_back(glm::vec3(0.25,0.25,0.75));
+  a5_rotationvector.push_back(a5_workvector[0]);
+  a5_workvector.push_back(glm::vec3(0.25,0.25,0.25));
+  a5_rotationvector.push_back(a5_workvector[1]);
+  a5_workvector.push_back(glm::vec3(0.25,0.25,-0.25));
+  a5_rotationvector.push_back(a5_workvector[2]);
+  a5_workvector.push_back(glm::vec3(0.25,0.25,-0.75));
+  a5_rotationvector.push_back(a5_workvector[3]);
+  //m_A5_3_polyline = new CgPolyline(5002,a5_workvector);
+
+  a5_workvector.clear();
+  a5_workvector.push_back(glm::vec3(0.5,0.0,0.75));
+  a5_rotationvector.push_back(a5_workvector[0]);
+  a5_workvector.push_back(glm::vec3(0.5,0.0,0.25));
+  a5_rotationvector.push_back(a5_workvector[1]);
+  a5_workvector.push_back(glm::vec3(0.5,0.0,-0.25));
+  a5_rotationvector.push_back(a5_workvector[2]);
+  a5_workvector.push_back(glm::vec3(0.5,0.0,-0.75));
+  a5_rotationvector.push_back(a5_workvector[3]);
+ // m_A5_4_polyline = new CgPolyline(5003,a5_workvector);
+
+  a5_workvector.clear();
+  a5_workvector.push_back(glm::vec3(0.25,-0.25,0.75));
+  a5_rotationvector.push_back(a5_workvector[0]);
+  a5_workvector.push_back(glm::vec3(0.25,-0.25,0.25));
+  a5_rotationvector.push_back(a5_workvector[1]);
+  a5_workvector.push_back(glm::vec3(0.25,-0.25,-0.25));
+  a5_rotationvector.push_back(a5_workvector[2]);
+  a5_workvector.push_back(glm::vec3(0.25,-0.25,-0.75));
+  a5_rotationvector.push_back(a5_workvector[3]);
+  //m_A5_5_polyline = new CgPolyline(5004,a5_workvector);
+
+  a5_workvector.clear();
+  a5_workvector.push_back(glm::vec3(-0.25,-0.25,0.75));
+  a5_rotationvector.push_back(a5_workvector[0]);
+  a5_workvector.push_back(glm::vec3(-0.25,-0.25,0.25));
+  a5_rotationvector.push_back(a5_workvector[1]);
+  a5_workvector.push_back(glm::vec3(-0.25,-0.25,-0.25));
+  a5_rotationvector.push_back(a5_workvector[2]);
+  a5_workvector.push_back(glm::vec3(-0.25,-0.25,-0.75));
+  a5_rotationvector.push_back(a5_workvector[3]);
+  //m_A5_6_polyline = new CgPolyline(5005,a5_workvector);
+  m_A5_6_polyline = new CgPolyline(5005,a5_rotationvector);
 }
 
 void CgSceneControl::a5_Renderer_render()
 {
-
+  /*if(m_A5_1_polyline!=NULL)
+    m_renderer->render(m_A5_1_polyline);
+  if(m_A5_2_polyline!=NULL)
+    m_renderer->render(m_A5_2_polyline);
+  if(m_A5_3_polyline!=NULL)
+    m_renderer->render(m_A5_3_polyline);
+  if(m_A5_4_polyline!=NULL)
+    m_renderer->render(m_A5_4_polyline);
+  if(m_A5_5_polyline!=NULL)
+    m_renderer->render(m_A5_5_polyline);*/
+  if(m_A5_6_polyline!=NULL)
+    m_renderer->render(m_A5_6_polyline);
 }
 
 void CgSceneControl::a5_Renderer_init()
 {
-
+ /* if(m_A5_1_polyline!=NULL)
+    m_renderer->init(m_A5_1_polyline);
+  if(m_A5_2_polyline!=NULL)
+    m_renderer->init(m_A5_2_polyline);
+  if(m_A5_3_polyline!=NULL)
+    m_renderer->init(m_A5_3_polyline);
+  if(m_A5_4_polyline!=NULL)
+    m_renderer->init(m_A5_4_polyline);
+  if(m_A5_5_polyline!=NULL)
+    m_renderer->init(m_A5_5_polyline);*/
+  if(m_A5_6_polyline!=NULL)
+    m_renderer->init(m_A5_6_polyline);
 }
 
 void CgSceneControl::a5_Renderer_reset()

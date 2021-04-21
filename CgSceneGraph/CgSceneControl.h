@@ -90,6 +90,15 @@ private:
 
   // A5 Objekte
 
+  CgPolyline* m_A5_1_polyline;
+  CgPolyline* m_A5_2_polyline;
+  CgPolyline* m_A5_3_polyline;
+  CgPolyline* m_A5_4_polyline;
+  CgPolyline* m_A5_5_polyline;
+  CgPolyline* m_A5_6_polyline;
+  std::vector<glm::vec3> a5_workvector;
+  std::vector<glm::vec3> a5_rotationvector;
+
   // A6 Objekte
 
   // A7 Objekte
