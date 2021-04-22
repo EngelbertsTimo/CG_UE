@@ -160,6 +160,7 @@ private slots:
 
   /* slots example qt gui elements */
 
+
   void slotMySpinBox1Changed();
   void slotMyCheckBox1Changed();
   void slotMyButton1Pressed();

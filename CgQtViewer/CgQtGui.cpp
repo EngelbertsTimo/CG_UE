@@ -261,7 +261,7 @@ void CgQtGui::createOptionPanelA3(QWidget* parent)
 
   connect(colorButton, SIGNAL( clicked() ), this, SLOT(slotChangeColorButtonA3()) );
 
-
+connect(m_glRenderWidget, SIGNAL(viewportChanged(int,int)), this, SLOT(viewportChanged(int,int)));
   // reset Button
   QPushButton* resetButtonA3 = new QPushButton("Reset");
   a3_control->addWidget(resetButtonA3);
@@ -600,6 +600,7 @@ void CgQtGui::slotA3StatusCheckBoxChanged()
 
   notifyObserver(e);
 }
+
 
 void CgQtGui::slotChangeColorButtonA3()
 {

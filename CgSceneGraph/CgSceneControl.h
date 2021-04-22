@@ -11,6 +11,7 @@ class CgBaseRenderer;
 class CgExampleTriangle;
 class CgTriCube;
 class CgPolyline;
+class CgRotationBody;
 
 class CgSceneControl : public CgObserver, public CgBaseSceneControl
 {
@@ -23,6 +24,9 @@ public:
   void renderObjects();
 
 private:
+
+  int assign_id();
+
 
   // A3 Hilfsmethoden
   void a3_object_initiation();
@@ -37,6 +41,7 @@ private:
   void a4_Renderer_init();
   void a4_Renderer_reset();
   void a4_LRA_mitteln(int schritte, int iterationen);
+  void a4_roteieren(int segmente);
 
   // A5 Hilfsmethoden
   void a5_object_initiation();
@@ -62,7 +67,7 @@ private:
   void a8_Renderer_init();
   void a8_Renderer_reset();
 
-
+  int global_id;
 
   int mode;
 
@@ -87,7 +92,10 @@ private:
   // A4 Objekte
   CgPolyline* m_polyline;
   std::vector<glm::vec3> a4_workvector;
-
+  std::vector<glm::vec3> a4_rotationvector;
+  CgRotationBody* a4_rotationBody;
+  std::vector<CgPolyline*> a4_rotation_Face_Nomral_polylines;
+  std::vector<CgPolyline*> a4_rotation_Vertex_Nomral_polylines;
   // A5 Objekte
 
   CgPolyline* m_A5_1_polyline;
@@ -98,6 +106,8 @@ private:
   CgPolyline* m_A5_6_polyline;
   std::vector<glm::vec3> a5_workvector;
   std::vector<glm::vec3> a5_rotationvector;
+  CgRotationBody* a5_rotationBody;
+  std::vector<CgPolyline*> a5_rotationNomral_polylines;
 
   // A6 Objekte
 
@@ -113,6 +123,20 @@ private:
   bool a6_active;
   bool a7_active;
   bool a8_active;
+
+  bool a3_Face_normal_Vectors;
+  bool a4_Face_normal_Vectors;
+  bool a5_Face_normal_Vectors;
+  bool a6_Face_normal_Vectors;
+  bool a7_Face_normal_Vectors;
+  bool a8_Face_normal_Vectors;
+
+  bool a3_Vertex_normal_Vectors;
+  bool a4_Vertex_normal_Vectors;
+  bool a5_Vertex_normal_Vectors;
+  bool a6_Vertex_normal_Vectors;
+  bool a7_Vertex_normal_Vectors;
+  bool a8_Vertex_normal_Vectors;
 
   glm::mat4 m_current_transformation;
   glm::mat4 m_trackball_rotation;

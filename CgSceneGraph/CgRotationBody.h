@@ -5,11 +5,11 @@
 #include <string>
 #include "CgBase/CgBaseTriangleMesh.h"
 
-class CgTriangleShape: public CgBaseTriangleMesh
+class CgRotationBody: public CgBaseTriangleMesh
 {
 public:
-  CgTriangleShape(int id);
-  ~CgTriangleShape();
+  CgRotationBody(int id, int segmente, int pointNumber, std::vector<glm::vec3> workVector);
+  ~CgRotationBody();
 
   //inherited from CgBaseRenderableObject
   Cg::ObjectType getType() const;
@@ -47,8 +47,8 @@ private:
   const unsigned int m_id;
 
 };
-inline Cg::ObjectType  CgTriangleShape::getType() const {return m_type;}
-inline unsigned int CgTriangleShape::getID() const {return m_id;}
+inline Cg::ObjectType  CgRotationBody::getType() const {return m_type;}
+inline unsigned int CgRotationBody::getID() const {return m_id;}
 
 #endif // CGTRIANGLESHAPE_H
 

@@ -285,40 +285,40 @@ CgTriCube::CgTriCube(int id):
   //Dreieck Normale
 
   //  dreieck 1   0-2
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[0]]-m_vertices[m_triangle_indices[1]],m_vertices[m_triangle_indices[0]]-m_vertices[m_triangle_indices[2]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[0]]-m_vertices[m_triangle_indices[1]],m_vertices[m_triangle_indices[0]]-m_vertices[m_triangle_indices[2]]));
 
   //  dreieck 2   3-5
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[3]]-m_vertices[m_triangle_indices[4]],m_vertices[m_triangle_indices[3]]-m_vertices[m_triangle_indices[5]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[3]]-m_vertices[m_triangle_indices[4]],m_vertices[m_triangle_indices[3]]-m_vertices[m_triangle_indices[5]]));
 
   //  dreieck 3   6-8
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[6]]-m_vertices[m_triangle_indices[7]],m_vertices[m_triangle_indices[6]]-m_vertices[m_triangle_indices[8]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[6]]-m_vertices[m_triangle_indices[7]],m_vertices[m_triangle_indices[6]]-m_vertices[m_triangle_indices[8]]));
 
   //  dreieck 4   9-11
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[9]]-m_vertices[m_triangle_indices[10]],m_vertices[m_triangle_indices[9]]-m_vertices[m_triangle_indices[11]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[9]]-m_vertices[m_triangle_indices[10]],m_vertices[m_triangle_indices[9]]-m_vertices[m_triangle_indices[11]]));
 
   //  dreieck 5   12-14
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[12]]-m_vertices[m_triangle_indices[13]],m_vertices[m_triangle_indices[12]]-m_vertices[m_triangle_indices[14]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[12]]-m_vertices[m_triangle_indices[13]],m_vertices[m_triangle_indices[12]]-m_vertices[m_triangle_indices[14]]));
 
   //  dreieck 6   15-17
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[15]]-m_vertices[m_triangle_indices[16]],m_vertices[m_triangle_indices[15]]-m_vertices[m_triangle_indices[17]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[15]]-m_vertices[m_triangle_indices[16]],m_vertices[m_triangle_indices[15]]-m_vertices[m_triangle_indices[17]]));
 
   //  dreieck 7   18-20
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[18]]-m_vertices[m_triangle_indices[19]],m_vertices[m_triangle_indices[18]]-m_vertices[m_triangle_indices[20]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[18]]-m_vertices[m_triangle_indices[19]],m_vertices[m_triangle_indices[18]]-m_vertices[m_triangle_indices[20]]));
 
   //  dreieck 8   21-23
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[21]]-m_vertices[m_triangle_indices[22]],m_vertices[m_triangle_indices[21]]-m_vertices[m_triangle_indices[23]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[21]]-m_vertices[m_triangle_indices[22]],m_vertices[m_triangle_indices[21]]-m_vertices[m_triangle_indices[23]]));
 
   //  dreieck 9   24-26
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[24]]-m_vertices[m_triangle_indices[25]],m_vertices[m_triangle_indices[24]]-m_vertices[m_triangle_indices[26]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[24]]-m_vertices[m_triangle_indices[25]],m_vertices[m_triangle_indices[24]]-m_vertices[m_triangle_indices[26]]));
 
   //  dreieck 10  27-29
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[27]]-m_vertices[m_triangle_indices[28]],m_vertices[m_triangle_indices[27]]-m_vertices[m_triangle_indices[29]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[27]]-m_vertices[m_triangle_indices[28]],m_vertices[m_triangle_indices[27]]-m_vertices[m_triangle_indices[29]]));
 
   //  dreieck 11  30-31
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[30]]-m_vertices[m_triangle_indices[31]],m_vertices[m_triangle_indices[30]]-m_vertices[m_triangle_indices[32]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[30]]-m_vertices[m_triangle_indices[31]],m_vertices[m_triangle_indices[30]]-m_vertices[m_triangle_indices[32]]));
 
   //  dreieck 12  33-35
-  m_vertex_normals.push_back(glm::cross(m_vertices[m_triangle_indices[33]]-m_vertices[m_triangle_indices[34]],m_vertices[m_triangle_indices[33]]-m_vertices[m_triangle_indices[35]]));
+  m_face_normals.push_back(glm::cross(m_vertices[m_triangle_indices[33]]-m_vertices[m_triangle_indices[34]],m_vertices[m_triangle_indices[33]]-m_vertices[m_triangle_indices[35]]));
 
 
   /*std::cout << "CgTriCube.cpp: punkte"<< <<std::endl;
