@@ -44,7 +44,7 @@ private:
   void a4_Renderer_reset();
   void a4_delete();
   void a4_LRA_mitteln(int schritte, int iterationen);
-  void a4_roteieren(int segmente);
+  void a4_roteieren(int segmente,int rotationType);
 
   // A5 Hilfsmethoden
   void a5_object_initiation();
@@ -75,11 +75,11 @@ private:
   void a8_delete();
 
   // Arbeits methoden
-  std::vector<glm::vec3> m_LRA_mitteln(int schritte, int iterationen);
+  std::vector<glm::vec3> m_LRA_mitteln(int schritte, int iterationen, std::vector<glm::vec3> lra_workVector_input);
 
-  CgRotationBody* m_roteieren_1(int segmente);
-  CgRotationBody* m_roteieren_2(int segmente);
-  CgRotationBody* m_roteieren_3(int segmente);
+  CgRotationBody* m_roteieren_1(int segmente,std::vector<glm::vec3> r1_workVector);
+  CgRotationBody* m_roteieren_2(int segmente,std::vector<glm::vec3> r2_workVector);
+  CgRotationBody* m_roteieren_3(int segmente,std::vector<glm::vec3> r3_workVector);
   std::vector<CgPolyline*> m_FaceNormales(CgBaseTriangleMesh* workBody);
   std::vector<CgPolyline*> m_VertexNormales(CgBaseTriangleMesh* workBody);
 
@@ -94,19 +94,6 @@ private:
   CgTriCube* a3_tricube;
   std::vector<CgPolyline*> a3_triCube_Face_Nomral_polylines;
   std::vector<CgPolyline*> a3_triCube_Vertex_Nomral_polylines;
-  /*
-  CgPolyline* m_polyline1;
-  CgPolyline* m_polyline2;
-  CgPolyline* m_polyline3;
-  CgPolyline* m_polyline4;
-  CgPolyline* m_polyline5;
-  CgPolyline* m_polyline6;
-  CgPolyline* m_polyline7;
-  CgPolyline* m_polyline8;
-  CgPolyline* m_polyline9;
-  CgPolyline* m_polyline10;
-  CgPolyline* m_polyline11;
-  CgPolyline* m_polyline12;*/
 
   // A4 Objekte
   CgPolyline* a4_polyline;

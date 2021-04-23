@@ -773,7 +773,7 @@ void CgQtGui::slotA4RotationButton()
 {
   int rotation_Segemente = a4_rotation_segmente->value();
   std::cout << "CgQtGui: " << "A4 Rotieren " << std::endl;
-  CgBaseEvent* e = new CgRotationEvent(Cg::RotationEvent,4,rotation_Segemente);
+  CgBaseEvent* e = new CgRotationEvent(Cg::RotationEvent,4,1,rotation_Segemente);
   notifyObserver(e);
 }
 

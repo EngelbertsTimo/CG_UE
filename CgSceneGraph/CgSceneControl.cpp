@@ -468,10 +468,10 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
   if(e->getType() & Cg::RotationEvent)
     {
       CgRotationEvent* ev =(CgRotationEvent*)e;
-      std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; Roteieren: Aufgabe "<< ev->getAufgabe() <<" | Rotations Segmente: "<<ev->getSegmente() <<std::endl;
+      std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; Roteieren: Aufgabe "<< ev->getAufgabe()<<"| Rotations Typ: "<<ev->getRotationType() <<" | Rotations Segmente: "<<ev->getSegmente() <<std::endl;
       switch (ev->getAufgabe()) {
         case 4:
-          a4_roteieren(ev->getSegmente());
+          a4_roteieren(ev->getSegmente(),ev->getRotationType());
           break;
         default:
           break;
@@ -646,8 +646,11 @@ void CgSceneControl::a3_delete(){
 
 // A4 Hilfsmethoden id:4000-4999
 void CgSceneControl::a4_object_initiation()
-{
+{/*
   a4_workvector.clear();
+  a4_workvector.push_back(glm::vec3(-0.0,-0.5,-0.5));
+  a4_workvector.push_back(glm::vec3(0.0,0.0,0.0));
+  a4_workvector.push_back(glm::vec3(0.5,0.5,0.5));
 
   a4_workvector.push_back(glm::vec3(-1.0,-1.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.5,-0.5,-0.25));
@@ -655,21 +658,21 @@ void CgSceneControl::a4_object_initiation()
   a4_workvector.push_back(glm::vec3(-1.0,1.0,0.25));
   a4_workvector.push_back(glm::vec3(-0.5,1.0,0.5));
 
+*/
 
-
-  /*
+/*
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.75,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(0.75,0.0,0.0));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.25));
+
 */
 
-  /*
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.0));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.25));
-*/
+
 
   /*
   a4_workvector.push_back(glm::vec3(1.0,0.0,-0.5));
@@ -756,73 +759,35 @@ void CgSceneControl::a4_delete(){
     }
 }
 
-void CgSceneControl::a4_LRA_mitteln(int schritte, int iterationen){
+void CgSceneControl::a4_LRA_mitteln(int schritte, int iterationen){ 
+  a4_workvector = m_LRA_mitteln(schritte,iterationen,a4_workvector);
+  std::cout << "CgSCeneControl: hier" <<std::endl;
+  a4_polyline = new CgPolyline(assign_id(),a4_workvector);
 
-  if(schritte<(a4_workvector.size()*2)){
-      int initial_length;
-      double x1,x2,y1,y2,z1,z2;
-
-      std::cout << "CgSCeneControl: glätten: schritte: "<<schritte<<"; iterationen: "<<iterationen <<std::endl;
-
-      for (int j = 0; j < iterationen; ++j) {
-          std::cout << "CgSCeneControl: glätten: iteration: "<<j+1 <<std::endl;
-          initial_length=a4_workvector.size();
-          for (int x = 0; x < initial_length; ++x) {
-              std::cout << "CgSCeneControl: glätten: vorbereiten: "<<x+1 <<std::endl;
-              a4_workvector.insert(a4_workvector.begin()+(x*2)+1,a4_workvector[x*2]);
-            }
-          for (int y = 0; y < schritte; ++y) {
-              std::cout << "CgSCeneControl: glätten: schritt: "<<y+1 <<std::endl;
-              for (int i = 0; i < a4_workvector.size()-1; ++i) {
-                  std::cout << "CgSCeneControl: glätten: durchlauf: "<<i+1 <<std::endl;
-                  x1=a4_workvector[i][0];
-                  x2=a4_workvector[i+1][0];
-
-                  y1=a4_workvector[i][1];
-                  y2=a4_workvector[i+1][1];
-
-                  z1=a4_workvector[i][2];
-                  z2=a4_workvector[i+1][2];
-                  a4_workvector[i]=glm::vec3((x1+x2)/2,(y1+y2)/2,(z1+z2)/2);
-                }
-              a4_workvector.erase(a4_workvector.begin()+a4_workvector.size()-1);
-            }
-          std::cout << "CgSCeneControl: glätten: Gesamtzahl Unterpunkte: "<<a4_workvector.size() <<std::endl;
-          a4_polyline = new CgPolyline(assign_id(),a4_workvector);
-
-          a4_Renderer_init();
-          a4_Renderer_render();
-          m_renderer->redraw();
-        }
-    } else {
-      std::cout << "CgSCeneControl: glätten: schritte: zu viele Mittelschritte("<<schritte<<")  angegeben; Maximale Mittlungschrittanzahl = "<<(a4_workvector.size()*2)-1 <<std::endl;
-    }
-
+  a4_Renderer_init();
+  a4_Renderer_render();
+  m_renderer->redraw();
 }
 
-void CgSceneControl::a4_roteieren(int segmente){
-  std::vector<glm::vec3> a4_zws_old_vector=a4_workvector;
-  std::vector<glm::vec3> a4_zws_new_vector;
-  a4_rotationvector.clear();
-  double winkel=2* M_PI/segmente;
-  for (int j = 0; j < a4_workvector.size(); ++j) {
-      a4_rotationvector.push_back(glm::vec3((a4_workvector[j][0]),(a4_workvector[j][1]),a4_workvector[j][2]));
+
+
+
+void CgSceneControl::a4_roteieren(int segmente, int rotationType)
+{
+  switch (rotationType) {
+    case 1:
+      a4_rotationBody= m_roteieren_1(segmente,a4_workvector);//new CgRotationBody(assign_id(),segmente,a4_workvector.size(),a4_rotationvector);
+      break;
+    case 2:
+      a4_rotationBody= m_roteieren_2(segmente,a4_workvector);//new CgRotationBody(assign_id(),segmente,a4_workvector.size(),a4_rotationvector);
+      break;
+    case 3:
+      a4_rotationBody= m_roteieren_3(segmente,a4_workvector);//new CgRotationBody(assign_id(),segmente,a4_workvector.size(),a4_rotationvector);
+      break;
+    default:
+      break;
     }
-
-
-
-  for (int i = 1; i < segmente; ++i) {
-      for (int j = 0; j < a4_workvector.size(); ++j) {
-          double x =(a4_zws_old_vector[j][0]*cos(winkel)-a4_zws_old_vector[j][1]*sin(winkel));
-          double y =(a4_zws_old_vector[j][0]*sin(winkel)+a4_zws_old_vector[j][1]*cos(winkel));
-          a4_zws_new_vector.push_back(glm::vec3(x,y,a4_zws_old_vector[j][2]));
-          a4_rotationvector.push_back(glm::vec3(x,y,a4_zws_old_vector[j][2]));
-        }
-      a4_zws_old_vector.clear();
-      a4_zws_old_vector=a4_zws_new_vector;
-      a4_zws_new_vector.clear();
-    }
-  a4_rotationBody= new CgRotationBody(assign_id(),segmente,a4_workvector.size(),a4_rotationvector);
+  //a4_rotationBody= m_roteieren_3(segmente,a4_workvector);//new CgRotationBody(assign_id(),segmente,a4_workvector.size(),a4_rotationvector);
 
   a4_rotation_Face_Nomral_polylines = m_FaceNormales(a4_rotationBody);
 
@@ -832,6 +797,7 @@ void CgSceneControl::a4_roteieren(int segmente){
   a4_Renderer_render();
   m_renderer->redraw();
 }
+
 
 // A5 Hilfsmethoden id:5000-5999
 void CgSceneControl::a5_object_initiation()
@@ -980,21 +946,126 @@ void CgSceneControl::a8_delete(){
 
 //Arbeitsmethoden
 
-std::vector<glm::vec3> CgSceneControl::m_LRA_mitteln(int schritte, int iterationen){
 
+std::vector<glm::vec3> CgSceneControl::m_LRA_mitteln(int schritte, int iterationen,std::vector<glm::vec3> lra_workVector_input){
+  std::vector<glm::vec3> lra_workVector=lra_workVector_input;
+
+  if(schritte<(lra_workVector.size()*2)){
+      int initial_length;
+      double x1,x2,y1,y2,z1,z2;
+      for (int j = 0; j < iterationen; ++j) {
+          std::cout << "CgSCeneControl: glätten: iteration: "<<j+1 <<std::endl;
+          initial_length=lra_workVector.size();
+          for (int x = 0; x < initial_length; ++x) {
+              std::cout << "CgSCeneControl: glätten: vorbereiten: "<<x+1 <<std::endl;
+              lra_workVector.insert(lra_workVector.begin()+(x*2)+1,lra_workVector[x*2]);
+            }
+
+          for (int y = 0; y < schritte; ++y) {
+              std::cout << "CgSCeneControl: glätten: schritt: "<<y+1 <<std::endl;
+              for (int i = 0; i < lra_workVector.size()-1; ++i) {
+                  std::cout << "CgSCeneControl: glätten: durchlauf: "<<i+1 <<std::endl;
+                  x1=lra_workVector[i][0];
+                  x2=lra_workVector[i+1][0];
+
+                  y1=lra_workVector[i][1];
+                  y2=lra_workVector[i+1][1];
+
+                  z1=lra_workVector[i][2];
+                  z2=lra_workVector[i+1][2];
+                  lra_workVector[i]=glm::vec3((x1+x2)/2,(y1+y2)/2,(z1+z2)/2);
+                }
+              lra_workVector.erase(lra_workVector.begin()+lra_workVector.size()-1);
+            }
+          std::cout << "CgSCeneControl: glätten: Gesamtzahl Unterpunkte: "<<lra_workVector.size() <<std::endl;
+        }
+
+    } else {
+      std::cout << "CgSCeneControl: LRA glätten: schritte: zu viele Mittelschritte("<<schritte<<")  angegeben; Maximale Mittlungschrittanzahl = "<<(lra_workVector.size()*2)-1 <<std::endl;
+    }
+  return lra_workVector;
 }
 
-CgRotationBody* CgSceneControl::m_roteieren_1(int segmente){
+CgRotationBody* CgSceneControl::m_roteieren_1(int segmente,std::vector<glm::vec3> r1_workVector){
+  std::vector<glm::vec3> r1_zws_old_vector=r1_workVector;
+  std::vector<glm::vec3> r1_zws_new_vector,r1_rotationVector;
 
+  double winkel=2* M_PI/segmente;
+
+  for (int j = 0; j < r1_workVector.size(); ++j) {
+      r1_rotationVector.push_back(glm::vec3((r1_zws_old_vector[j][0]),(r1_zws_old_vector[j][1]),r1_zws_old_vector[j][2]));
+    }
+
+  for (int i = 1; i < segmente; ++i) {
+      for (int j = 0; j < r1_workVector.size(); ++j) {
+          double v1 =(r1_zws_old_vector[j][0]*cos(winkel)-r1_zws_old_vector[j][1]*sin(winkel));
+          double v2 =(r1_zws_old_vector[j][0]*sin(winkel)+r1_zws_old_vector[j][1]*cos(winkel));
+          r1_zws_new_vector.push_back(glm::vec3(v1,v2,r1_zws_old_vector[j][2]));
+          r1_rotationVector.push_back(glm::vec3(v1,v2,r1_zws_old_vector[j][2]));
+        }
+      r1_zws_old_vector.clear();
+      r1_zws_old_vector=r1_zws_new_vector;
+      r1_zws_new_vector.clear();
+    }
+  CgRotationBody*  rotationBody= new CgRotationBody(assign_id(),segmente,a4_workvector.size(),r1_rotationVector);
+
+  return rotationBody;
 }
 
-CgRotationBody* CgSceneControl::m_roteieren_2(int segmente){
+CgRotationBody* CgSceneControl::m_roteieren_2(int segmente,std::vector<glm::vec3> r2_workVector){
 
+  std::vector<glm::vec3> r2_zws_old_vector=r2_workVector;
+  std::vector<glm::vec3> r2_zws_new_vector,r2_rotationVector;
+
+  double winkel=2* M_PI/segmente;
+
+  for (int j = 0; j < r2_workVector.size(); ++j) {
+      r2_rotationVector.push_back(glm::vec3((r2_zws_old_vector[j][0]),(r2_zws_old_vector[j][1]),r2_zws_old_vector[j][2]));
+    }
+
+  for (int i = 1; i < segmente; ++i) {
+      for (int j = 0; j < r2_workVector.size(); ++j) {
+          double v1 =(r2_zws_old_vector[j][0]*cos(winkel)-r2_zws_old_vector[j][2]*sin(winkel));
+          double v3 =(r2_zws_old_vector[j][0]*sin(winkel)+r2_zws_old_vector[j][2]*cos(winkel));
+          r2_zws_new_vector.push_back(glm::vec3(v1,r2_zws_old_vector[j][1],v3));
+          r2_rotationVector.push_back(glm::vec3(v1,r2_zws_old_vector[j][1],v3));
+        }
+      r2_zws_old_vector.clear();
+      r2_zws_old_vector=r2_zws_new_vector;
+      r2_zws_new_vector.clear();
+    }
+  CgRotationBody*  rotationBody= new CgRotationBody(assign_id(),segmente,a4_workvector.size(),r2_rotationVector);
+
+  return rotationBody;
 }
 
-CgRotationBody* CgSceneControl::m_roteieren_3(int segmente){
+CgRotationBody* CgSceneControl::m_roteieren_3(int segmente,std::vector<glm::vec3> r3_workVector){
 
+  std::vector<glm::vec3> r3_zws_old_vector=r3_workVector;
+  std::vector<glm::vec3> r3_zws_new_vector,r3_rotationVector;
+
+  double winkel=2* M_PI/segmente;
+
+  for (int j = 0; j < r3_workVector.size(); ++j) {
+      r3_rotationVector.push_back(glm::vec3((r3_zws_old_vector[j][0]),(r3_zws_old_vector[j][1]),r3_zws_old_vector[j][2]));
+    }
+
+  for (int i = 1; i < segmente; ++i) {
+      for (int j = 0; j < r3_workVector.size(); ++j) {
+          double v2 =(r3_zws_old_vector[j][1]*cos(winkel)-r3_zws_old_vector[j][2]*sin(winkel));
+          double v3 =(r3_zws_old_vector[j][1]*sin(winkel)+r3_zws_old_vector[j][2]*cos(winkel));
+          r3_zws_new_vector.push_back(glm::vec3(r3_zws_old_vector[j][0],v2,v3));
+          r3_rotationVector.push_back(glm::vec3(r3_zws_old_vector[j][0],v2,v3));
+        }
+      r3_zws_old_vector.clear();
+      r3_zws_old_vector=r3_zws_new_vector;
+      r3_zws_new_vector.clear();
+    }
+  CgRotationBody*  rotationBody= new CgRotationBody(assign_id(),segmente,a4_workvector.size(),r3_rotationVector);
+
+  return rotationBody;
 }
+
 
 std::vector<CgPolyline*> CgSceneControl::m_FaceNormales(CgBaseTriangleMesh* workBody){
   std::vector<CgPolyline*> result;
