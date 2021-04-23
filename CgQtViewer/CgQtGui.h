@@ -143,6 +143,20 @@ private:
   QCheckBox* a8StatusCheckBox;
 
 
+  // Normal Anzeige Status CheckBox
+  QCheckBox* a3FaceNormalStatusCheckBox;
+  QCheckBox* a3VertexNormalStatusCheckBox;
+  QCheckBox* a4FaceNormalStatusCheckBox;
+  QCheckBox* a4VertexNormalStatusCheckBox;
+  QCheckBox* a5FaceNormalStatusCheckBox;
+  QCheckBox* a5VertexNormalStatusCheckBox;
+  QCheckBox* a6FaceNormalStatusCheckBox;
+  QCheckBox* a6VertexNormalStatusCheckBox;
+  QCheckBox* a7FaceNormalStatusCheckBox;
+  QCheckBox* a7VertexNormalStatusCheckBox;
+  QCheckBox* a8FaceNormalStatusCheckBox;
+  QCheckBox* a8VertexNormalStatusCheckBox;
+
   // Aufgabe4 Tab
   QSpinBox* a4_LRA_Mittlunsgschritte;
   QSpinBox* a4_LRA_Iterationen;
@@ -190,6 +204,20 @@ private slots:
   void slotA6Reset();
   void slotA7Reset();
   void slotA8Reset();
+
+  // Normal Anzeige Status Slots
+  void slotA3FaceNormalStatusCheckBoxChanged();
+  void slotA3VertexNormalStatusCheckBoxChanged();
+  void slotA4FaceNormalStatusCheckBoxChanged();
+  void slotA4VertexNormalStatusCheckBoxChanged();
+  void slotA5FaceNormalStatusCheckBoxChanged();
+  void slotA5VertexNormalStatusCheckBoxChanged();
+  void slotA6FaceNormalStatusCheckBoxChanged();
+  void slotA6VertexNormalStatusCheckBoxChanged();
+  void slotA7FaceNormalStatusCheckBoxChanged();
+  void slotA7VertexNormalStatusCheckBoxChanged();
+  void slotA8FaceNormalStatusCheckBoxChanged();
+  void slotA8VertexNormalStatusCheckBoxChanged();
 
   //Aufagbe 4 Slots
   void soltA4LRAglaetenButton();

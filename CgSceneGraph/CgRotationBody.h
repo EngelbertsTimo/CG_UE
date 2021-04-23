@@ -23,7 +23,7 @@ public:
   const std::vector<glm::vec3>& getVertexNormals() const;
   const std::vector<glm::vec3>& getVertexColors() const;
   const std::vector<glm::vec2>& getVertexTexCoords() const;
-  const std::vector<glm::vec3>& getTriangleGravities() const;
+  //const std::vector<glm::vec3>& getTriangleGravities() const;
 
   const std::vector<unsigned int>& getTriangleIndices() const;
 
@@ -32,11 +32,13 @@ public:
 
 private:
 
+  void createNormals();
+
   std::vector<glm::vec3> m_vertices;
   std::vector<glm::vec3> m_vertex_normals;
   std::vector<glm::vec3> m_vertex_colors;
   std::vector<glm::vec2> m_tex_coords;
-  std::vector<glm::vec3> m_triangle_gravities;
+  //std::vector<glm::vec3> m_triangle_gravities;
 
   std::vector<unsigned int>  m_triangle_indices;
 

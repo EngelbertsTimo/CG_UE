@@ -11,6 +11,7 @@
 #include "CgEvents/CgResetEvent.h"
 #include "CgEvents/CgLRAglaetenEvent.h"
 #include "CgEvents/CgRotationEvent.h"
+#include "CgEvents/CgShowNormalsEvent.h"
 #include "CgBase/CgBaseRenderer.h"
 #include "CgExampleTriangle.h"
 #include "cgtricube.h"
@@ -28,14 +29,14 @@ CgSceneControl::CgSceneControl()
   global_id =0;
 
   m_triangle=nullptr;
-  m_tricube=nullptr;
-  m_polyline=nullptr;
-   a4_rotationBody = nullptr;
+  a3_tricube=nullptr;
+  a4_polyline=nullptr;
+  a4_rotationBody = nullptr;
   // ?
   m_current_transformation=glm::mat4(1.);
 
   // Blickwinkel
-  m_lookAt_matrix= glm::lookAt(glm::vec3(0.0,0.0,2.0),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
+  m_lookAt_matrix= glm::lookAt(glm::vec3(0.0,0.0,4.0),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
 
 
   // Projekt Einstellungen
@@ -48,19 +49,12 @@ CgSceneControl::CgSceneControl()
   mode = 2;
 
   // Aufgaben Fraben vorbestimmen
-  m_initial_color_a3 = glm::vec4(1.0,0.0,0.0,1.0);
-  m_initial_color_a4 = glm::vec4(0.0,1.0,0.0,1.0);
-  m_initial_color_a5 = glm::vec4(0.0,0.0,1.0,1.0);
-  m_initial_color_a6 = glm::vec4(1.0,0.0,1.0,1.0);
-  m_initial_color_a7 = glm::vec4(0.0,1.0,1.0,1.0);
-  m_initial_color_a8 = glm::vec4(0.5,0.5,1.0,1.0);
-
-  m_color_a3 = m_initial_color_a3;
-  m_color_a4 = m_initial_color_a4;
-  m_color_a5 = m_initial_color_a5;
-  m_color_a6 = m_initial_color_a6;
-  m_color_a7 = m_initial_color_a7;
-  m_color_a8 = m_initial_color_a8;
+  m_initial_color_a3 = m_color_a3 = glm::vec4(1.0,0.0,0.0,1.0);
+  m_initial_color_a4 = m_color_a4 = glm::vec4(0.0,1.0,0.0,1.0);
+  m_initial_color_a5 =  m_color_a5 = glm::vec4(0.0,0.0,1.0,1.0);
+  m_initial_color_a6 = m_color_a6 = glm::vec4(1.0,0.0,1.0,1.0);
+  m_initial_color_a7 = m_color_a7 = glm::vec4(0.0,1.0,1.0,1.0);
+  m_initial_color_a8 = m_color_a8 = glm::vec4(0.5,0.5,1.0,1.0);
 
 
 
@@ -83,7 +77,7 @@ CgSceneControl::CgSceneControl()
   a8_Face_normal_Vectors = false;
 
   a3_Vertex_normal_Vectors = false;
-  a4_Vertex_normal_Vectors = true;
+  a4_Vertex_normal_Vectors = false;
   a5_Vertex_normal_Vectors = false;
   a6_Vertex_normal_Vectors = false;
   a7_Vertex_normal_Vectors = false;
@@ -103,34 +97,12 @@ CgSceneControl::CgSceneControl()
 
 CgSceneControl::~CgSceneControl()
 {
-  if(m_triangle!=NULL)
-    delete m_triangle;
-  if(m_tricube!=NULL)
-    delete m_tricube;
-  if(m_polyline1!=NULL)
-    delete m_polyline1;
-  if(m_polyline2!=NULL)
-    delete m_polyline2;
-  if(m_polyline3!=NULL)
-    delete m_polyline3;
-  if(m_polyline4!=NULL)
-    delete m_polyline4;
-  if(m_polyline5!=NULL)
-    delete m_polyline5;
-  if(m_polyline6!=NULL)
-    delete m_polyline6;
-  if(m_polyline7!=NULL)
-    delete m_polyline7;
-  if(m_polyline8!=NULL)
-    delete m_polyline8;
-  if(m_polyline9!=NULL)
-    delete m_polyline9;
-  if(m_polyline10!=NULL)
-    delete m_polyline10;
-  if(m_polyline11!=NULL)
-    delete m_polyline11;
-  if(m_polyline12!=NULL)
-    delete m_polyline12;
+  a3_delete();
+  a4_delete();
+  a5_delete();
+  a6_delete();
+  a7_delete();
+  a8_delete();
 
 
 }
@@ -295,10 +267,107 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
         default:
           break;
         }
-
-      a3_Renderer_init();
       m_renderer->redraw();
     }
+
+  if(e->getType() & Cg::ShowNormalsEvent)
+    {
+      CgShowNormalsEvent* ev =(CgShowNormalsEvent*)e;
+      bool normal_status;
+      if(ev->getNormalStatus())
+        normal_status=true;
+      else
+        normal_status=false;
+
+      int normal_type=ev->getNormalType();
+
+      std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; Aufgabe "<<ev->getAufagbenNummer()<<" | Normal Statusänderung zu "<<normal_status << "| NormalType = "<<normal_type <<" (1:Face ; 2:Vertex)" <<std::endl;
+
+      switch (ev->getAufagbenNummer()) {
+        case 3:
+          switch (normal_type) {
+            case 1:
+              a3_Face_normal_Vectors=normal_status;
+              break;
+            case 2:
+              a3_Vertex_normal_Vectors=normal_status;
+              break;
+            default:
+              break;
+            }
+          a3_Renderer_init();
+          break;
+        case 4:
+          switch (normal_type) {
+            case 1:
+              a4_Face_normal_Vectors=normal_status;
+              break;
+            case 2:
+              a4_Vertex_normal_Vectors=normal_status;
+              break;
+            default:
+              break;
+            }
+          a4_Renderer_init();
+          break;
+        case 5:
+          switch (normal_type) {
+            case 1:
+              a5_Face_normal_Vectors=normal_status;
+              break;
+            case 2:
+              a5_Vertex_normal_Vectors=normal_status;
+              break;
+            default:
+              break;
+            }
+          a5_Renderer_init();
+          break;
+        case 6:
+          switch (normal_type) {
+            case 1:
+              a6_Face_normal_Vectors=normal_status;
+              break;
+            case 2:
+              a6_Vertex_normal_Vectors=normal_status;
+              break;
+            default:
+              break;
+            }
+          a6_Renderer_init();
+          break;
+        case 7:
+          switch (normal_type) {
+            case 1:
+              a7_Face_normal_Vectors=normal_status;
+              break;
+            case 2:
+              a7_Vertex_normal_Vectors=normal_status;
+              break;
+            default:
+              break;
+            }
+          a7_Renderer_init();
+          break;
+        case 8:
+          switch (normal_type) {
+            case 1:
+              a8_Face_normal_Vectors=normal_status;
+              break;
+            case 2:
+              a8_Vertex_normal_Vectors=normal_status;
+              break;
+            default:
+              break;
+            }
+          a8_Renderer_init();
+          break;
+        default:
+          break;
+        }
+      m_renderer->redraw();
+    }
+
   if(e->getType() & Cg::ResetEvent)
     {
       CgResetEvent* ev = (CgResetEvent*)e;
@@ -505,8 +574,8 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
           m_triangle->init(pos,norm,indx);
           m_renderer->init(m_triangle);
         } else if(mode==2){
-          m_tricube->init(pos,norm,indx);
-          m_renderer->init(m_tricube);
+          a3_tricube->init(pos,norm,indx);
+          m_renderer->init(a3_tricube);
         }
       m_renderer->redraw();
     }
@@ -520,89 +589,43 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
 // A3 Hilfsmethoden id:3000-3999
 void CgSceneControl::a3_object_initiation()
 {
-  m_tricube = new CgTriCube(assign_id());
-  m_polyline1 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[0],m_tricube->getFaceNormals()[0]);
-  m_polyline2 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[1],m_tricube->getFaceNormals()[1]);
-  m_polyline3 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[2],m_tricube->getFaceNormals()[2]);
-  m_polyline4 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[3],m_tricube->getFaceNormals()[3]);
-  m_polyline5 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[4],m_tricube->getFaceNormals()[4]);
-  m_polyline6 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[5],m_tricube->getFaceNormals()[5]);
-  m_polyline7 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[6],m_tricube->getFaceNormals()[6]);
-  m_polyline8 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[7],m_tricube->getFaceNormals()[7]);
-  m_polyline9 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[8],m_tricube->getFaceNormals()[8]);
-  m_polyline10 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[9],m_tricube->getFaceNormals()[9]);
-  m_polyline11 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[10],m_tricube->getFaceNormals()[10]);
-  m_polyline12 = new CgPolyline(assign_id(),m_tricube->getTriangleGravities()[11],m_tricube->getFaceNormals()[11]);
+  a3_tricube = new CgTriCube(assign_id());
+  a3_triCube_Face_Nomral_polylines=m_FaceNormales(a3_tricube);
+  a3_triCube_Vertex_Nomral_polylines=m_VertexNormales(a3_tricube);
+
 }
 
 void CgSceneControl::a3_Renderer_render()
 {
-  if(m_tricube!=NULL)
-    m_renderer->render(m_tricube);
-  if (a3_Vertex_normal_Vectors) {
-
+  if(a3_tricube!=NULL)
+    m_renderer->render(a3_tricube);
+  if(a3_Face_normal_Vectors){
+      for (int i = 0; i < a3_triCube_Face_Nomral_polylines.size(); ++i) {
+          m_renderer->render(a3_triCube_Face_Nomral_polylines[i]);
+        }
     }
-  if (a3_Face_normal_Vectors) {
-      if(m_polyline1!=NULL)
-        m_renderer->render(m_polyline1);
-      if(m_polyline2!=NULL)
-        m_renderer->render(m_polyline2);
-      if(m_polyline3!=NULL)
-        m_renderer->render(m_polyline3);
-      if(m_polyline4!=NULL)
-        m_renderer->render(m_polyline4);
-      if(m_polyline5!=NULL)
-        m_renderer->render(m_polyline5);
-      if(m_polyline6!=NULL)
-        m_renderer->render(m_polyline6);
-      if(m_polyline7!=NULL)
-        m_renderer->render(m_polyline7);
-      if(m_polyline8!=NULL)
-        m_renderer->render(m_polyline8);
-      if(m_polyline9!=NULL)
-        m_renderer->render(m_polyline9);
-      if(m_polyline10!=NULL)
-        m_renderer->render(m_polyline10);
-      if(m_polyline11!=NULL)
-        m_renderer->render(m_polyline11);
-      if(m_polyline12!=NULL)
-        m_renderer->render(m_polyline12);
+  if(a3_Vertex_normal_Vectors){
+      for (int i = 0; i < a3_triCube_Vertex_Nomral_polylines.size(); ++i) {
+          m_renderer->render(a3_triCube_Vertex_Nomral_polylines[i]);
+        }
     }
 }
 
 void CgSceneControl::a3_Renderer_init()
 {
-  if(m_tricube!=NULL)
-    m_renderer->init(m_tricube);
-  if(a3_Vertex_normal_Vectors){
+  if(a3_tricube!=NULL)
+    m_renderer->init(a3_tricube);
 
-    }
   if(a3_Face_normal_Vectors){
-
-      if(m_polyline1!=NULL)
-        m_renderer->init(m_polyline1);
-      if(m_polyline2!=NULL)
-        m_renderer->init(m_polyline2);
-      if(m_polyline3!=NULL)
-        m_renderer->init(m_polyline3);
-      if(m_polyline4!=NULL)
-        m_renderer->init(m_polyline4);
-      if(m_polyline5!=NULL)
-        m_renderer->init(m_polyline5);
-      if(m_polyline6!=NULL)
-        m_renderer->init(m_polyline6);
-      if(m_polyline7!=NULL)
-        m_renderer->init(m_polyline7);
-      if(m_polyline8!=NULL)
-        m_renderer->init(m_polyline8);
-      if(m_polyline9!=NULL)
-        m_renderer->init(m_polyline9);
-      if(m_polyline10!=NULL)
-        m_renderer->init(m_polyline10);
-      if(m_polyline11!=NULL)
-        m_renderer->init(m_polyline11);
-      if(m_polyline12!=NULL)
-        m_renderer->init(m_polyline12);}
+      for (int i = 0; i < a3_triCube_Face_Nomral_polylines.size(); ++i) {
+          m_renderer->init(a3_triCube_Face_Nomral_polylines[i]);
+        }
+    }
+  if(a3_Vertex_normal_Vectors){
+      for (int i = 0; i < a3_triCube_Vertex_Nomral_polylines.size(); ++i) {
+          m_renderer->init(a3_triCube_Vertex_Nomral_polylines[i]);
+        }
+    }
 }
 
 void CgSceneControl::a3_Renderer_reset()
@@ -613,53 +636,68 @@ void CgSceneControl::a3_Renderer_reset()
   m_renderer->redraw();
 }
 
+void CgSceneControl::a3_delete(){
+
+  if(a3_tricube!=NULL)
+    delete a3_tricube;
+
+
+}
 
 // A4 Hilfsmethoden id:4000-4999
 void CgSceneControl::a4_object_initiation()
 {
   a4_workvector.clear();
-  /*   a4_workvector.push_back(glm::vec3(-1.0,-1.0,-0.5));
+
+  a4_workvector.push_back(glm::vec3(-1.0,-1.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.5,-0.5,-0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.5,0.0));
   a4_workvector.push_back(glm::vec3(-1.0,1.0,0.25));
-  a4_workvector.push_back(glm::vec3(-0.5,1.0,0.5));*/
+  a4_workvector.push_back(glm::vec3(-0.5,1.0,0.5));
 
 
-/*  a4_workvector.push_back(glm::vec3(0.5,0.0,-0.5));
+
+  /*
+  a4_workvector.push_back(glm::vec3(0.5,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.75,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(0.75,0.0,0.0));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.25));
 */
 
-  /*a4_workvector.push_back(glm::vec3(0.5,0.0,-0.5));
+  /*
+  a4_workvector.push_back(glm::vec3(0.5,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.0));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.25));
 */
 
+  /*
   a4_workvector.push_back(glm::vec3(1.0,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.0));
   a4_workvector.push_back(glm::vec3(1.0,0.0,0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.5));
+*/
 
   /* a4_workvector.push_back(glm::vec3(-1.0,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(-1.0,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(-1.0,00,0.0));
   a4_workvector.push_back(glm::vec3(-1.0,0.0,0.25));
-  a4_workvector.push_back(glm::vec3(-1.0,0.0,0.5));*/
+  a4_workvector.push_back(glm::vec3(-1.0,0.0,0.5));
+*/
 
-  m_polyline = new CgPolyline(assign_id(),a4_workvector);
+  a4_polyline = new CgPolyline(assign_id(),a4_workvector);
 
   a4_rotation_Face_Nomral_polylines.clear();
+  a4_rotation_Vertex_Nomral_polylines.clear();
   a4_rotationBody = nullptr;
 
 }
 
 void CgSceneControl::a4_Renderer_render()
 {
-  if(m_polyline!=NULL)
-    m_renderer->render(m_polyline);
+  if(a4_polyline!=NULL)
+    m_renderer->render(a4_polyline);
 
   if(a4_rotationBody!=NULL)
     m_renderer->render(a4_rotationBody);
@@ -677,8 +715,8 @@ void CgSceneControl::a4_Renderer_render()
 
 void CgSceneControl::a4_Renderer_init()
 {
-  if(m_polyline!=NULL)
-    m_renderer->init(m_polyline);
+  if(a4_polyline!=NULL)
+    m_renderer->init(a4_polyline);
   if(a4_rotationBody!=NULL)
     m_renderer->init(a4_rotationBody);
   if(a4_Face_normal_Vectors){
@@ -700,6 +738,22 @@ void CgSceneControl::a4_Renderer_reset()
   a4_object_initiation();
   a4_Renderer_init();
   m_renderer->redraw();
+}
+
+void CgSceneControl::a4_delete(){
+  if(a4_rotationBody!=NULL)
+    delete a4_rotationBody;
+  if(a4_polyline!=NULL)
+    delete a4_polyline;
+
+  for (int i = 0; i < a4_rotation_Face_Nomral_polylines.size(); ++i) {
+      if(a4_rotation_Face_Nomral_polylines[i]!=NULL)
+        delete a4_rotation_Face_Nomral_polylines[i];
+    }
+  for (int i = 0; i < a4_rotation_Vertex_Nomral_polylines.size(); ++i) {
+      if(a4_rotation_Vertex_Nomral_polylines[i]!=NULL)
+        delete a4_rotation_Vertex_Nomral_polylines[i];
+    }
 }
 
 void CgSceneControl::a4_LRA_mitteln(int schritte, int iterationen){
@@ -734,7 +788,7 @@ void CgSceneControl::a4_LRA_mitteln(int schritte, int iterationen){
               a4_workvector.erase(a4_workvector.begin()+a4_workvector.size()-1);
             }
           std::cout << "CgSCeneControl: glätten: Gesamtzahl Unterpunkte: "<<a4_workvector.size() <<std::endl;
-          m_polyline = new CgPolyline(assign_id(),a4_workvector);
+          a4_polyline = new CgPolyline(assign_id(),a4_workvector);
 
           a4_Renderer_init();
           a4_Renderer_render();
@@ -747,15 +801,8 @@ void CgSceneControl::a4_LRA_mitteln(int schritte, int iterationen){
 }
 
 void CgSceneControl::a4_roteieren(int segmente){
-  // std::cout << "CgSCeneControl: rotieren test: bogenmaß aufteile in "<<segmente<<" Segmente; Winkel zwischen Segmenten: "<<2* M_PI/segmente <<std::endl;
-
   std::vector<glm::vec3> a4_zws_old_vector=a4_workvector;
   std::vector<glm::vec3> a4_zws_new_vector;
-
-  for (int j = 0; j < a4_workvector.size(); ++j) {
-      // std::cout << "CgSCeneControl: rotieren test: workvector kontrolle: "<<j<<" = x: "<<  a4_workvector[j][0]<<" = y: "<<  a4_workvector[j][1]<<" = z: "<<  a4_workvector[j][2]<<std::endl<<std::endl;
-    }
-
   a4_rotationvector.clear();
   double winkel=2* M_PI/segmente;
   for (int j = 0; j < a4_workvector.size(); ++j) {
@@ -766,42 +813,20 @@ void CgSceneControl::a4_roteieren(int segmente){
 
   for (int i = 1; i < segmente; ++i) {
       for (int j = 0; j < a4_workvector.size(); ++j) {
-          //  std::cout << "CgSCeneControl: rotieren test: old vector(ursprung): "<<i<<" Punkt: "<<j+1<<" = x: "<<  a4_workvector[j][0]<<" = y: "<<  a4_workvector[j][1]<<" = z: "<<  a4_workvector[j][2]<<std::endl;
-          //  std::cout << "CgSCeneControl: rotieren test: old vector: "<<i<<" Punkt: "<<j+1<<": x= "<<  a4_zws_old_vector[j][0]<<"; y=  "<<  a4_zws_old_vector[j][1]<<";z= "<<  a4_zws_old_vector[j][2]<<std::endl;
-
           double x =(a4_zws_old_vector[j][0]*cos(winkel)-a4_zws_old_vector[j][1]*sin(winkel));
           double y =(a4_zws_old_vector[j][0]*sin(winkel)+a4_zws_old_vector[j][1]*cos(winkel));
-
-          //  std::cout << "CgSCeneControl: rotieren test: mathe segment "<<i<<std::endl;
-          //  std::cout << "winkel ="<<winkel<<"; x alt= "<<a4_zws_old_vector[j][0]<<"; cos(winkel)="<<cos(winkel)<<"; y alt= "<<a4_zws_old_vector[j][1]<<"; x neu= "<<x<<"; y neu= "<<y<<std::endl;
-
           a4_zws_new_vector.push_back(glm::vec3(x,y,a4_zws_old_vector[j][2]));
           a4_rotationvector.push_back(glm::vec3(x,y,a4_zws_old_vector[j][2]));
-          // std::cout << "CgSCeneControl: rotieren test: new vector: segment "<<i<<" Punkt: "<<j+1<<": x = "<<  a4_zws_new_vector[i][0]<<"; y= "<<  a4_zws_new_vector[i][1]<<"; z= "<<  a4_zws_new_vector[i][2]<<std::endl;
-          //a4_zws_new_vector=glm::rotate(a4_zws_old_vector[j],winkel,std::vector<glm::vec3>(0.0,0.0,1.0));
-
         }
-      //  std::cout << "    CgSCeneControl: rotieren test: next Segement: "<<std::endl<<std::endl;;
       a4_zws_old_vector.clear();
       a4_zws_old_vector=a4_zws_new_vector;
       a4_zws_new_vector.clear();
     }
-
-  for (int j = 0; j < a4_rotationvector.size(); ++j) {
-      std::cout << "CgSCeneControl: rotieren test: endvekto kontrolle: "<<j<<" = x: "<<  a4_rotationvector[j][0]<<" = y: "<<  a4_rotationvector[j][1]<<" = z: "<<  a4_rotationvector[j][2]<<std::endl;
-    }
-
   a4_rotationBody= new CgRotationBody(assign_id(),segmente,a4_workvector.size(),a4_rotationvector);
 
- for (int j = 0; j < a4_rotationBody->getTriangleGravities().size(); ++j) {
-      a4_rotation_Face_Nomral_polylines.push_back(new CgPolyline(assign_id(),a4_rotationBody->getTriangleGravities()[j],a4_rotationBody->getFaceNormals()[j]));
-    }
+  a4_rotation_Face_Nomral_polylines = m_FaceNormales(a4_rotationBody);
 
-  for (int j = 0; j < a4_rotationBody->getVertices().size(); ++j) {
-    a4_rotation_Vertex_Nomral_polylines.push_back(new CgPolyline(assign_id(),a4_rotationBody->getVertices()[j],a4_rotationBody->getVertexNormals()[j]));
-    }
-
-
+  a4_rotation_Vertex_Nomral_polylines = m_VertexNormales(a4_rotationBody);
 
   a4_Renderer_init();
   a4_Renderer_render();
@@ -811,135 +836,16 @@ void CgSceneControl::a4_roteieren(int segmente){
 // A5 Hilfsmethoden id:5000-5999
 void CgSceneControl::a5_object_initiation()
 {
-
-  a5_rotationvector.clear();
-  a5_workvector.clear();
-  a5_workvector.push_back(glm::vec3(-0.5,0.0,0.75));
-  a5_rotationvector.push_back(a5_workvector[0]);
-  a5_workvector.push_back(glm::vec3(-0.5,0.0,0.25));
-  a5_rotationvector.push_back(a5_workvector[1]);
-  a5_workvector.push_back(glm::vec3(-0.5,0.0,-0.25));
-  a5_rotationvector.push_back(a5_workvector[2]);
-  a5_workvector.push_back(glm::vec3(-0.5,0.0,-0.75));
-  a5_rotationvector.push_back(a5_workvector[3]);
-  //m_A5_1_polyline = new CgPolyline(5000,a5_workvector);
-
-
-  a5_workvector.clear();
-  a5_workvector.push_back(glm::vec3(-0.25,0.25,0.75));
-  a5_rotationvector.push_back(a5_workvector[0]);
-  a5_workvector.push_back(glm::vec3(-0.25,0.25,0.25));
-  a5_rotationvector.push_back(a5_workvector[1]);
-  a5_workvector.push_back(glm::vec3(-0.25,0.25,-0.25));
-  a5_rotationvector.push_back(a5_workvector[2]);
-  a5_workvector.push_back(glm::vec3(-0.25,0.25,-0.75));
-  a5_rotationvector.push_back(a5_workvector[3]);
-  //m_A5_2_polyline = new CgPolyline(5001,a5_workvector);
-
-
-  a5_workvector.clear();
-  a5_workvector.push_back(glm::vec3(0.25,0.25,0.75));
-  a5_rotationvector.push_back(a5_workvector[0]);
-  a5_workvector.push_back(glm::vec3(0.25,0.25,0.25));
-  a5_rotationvector.push_back(a5_workvector[1]);
-  a5_workvector.push_back(glm::vec3(0.25,0.25,-0.25));
-  a5_rotationvector.push_back(a5_workvector[2]);
-  a5_workvector.push_back(glm::vec3(0.25,0.25,-0.75));
-  a5_rotationvector.push_back(a5_workvector[3]);
-  //m_A5_3_polyline = new CgPolyline(5002,a5_workvector);
-
-  a5_workvector.clear();
-  a5_workvector.push_back(glm::vec3(0.5,0.0,0.75));
-  a5_rotationvector.push_back(a5_workvector[0]);
-  a5_workvector.push_back(glm::vec3(0.5,0.0,0.25));
-  a5_rotationvector.push_back(a5_workvector[1]);
-  a5_workvector.push_back(glm::vec3(0.5,0.0,-0.25));
-  a5_rotationvector.push_back(a5_workvector[2]);
-  a5_workvector.push_back(glm::vec3(0.5,0.0,-0.75));
-  a5_rotationvector.push_back(a5_workvector[3]);
-  // m_A5_4_polyline = new CgPolyline(5003,a5_workvector);
-
-  a5_workvector.clear();
-  a5_workvector.push_back(glm::vec3(0.25,-0.25,0.75));
-  a5_rotationvector.push_back(a5_workvector[0]);
-  a5_workvector.push_back(glm::vec3(0.25,-0.25,0.25));
-  a5_rotationvector.push_back(a5_workvector[1]);
-  a5_workvector.push_back(glm::vec3(0.25,-0.25,-0.25));
-  a5_rotationvector.push_back(a5_workvector[2]);
-  a5_workvector.push_back(glm::vec3(0.25,-0.25,-0.75));
-  a5_rotationvector.push_back(a5_workvector[3]);
-  //m_A5_5_polyline = new CgPolyline(5004,a5_workvector);
-
-  a5_workvector.clear();
-  a5_workvector.push_back(glm::vec3(-0.25,-0.25,0.75));
-  a5_rotationvector.push_back(a5_workvector[0]);
-  a5_workvector.push_back(glm::vec3(-0.25,-0.25,0.25));
-  a5_rotationvector.push_back(a5_workvector[1]);
-  a5_workvector.push_back(glm::vec3(-0.25,-0.25,-0.25));
-  a5_rotationvector.push_back(a5_workvector[2]);
-  a5_workvector.push_back(glm::vec3(-0.25,-0.25,-0.75));
-  a5_rotationvector.push_back(a5_workvector[3]);
-  //m_A5_6_polyline = new CgPolyline(5005,a5_workvector);
-  m_A5_6_polyline = new CgPolyline(assign_id(),a5_rotationvector);
-
-  a5_rotationBody= new CgRotationBody(assign_id(),6,4,a5_rotationvector);
-
-
-  for (int j = 0; j < a5_rotationBody->getTriangleGravities().size(); ++j) {
-      a5_rotationNomral_polylines.push_back(new CgPolyline(assign_id(),a5_rotationBody->getTriangleGravities()[j],a5_rotationBody->getFaceNormals()[j]));
-    }
 }
 
 void CgSceneControl::a5_Renderer_render()
 {
-  /*if(m_A5_1_polyline!=NULL)
-    m_renderer->render(m_A5_1_polyline);
-  if(m_A5_2_polyline!=NULL)
-    m_renderer->render(m_A5_2_polyline);
-  if(m_A5_3_polyline!=NULL)
-    m_renderer->render(m_A5_3_polyline);
-  if(m_A5_4_polyline!=NULL)
-    m_renderer->render(m_A5_4_polyline);
-  if(m_A5_5_polyline!=NULL)
-    m_renderer->render(m_A5_5_polyline);*/
-  if(m_A5_6_polyline!=NULL)
-    //m_renderer->render(m_A5_6_polyline);
-    if(a5_rotationBody!=NULL)
-      m_renderer->render(a5_rotationBody);
-  if(a5_Face_normal_Vectors){
-      for (int i = 0; i < a5_rotationNomral_polylines.size(); ++i) {
-          m_renderer->render(a5_rotationNomral_polylines[i]);
-        }
-    }
-  if(a5_Vertex_normal_Vectors){
 
-    }
 }
 
 void CgSceneControl::a5_Renderer_init()
 {
-  /* if(m_A5_1_polyline!=NULL)
-    m_renderer->init(m_A5_1_polyline);
-  if(m_A5_2_polyline!=NULL)
-    m_renderer->init(m_A5_2_polyline);
-  if(m_A5_3_polyline!=NULL)
-    m_renderer->init(m_A5_3_polyline);
-  if(m_A5_4_polyline!=NULL)
-    m_renderer->init(m_A5_4_polyline);
-  if(m_A5_5_polyline!=NULL)
-    m_renderer->init(m_A5_5_polyline);*/
-  if(m_A5_6_polyline!=NULL)
-    // m_renderer->init(m_A5_6_polyline);
-    if(a5_rotationBody!=NULL)
-      m_renderer->init(a5_rotationBody);
-  if(a5_Face_normal_Vectors){
-      for (int i = 0; i < a5_rotationNomral_polylines.size(); ++i) {
-          m_renderer->init(a5_rotationNomral_polylines[i]);
-        }
-    }
-  if(a5_Vertex_normal_Vectors){
 
-    }
 }
 
 void CgSceneControl::a5_Renderer_reset()
@@ -948,6 +854,11 @@ void CgSceneControl::a5_Renderer_reset()
   a5_object_initiation();
   a5_Renderer_init();
   m_renderer->redraw();
+}
+
+void CgSceneControl::a5_delete(){
+
+
 }
 
 // A6 Hilfsmethoden id:6000-6999
@@ -984,6 +895,11 @@ void CgSceneControl::a6_Renderer_reset()
   m_renderer->redraw();
 }
 
+void CgSceneControl::a6_delete(){
+
+
+}
+
 // A7 Hilfsmethoden id:7000-7999
 void CgSceneControl::a7_object_initiation()
 {
@@ -1016,6 +932,11 @@ void CgSceneControl::a7_Renderer_reset()
   a7_object_initiation();
   a7_Renderer_init();
   m_renderer->redraw();
+}
+
+void CgSceneControl::a7_delete(){
+
+
 }
 
 // A8 Hilfsmethoden id:8000-8999
@@ -1052,3 +973,57 @@ void CgSceneControl::a8_Renderer_reset()
   m_renderer->redraw();
 }
 
+void CgSceneControl::a8_delete(){
+
+
+}
+
+//Arbeitsmethoden
+
+std::vector<glm::vec3> CgSceneControl::m_LRA_mitteln(int schritte, int iterationen){
+
+}
+
+CgRotationBody* CgSceneControl::m_roteieren_1(int segmente){
+
+}
+
+CgRotationBody* CgSceneControl::m_roteieren_2(int segmente){
+
+}
+
+CgRotationBody* CgSceneControl::m_roteieren_3(int segmente){
+
+}
+
+std::vector<CgPolyline*> CgSceneControl::m_FaceNormales(CgBaseTriangleMesh* workBody){
+  std::vector<CgPolyline*> result;
+
+  double x1,x2,x3,y1,y2,y3,z1,z2,z3=0;
+  for (int i = 0; i < workBody->getTriangleIndices().size(); i=i+3) {
+
+      x1=workBody->getVertices()[workBody->getTriangleIndices()[i]][0];
+
+      y1=workBody->getVertices()[workBody->getTriangleIndices()[i]][1];
+      z1=workBody->getVertices()[workBody->getTriangleIndices()[i]][2];
+
+      x2=workBody->getVertices()[workBody->getTriangleIndices()[i+1]][0];
+      y2=workBody->getVertices()[workBody->getTriangleIndices()[i+1]][1];
+      z2=workBody->getVertices()[workBody->getTriangleIndices()[i+1]][2];
+
+      x3=workBody->getVertices()[workBody->getTriangleIndices()[i+2]][0];
+      y3=workBody->getVertices()[workBody->getTriangleIndices()[i+2]][1];
+      z3=workBody->getVertices()[workBody->getTriangleIndices()[i+2]][2];
+
+      result.push_back(new CgPolyline(assign_id(),glm::vec3(((x1+x2+x3)/3),((y1+y2+y3)/3),((z1+z2+z3)/3)),workBody->getFaceNormals()[i/3]));
+    }
+  return result;
+}
+
+std::vector<CgPolyline*> CgSceneControl::m_VertexNormales(CgBaseTriangleMesh* workBody){
+  std::vector<CgPolyline*> result;
+  for (int j = 0; j < workBody->getVertices().size(); ++j) {
+      result.push_back(new CgPolyline(assign_id(),workBody->getVertices()[j],workBody->getVertexNormals()[j]));
+    }
+  return result;
+}

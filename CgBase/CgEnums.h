@@ -31,6 +31,7 @@ namespace Cg{
     ResetEvent                      = 0x0008000,
     LRAglaetenEvent                 = 0x0010000,
     RotationEvent                   = 0x0020000,
+    ShowNormalsEvent                = 0x0040000,
 
     // unused, may be changed to whatever
 

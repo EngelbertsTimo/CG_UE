@@ -11,6 +11,7 @@ SOURCES += main.cpp \
     CgEvents/CgLRAglaetenEvent.cpp \
     CgEvents/CgResetEvent.cpp \
     CgEvents/CgRotationEvent.cpp \
+    CgEvents/CgShowNormalsEvent.cpp \
     CgQtViewer/CGQtGLRenderWidget.cpp \
     CgQtViewer/CgQtGui.cpp \
     CgBase/CgObservable.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     CgEvents/CgLRAglaetenEvent.h \
     CgEvents/CgResetEvent.h \
     CgEvents/CgRotationEvent.h \
+    CgEvents/CgShowNormalsEvent.h \
     CgQtViewer/CgQtGLRenderWidget.h \
     CgQtViewer/CgQtGui.h \
     CgBase/CgObserver.h \

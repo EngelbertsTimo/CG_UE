@@ -12,6 +12,7 @@ class CgExampleTriangle;
 class CgTriCube;
 class CgPolyline;
 class CgRotationBody;
+class CgBaseTriangleMesh;
 
 class CgSceneControl : public CgObserver, public CgBaseSceneControl
 {
@@ -33,6 +34,7 @@ private:
   void a3_Renderer_render();
   void a3_Renderer_init();
   void a3_Renderer_reset();
+  void a3_delete();
 
 
   // A4 Hilfsmethoden
@@ -40,6 +42,7 @@ private:
   void a4_Renderer_render();
   void a4_Renderer_init();
   void a4_Renderer_reset();
+  void a4_delete();
   void a4_LRA_mitteln(int schritte, int iterationen);
   void a4_roteieren(int segmente);
 
@@ -48,24 +51,37 @@ private:
   void a5_Renderer_render();
   void a5_Renderer_init();
   void a5_Renderer_reset();
+  void a5_delete();
 
   // A6 Hilfsmethoden
   void a6_object_initiation();
   void a6_Renderer_render();
   void a6_Renderer_init();
   void a6_Renderer_reset();
+  void a6_delete();
 
   // A7 Hilfsmethoden
   void a7_object_initiation();
   void a7_Renderer_render();
   void a7_Renderer_init();
   void a7_Renderer_reset();
+  void a7_delete();
 
   // A8 Hilfsmethoden
   void a8_object_initiation();
   void a8_Renderer_render();
   void a8_Renderer_init();
   void a8_Renderer_reset();
+  void a8_delete();
+
+  // Arbeits methoden
+  std::vector<glm::vec3> m_LRA_mitteln(int schritte, int iterationen);
+
+  CgRotationBody* m_roteieren_1(int segmente);
+  CgRotationBody* m_roteieren_2(int segmente);
+  CgRotationBody* m_roteieren_3(int segmente);
+  std::vector<CgPolyline*> m_FaceNormales(CgBaseTriangleMesh* workBody);
+  std::vector<CgPolyline*> m_VertexNormales(CgBaseTriangleMesh* workBody);
 
   int global_id;
 
@@ -75,7 +91,10 @@ private:
 
   // A3 Objekte
   CgExampleTriangle* m_triangle;
-  CgTriCube* m_tricube;
+  CgTriCube* a3_tricube;
+  std::vector<CgPolyline*> a3_triCube_Face_Nomral_polylines;
+  std::vector<CgPolyline*> a3_triCube_Vertex_Nomral_polylines;
+  /*
   CgPolyline* m_polyline1;
   CgPolyline* m_polyline2;
   CgPolyline* m_polyline3;
@@ -87,10 +106,10 @@ private:
   CgPolyline* m_polyline9;
   CgPolyline* m_polyline10;
   CgPolyline* m_polyline11;
-  CgPolyline* m_polyline12;
+  CgPolyline* m_polyline12;*/
 
   // A4 Objekte
-  CgPolyline* m_polyline;
+  CgPolyline* a4_polyline;
   std::vector<glm::vec3> a4_workvector;
   std::vector<glm::vec3> a4_rotationvector;
   CgRotationBody* a4_rotationBody;

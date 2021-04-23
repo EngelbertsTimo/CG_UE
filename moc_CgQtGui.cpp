@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CgQtGui_t {
-    QByteArrayData data[32];
-    char stringdata0[619];
+    QByteArrayData data[44];
+    char stringdata0[1087];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -61,8 +61,20 @@ QT_MOC_LITERAL(26, 527, 11), // "slotA5Reset"
 QT_MOC_LITERAL(27, 539, 11), // "slotA6Reset"
 QT_MOC_LITERAL(28, 551, 11), // "slotA7Reset"
 QT_MOC_LITERAL(29, 563, 11), // "slotA8Reset"
-QT_MOC_LITERAL(30, 575, 22), // "soltA4LRAglaetenButton"
-QT_MOC_LITERAL(31, 598, 20) // "slotA4RotationButton"
+QT_MOC_LITERAL(30, 575, 37), // "slotA3FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(31, 613, 39), // "slotA3VertexNormalStatusCheck..."
+QT_MOC_LITERAL(32, 653, 37), // "slotA4FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(33, 691, 39), // "slotA4VertexNormalStatusCheck..."
+QT_MOC_LITERAL(34, 731, 37), // "slotA5FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(35, 769, 39), // "slotA5VertexNormalStatusCheck..."
+QT_MOC_LITERAL(36, 809, 37), // "slotA6FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(37, 847, 39), // "slotA6VertexNormalStatusCheck..."
+QT_MOC_LITERAL(38, 887, 37), // "slotA7FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(39, 925, 39), // "slotA7VertexNormalStatusCheck..."
+QT_MOC_LITERAL(40, 965, 37), // "slotA8FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(41, 1003, 39), // "slotA8VertexNormalStatusCheck..."
+QT_MOC_LITERAL(42, 1043, 22), // "soltA4LRAglaetenButton"
+QT_MOC_LITERAL(43, 1066, 20) // "slotA4RotationButton"
 
     },
     "CgQtGui\0mouseEvent\0\0QMouseEvent*\0event\0"
@@ -81,8 +93,20 @@ QT_MOC_LITERAL(31, 598, 20) // "slotA4RotationButton"
     "slotA7StatusCheckBoxChanged\0"
     "slotA8StatusCheckBoxChanged\0slotA3Reset\0"
     "slotA4Reset\0slotA5Reset\0slotA6Reset\0"
-    "slotA7Reset\0slotA8Reset\0soltA4LRAglaetenButton\0"
-    "slotA4RotationButton"
+    "slotA7Reset\0slotA8Reset\0"
+    "slotA3FaceNormalStatusCheckBoxChanged\0"
+    "slotA3VertexNormalStatusCheckBoxChanged\0"
+    "slotA4FaceNormalStatusCheckBoxChanged\0"
+    "slotA4VertexNormalStatusCheckBoxChanged\0"
+    "slotA5FaceNormalStatusCheckBoxChanged\0"
+    "slotA5VertexNormalStatusCheckBoxChanged\0"
+    "slotA6FaceNormalStatusCheckBoxChanged\0"
+    "slotA6VertexNormalStatusCheckBoxChanged\0"
+    "slotA7FaceNormalStatusCheckBoxChanged\0"
+    "slotA7VertexNormalStatusCheckBoxChanged\0"
+    "slotA8FaceNormalStatusCheckBoxChanged\0"
+    "slotA8VertexNormalStatusCheckBoxChanged\0"
+    "soltA4LRAglaetenButton\0slotA4RotationButton"
 };
 #undef QT_MOC_LITERAL
 
@@ -92,7 +116,7 @@ static const uint qt_meta_data_CgQtGui[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      28,   14, // methods
+      40,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -100,38 +124,62 @@ static const uint qt_meta_data_CgQtGui[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  154,    2, 0x08 /* Private */,
-       5,    2,  157,    2, 0x08 /* Private */,
-       6,    0,  162,    2, 0x08 /* Private */,
-       7,    0,  163,    2, 0x08 /* Private */,
-       8,    0,  164,    2, 0x08 /* Private */,
-       9,    0,  165,    2, 0x08 /* Private */,
-      10,    0,  166,    2, 0x08 /* Private */,
-      11,    0,  167,    2, 0x08 /* Private */,
-      12,    0,  168,    2, 0x08 /* Private */,
-      13,    0,  169,    2, 0x08 /* Private */,
-      14,    0,  170,    2, 0x08 /* Private */,
-      15,    0,  171,    2, 0x08 /* Private */,
-      16,    0,  172,    2, 0x08 /* Private */,
-      17,    0,  173,    2, 0x08 /* Private */,
-      18,    0,  174,    2, 0x08 /* Private */,
-      19,    0,  175,    2, 0x08 /* Private */,
-      20,    0,  176,    2, 0x08 /* Private */,
-      21,    0,  177,    2, 0x08 /* Private */,
-      22,    0,  178,    2, 0x08 /* Private */,
-      23,    0,  179,    2, 0x08 /* Private */,
-      24,    0,  180,    2, 0x08 /* Private */,
-      25,    0,  181,    2, 0x08 /* Private */,
-      26,    0,  182,    2, 0x08 /* Private */,
-      27,    0,  183,    2, 0x08 /* Private */,
-      28,    0,  184,    2, 0x08 /* Private */,
-      29,    0,  185,    2, 0x08 /* Private */,
-      30,    0,  186,    2, 0x08 /* Private */,
-      31,    0,  187,    2, 0x08 /* Private */,
+       1,    1,  214,    2, 0x08 /* Private */,
+       5,    2,  217,    2, 0x08 /* Private */,
+       6,    0,  222,    2, 0x08 /* Private */,
+       7,    0,  223,    2, 0x08 /* Private */,
+       8,    0,  224,    2, 0x08 /* Private */,
+       9,    0,  225,    2, 0x08 /* Private */,
+      10,    0,  226,    2, 0x08 /* Private */,
+      11,    0,  227,    2, 0x08 /* Private */,
+      12,    0,  228,    2, 0x08 /* Private */,
+      13,    0,  229,    2, 0x08 /* Private */,
+      14,    0,  230,    2, 0x08 /* Private */,
+      15,    0,  231,    2, 0x08 /* Private */,
+      16,    0,  232,    2, 0x08 /* Private */,
+      17,    0,  233,    2, 0x08 /* Private */,
+      18,    0,  234,    2, 0x08 /* Private */,
+      19,    0,  235,    2, 0x08 /* Private */,
+      20,    0,  236,    2, 0x08 /* Private */,
+      21,    0,  237,    2, 0x08 /* Private */,
+      22,    0,  238,    2, 0x08 /* Private */,
+      23,    0,  239,    2, 0x08 /* Private */,
+      24,    0,  240,    2, 0x08 /* Private */,
+      25,    0,  241,    2, 0x08 /* Private */,
+      26,    0,  242,    2, 0x08 /* Private */,
+      27,    0,  243,    2, 0x08 /* Private */,
+      28,    0,  244,    2, 0x08 /* Private */,
+      29,    0,  245,    2, 0x08 /* Private */,
+      30,    0,  246,    2, 0x08 /* Private */,
+      31,    0,  247,    2, 0x08 /* Private */,
+      32,    0,  248,    2, 0x08 /* Private */,
+      33,    0,  249,    2, 0x08 /* Private */,
+      34,    0,  250,    2, 0x08 /* Private */,
+      35,    0,  251,    2, 0x08 /* Private */,
+      36,    0,  252,    2, 0x08 /* Private */,
+      37,    0,  253,    2, 0x08 /* Private */,
+      38,    0,  254,    2, 0x08 /* Private */,
+      39,    0,  255,    2, 0x08 /* Private */,
+      40,    0,  256,    2, 0x08 /* Private */,
+      41,    0,  257,    2, 0x08 /* Private */,
+      42,    0,  258,    2, 0x08 /* Private */,
+      43,    0,  259,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -194,8 +242,20 @@ void CgQtGui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 23: _t->slotA6Reset(); break;
         case 24: _t->slotA7Reset(); break;
         case 25: _t->slotA8Reset(); break;
-        case 26: _t->soltA4LRAglaetenButton(); break;
-        case 27: _t->slotA4RotationButton(); break;
+        case 26: _t->slotA3FaceNormalStatusCheckBoxChanged(); break;
+        case 27: _t->slotA3VertexNormalStatusCheckBoxChanged(); break;
+        case 28: _t->slotA4FaceNormalStatusCheckBoxChanged(); break;
+        case 29: _t->slotA4VertexNormalStatusCheckBoxChanged(); break;
+        case 30: _t->slotA5FaceNormalStatusCheckBoxChanged(); break;
+        case 31: _t->slotA5VertexNormalStatusCheckBoxChanged(); break;
+        case 32: _t->slotA6FaceNormalStatusCheckBoxChanged(); break;
+        case 33: _t->slotA6VertexNormalStatusCheckBoxChanged(); break;
+        case 34: _t->slotA7FaceNormalStatusCheckBoxChanged(); break;
+        case 35: _t->slotA7VertexNormalStatusCheckBoxChanged(); break;
+        case 36: _t->slotA8FaceNormalStatusCheckBoxChanged(); break;
+        case 37: _t->slotA8VertexNormalStatusCheckBoxChanged(); break;
+        case 38: _t->soltA4LRAglaetenButton(); break;
+        case 39: _t->slotA4RotationButton(); break;
         default: ;
         }
     }
@@ -232,13 +292,13 @@ int CgQtGui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 28)
+        if (_id < 40)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 28;
+        _id -= 40;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 28)
+        if (_id < 40)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 28;
+        _id -= 40;
     }
     return _id;
 }

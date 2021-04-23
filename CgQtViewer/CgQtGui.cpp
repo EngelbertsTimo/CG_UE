@@ -13,6 +13,7 @@
 #include "../CgEvents/CgButtonEvent.h"
 #include "../CgEvents/CgAufgabenStatusEvent.h"
 #include "../CgEvents/CgResetEvent.h"
+#include "../CgEvents/CgShowNormalsEvent.h"
 #include "../CgEvents/CgLRAglaetenEvent.h"
 #include "../CgEvents/CgRotationEvent.h"
 #include <QSlider>
@@ -173,6 +174,25 @@ void CgQtGui::createOptionPanelA3(QWidget* parent)
   connect(a3StatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA3StatusCheckBoxChanged()) );
   a3_control->addWidget(a3StatusCheckBox);
 
+
+  a3FaceNormalStatusCheckBox = new QCheckBox("enable Aufagbe 3 Face Normales");
+  a3FaceNormalStatusCheckBox->setCheckable(true);
+  a3FaceNormalStatusCheckBox->setChecked(false);
+  connect(a3FaceNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA3FaceNormalStatusCheckBoxChanged()) );
+  a3_control->addWidget(a3FaceNormalStatusCheckBox);
+
+  a3VertexNormalStatusCheckBox = new QCheckBox("enable Aufagbe 3 Vertex Normales");
+  a3VertexNormalStatusCheckBox->setCheckable(true);
+  a3VertexNormalStatusCheckBox->setChecked(false);
+  connect(a3VertexNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA3VertexNormalStatusCheckBoxChanged()) );
+  a3_control->addWidget(a3VertexNormalStatusCheckBox);
+
+  /*a3StatusCheckBox = new QCheckBox("enable Aufagbe 3 Ausgabe");
+  a3StatusCheckBox->setCheckable(true);
+  a3StatusCheckBox->setChecked(false);
+  connect(a3StatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA3StatusCheckBoxChanged()) );
+  a3_control->addWidget(a3StatusCheckBox);*/
+
   /*Example for using a label */
 
   QLabel *options_label = new QLabel("Options");
@@ -294,6 +314,18 @@ void CgQtGui::createOptionPanelA4(QWidget* parent)
   connect(a4StatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA4StatusCheckBoxChanged()) );
   a4_control->addWidget(a4StatusCheckBox);
 
+  a4FaceNormalStatusCheckBox = new QCheckBox("enable Aufagbe 4 Face Normales");
+  a4FaceNormalStatusCheckBox->setCheckable(true);
+  a4FaceNormalStatusCheckBox->setChecked(false);
+  connect(a4FaceNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA4FaceNormalStatusCheckBoxChanged()) );
+  a4_control->addWidget(a4FaceNormalStatusCheckBox);
+
+  a4VertexNormalStatusCheckBox = new QCheckBox("enable Aufagbe 4 Vertex Normales");
+  a4VertexNormalStatusCheckBox->setCheckable(true);
+  a4VertexNormalStatusCheckBox->setChecked(false);
+  connect(a4VertexNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA4VertexNormalStatusCheckBoxChanged()) );
+  a4_control->addWidget(a4VertexNormalStatusCheckBox);
+
 
   /*QPushButton* SmoothingButton = new QPushButton("change Color");
   a4_control->addWidget(SmoothingButton);
@@ -392,6 +424,18 @@ void CgQtGui::createOptionPanelA5(QWidget* parent)
   connect(a5StatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA5StatusCheckBoxChanged()) );
   a5_control->addWidget(a5StatusCheckBox);
 
+  a5FaceNormalStatusCheckBox = new QCheckBox("enable Aufagbe 5 Face Normales");
+  a5FaceNormalStatusCheckBox->setCheckable(true);
+  a5FaceNormalStatusCheckBox->setChecked(false);
+  connect(a5FaceNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA5FaceNormalStatusCheckBoxChanged()) );
+  a5_control->addWidget(a5FaceNormalStatusCheckBox);
+
+  a5VertexNormalStatusCheckBox = new QCheckBox("enable Aufagbe 5 Vertex Normales");
+  a5VertexNormalStatusCheckBox->setCheckable(true);
+  a5VertexNormalStatusCheckBox->setChecked(false);
+  connect(a5VertexNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA5VertexNormalStatusCheckBoxChanged()) );
+  a5_control->addWidget(a5VertexNormalStatusCheckBox);
+
   //Farb wahl
   QLabel *farb_label = new QLabel("Farbwahl");
   a5_control->addWidget(farb_label);
@@ -442,6 +486,18 @@ void CgQtGui::createOptionPanelA6(QWidget* parent)
   a6StatusCheckBox->setChecked(false);
   connect(a6StatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA6StatusCheckBoxChanged()) );
   a6_control->addWidget(a6StatusCheckBox);
+
+  a6FaceNormalStatusCheckBox = new QCheckBox("enable Aufagbe 6 Face Normales");
+  a6FaceNormalStatusCheckBox->setCheckable(true);
+  a6FaceNormalStatusCheckBox->setChecked(false);
+  connect(a6FaceNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA6FaceNormalStatusCheckBoxChanged()) );
+  a6_control->addWidget(a6FaceNormalStatusCheckBox);
+
+  a6VertexNormalStatusCheckBox = new QCheckBox("enable Aufagbe 6 Vertex Normales");
+  a6VertexNormalStatusCheckBox->setCheckable(true);
+  a6VertexNormalStatusCheckBox->setChecked(false);
+  connect(a6VertexNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA6VertexNormalStatusCheckBoxChanged()) );
+  a6_control->addWidget(a6VertexNormalStatusCheckBox);
 
   //Farb wahl
   QLabel *farb_label = new QLabel("Farbwahl");
@@ -495,6 +551,18 @@ void CgQtGui::createOptionPanelA7(QWidget* parent)
   connect(a7StatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA7StatusCheckBoxChanged()) );
   a7_control->addWidget(a7StatusCheckBox);
 
+  a7FaceNormalStatusCheckBox = new QCheckBox("enable Aufagbe 7 Face Normales");
+  a7FaceNormalStatusCheckBox->setCheckable(true);
+  a7FaceNormalStatusCheckBox->setChecked(false);
+  connect(a7FaceNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA7FaceNormalStatusCheckBoxChanged()) );
+  a7_control->addWidget(a7FaceNormalStatusCheckBox);
+
+  a7VertexNormalStatusCheckBox = new QCheckBox("enable Aufagbe 7 Vertex Normales");
+  a7VertexNormalStatusCheckBox->setCheckable(true);
+  a7VertexNormalStatusCheckBox->setChecked(false);
+  connect(a7VertexNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA7VertexNormalStatusCheckBoxChanged()) );
+  a7_control->addWidget(a7VertexNormalStatusCheckBox);
+
   //Farb wahl
   QLabel *farb_label = new QLabel("Farbwahl");
   a7_control->addWidget(farb_label);
@@ -546,6 +614,18 @@ void CgQtGui::createOptionPanelA8(QWidget* parent)
   a8StatusCheckBox->setChecked(false);
   connect(a8StatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA8StatusCheckBoxChanged()) );
   a8_control->addWidget(a8StatusCheckBox);
+
+  a8FaceNormalStatusCheckBox = new QCheckBox("enable Aufagbe 8 Face Normales");
+  a8FaceNormalStatusCheckBox->setCheckable(true);
+  a8FaceNormalStatusCheckBox->setChecked(false);
+  connect(a8FaceNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA8FaceNormalStatusCheckBoxChanged()) );
+  a8_control->addWidget(a8FaceNormalStatusCheckBox);
+
+  a8VertexNormalStatusCheckBox = new QCheckBox("enable Aufagbe 8 Vertex Normales");
+  a8VertexNormalStatusCheckBox->setCheckable(true);
+  a8VertexNormalStatusCheckBox->setChecked(false);
+  connect(a8VertexNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA8VertexNormalStatusCheckBoxChanged()) );
+  a8_control->addWidget(a8VertexNormalStatusCheckBox);
 
   //Farb wahl
   QLabel *farb_label = new QLabel("Farbwahl");
@@ -601,6 +681,23 @@ void CgQtGui::slotA3StatusCheckBoxChanged()
   notifyObserver(e);
 }
 
+void CgQtGui::slotA3FaceNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 3 Face Normal Status changed to "<< a3FaceNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,3,a3FaceNormalStatusCheckBox->checkState(),1);
+
+  notifyObserver(e);
+}
+
+void CgQtGui::slotA3VertexNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 3 Vertex Normal Status changed to "<< a3VertexNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,3,a3VertexNormalStatusCheckBox->checkState(),2);
+
+  notifyObserver(e);
+}
+
+
 
 void CgQtGui::slotChangeColorButtonA3()
 {
@@ -628,6 +725,23 @@ void CgQtGui::slotA4StatusCheckBoxChanged()
 
   notifyObserver(e);
 }
+
+void CgQtGui::slotA4FaceNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 4 Face Normal Status changed to "<< a4FaceNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,4,a4FaceNormalStatusCheckBox->checkState(),1);
+
+  notifyObserver(e);
+}
+
+void CgQtGui::slotA4VertexNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 4 Vertex Normal Status changed to "<< a4VertexNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,4,a4VertexNormalStatusCheckBox->checkState(),2);
+
+  notifyObserver(e);
+}
+
 void CgQtGui::slotChangeColorButtonA4()
 {
   int16_t redValue = colorSpinBoxredA4->value();
@@ -672,6 +786,22 @@ void CgQtGui::slotA5StatusCheckBoxChanged()
 
   notifyObserver(e);
 }
+void CgQtGui::slotA5FaceNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 5 Face Normal Status changed to "<< a5FaceNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,5,a5FaceNormalStatusCheckBox->checkState(),1);
+
+  notifyObserver(e);
+}
+
+void CgQtGui::slotA5VertexNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 5 Vertex Normal Status changed to "<< a5VertexNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,5,a5VertexNormalStatusCheckBox->checkState(),2);
+
+  notifyObserver(e);
+}
+
 void CgQtGui::slotChangeColorButtonA5()
 {
   int16_t redValue = colorSpinBoxredA5->value();
@@ -696,6 +826,22 @@ void CgQtGui::slotA6StatusCheckBoxChanged()
 
   notifyObserver(e);
 }
+void CgQtGui::slotA6FaceNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 6 Face Normal Status changed to "<< a6FaceNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,6,a6FaceNormalStatusCheckBox->checkState(),1);
+
+  notifyObserver(e);
+}
+
+void CgQtGui::slotA6VertexNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 6 Vertex Normal Status changed to "<< a6VertexNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,6,a6VertexNormalStatusCheckBox->checkState(),2);
+
+  notifyObserver(e);
+}
+
 void CgQtGui::slotChangeColorButtonA6()
 {
   int16_t redValue = colorSpinBoxredA6->value();
@@ -720,6 +866,22 @@ void CgQtGui::slotA7StatusCheckBoxChanged()
 
   notifyObserver(e);
 }
+void CgQtGui::slotA7FaceNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 7 Face Normal Status changed to "<< a7FaceNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,7,a7FaceNormalStatusCheckBox->checkState(),1);
+
+  notifyObserver(e);
+}
+
+void CgQtGui::slotA7VertexNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 7 Vertex Normal Status changed to "<< a7VertexNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,7,a7VertexNormalStatusCheckBox->checkState(),2);
+
+  notifyObserver(e);
+}
+
 void CgQtGui::slotChangeColorButtonA7()
 {
   int16_t redValue = colorSpinBoxredA7->value();
@@ -744,6 +906,22 @@ void CgQtGui::slotA8StatusCheckBoxChanged()
 
   notifyObserver(e);
 }
+void CgQtGui::slotA8FaceNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 8 Face Normal Status changed to "<< a8FaceNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,8,a8FaceNormalStatusCheckBox->checkState(),1);
+
+  notifyObserver(e);
+}
+
+void CgQtGui::slotA8VertexNormalStatusCheckBoxChanged()
+{
+  std::cout << "CgQtGui: " << "Aufgabe 8 Vertex Normal Status changed to "<< a8VertexNormalStatusCheckBox->checkState() << std::endl;
+  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,8,a8VertexNormalStatusCheckBox->checkState(),2);
+
+  notifyObserver(e);
+}
+
 void CgQtGui::slotChangeColorButtonA8()
 {
   int16_t redValue = colorSpinBoxredA8->value();
