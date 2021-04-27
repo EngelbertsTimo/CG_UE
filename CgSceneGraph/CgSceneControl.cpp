@@ -36,7 +36,7 @@ CgSceneControl::CgSceneControl()
   m_current_transformation=glm::mat4(1.);
 
   // Blickwinkel
-  m_lookAt_matrix= glm::lookAt(glm::vec3(0.0,0.0,4.0),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
+  m_lookAt_matrix= glm::lookAt(glm::vec3(0.0,0.0,40.0),glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0));
 
 
   // Projekt Einstellungen
@@ -141,6 +141,8 @@ void CgSceneControl::setRenderer(CgBaseRenderer* r)
 
 void CgSceneControl::renderObjects()
 {
+
+
 
   // Materialeigenschaften setzen
   // sollte ja eigentlich pro Objekt unterschiedlich sein können, naja bekommen sie schon hin....
