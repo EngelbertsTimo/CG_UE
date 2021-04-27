@@ -97,36 +97,33 @@ void CgTriCube::createNormals(){
   for (int i = 0; i < m_triangle_indices.size(); i=i+3) {
       m_face_normals.push_back(normalize(glm::cross(m_vertices[m_triangle_indices[i]]-m_vertices[m_triangle_indices[i+1]],m_vertices[m_triangle_indices[i]]-m_vertices[m_triangle_indices[i+2]])));
     }
-    glm::vec3 workVec=glm::vec3(0.0,0.0,0.0);
-    std::vector<double> x_vec,y_vec,z_vec;
-    double x,y,z;
-    int zaeler;
-    for (int j = 0; j < m_vertices.size(); ++j) {
-        workVec=glm::vec3(0.0,0.0,0.0);
-        z=0;
-        x=0;
-        y=0;
-        zaeler=0;
-        for (int i = 0; i < m_triangle_indices.size(); i++) {
-            if(j==m_triangle_indices[i]){
-                int dreieck = floor(i/3);
-                workVec=workVec+m_face_normals[dreieck];
-                zaeler++;
-                x_vec.push_back(m_face_normals[dreieck][0]);
-                y_vec.push_back(m_face_normals[dreieck][1]);
-                z_vec.push_back(m_face_normals[dreieck][2]);
+  glm::vec3 workVec=glm::vec3(0.0,0.0,0.0);
+  std::vector<double> x_vec,y_vec,z_vec;
+  double x,y,z;
+  int zaeler;
+  for (int j = 0; j < m_vertices.size(); ++j) {
+      z=0;
+      x=0;
+      y=0;
+      zaeler=0;
+      for (int i = 0; i < m_triangle_indices.size(); i++) {
+          if(j==m_triangle_indices[i]){
+              int dreieck = floor(i/3);
+              zaeler++;
+              x_vec.push_back(m_face_normals[dreieck][0]);
+              y_vec.push_back(m_face_normals[dreieck][1]);
+              z_vec.push_back(m_face_normals[dreieck][2]);
+              x=x+(m_face_normals[dreieck][0]);
+              y=y+(m_face_normals[dreieck][1]);
+              z=z+(m_face_normals[dreieck][2]);
+            }
+        }
+      x=x/zaeler;
+      y=y/zaeler;
+      z=z/zaeler;
 
-                x=x+(m_face_normals[dreieck][0]);
-                y=y+(m_face_normals[dreieck][1]);
-                z=z+(m_face_normals[dreieck][2]);
-              }
-          }
-       x=x/zaeler;
-       y=y/zaeler;
-       z=z/zaeler;
-
-        m_vertex_normals.push_back(normalize(glm::vec3(x,y,z)));
-      }
+      m_vertex_normals.push_back(normalize(glm::vec3(x,y,z)));
+    }
 }
 
 
@@ -163,6 +160,8 @@ void CgTriCube::init( std::string filename)
   loader.getPositionData(m_vertices);
   loader.getNormalData(m_vertex_normals);
   loader.getFaceIndexData(m_triangle_indices);
+
+  createNormals();
 }
 
 
@@ -173,11 +172,13 @@ const std::vector<glm::vec3>& CgTriCube::getVertices() const
 
 const std::vector<glm::vec3>& CgTriCube::getVertexNormals() const
 {
+
   return m_vertex_normals;
 }
 
 const std::vector<glm::vec3>& CgTriCube::getVertexColors() const
 {
+
   return m_vertex_colors;
 }
 

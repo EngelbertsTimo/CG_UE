@@ -569,14 +569,14 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
       std::vector<unsigned int> indx;
       loader->getFaceIndexData(indx);
 
-
-      if(mode==1){
-          m_triangle->init(pos,norm,indx);
-          m_renderer->init(m_triangle);
-        } else if(mode==2){
-          a3_tricube->init(pos,norm,indx);
-          m_renderer->init(a3_tricube);
-        }
+      a3_tricube->init(pos,norm,indx);
+        std::cout << "CgSCeneControl: file Loader; obj init" << std::endl;
+      a3_triCube_Face_Nomral_polylines=m_FaceNormales(a3_tricube);
+        std::cout << "CgSCeneControl: file Loader; face normals init" << std::endl;
+        a3_triCube_Vertex_Nomral_polylines=m_VertexNormales(a3_tricube);
+          std::cout << "CgSCeneControl: file Loader; vertex normals init" << std::endl;
+//      m_renderer->init(a3_tricube);
+a3_Renderer_init();
       m_renderer->redraw();
     }
 
@@ -646,8 +646,10 @@ void CgSceneControl::a3_delete(){
 
 // A4 Hilfsmethoden id:4000-4999
 void CgSceneControl::a4_object_initiation()
-{/*
+{
   a4_workvector.clear();
+
+  /*
   a4_workvector.push_back(glm::vec3(-0.0,-0.5,-0.5));
   a4_workvector.push_back(glm::vec3(0.0,0.0,0.0));
   a4_workvector.push_back(glm::vec3(0.5,0.5,0.5));
@@ -658,36 +660,32 @@ void CgSceneControl::a4_object_initiation()
   a4_workvector.push_back(glm::vec3(-1.0,1.0,0.25));
   a4_workvector.push_back(glm::vec3(-0.5,1.0,0.5));
 
-*/
 
-/*
+
+
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.75,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(0.75,0.0,0.0));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.25));
 
-*/
+
 
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.0));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.25));
 
+*/
 
-  /*
   a4_workvector.push_back(glm::vec3(1.0,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.0));
   a4_workvector.push_back(glm::vec3(1.0,0.0,0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.5));
-*/
 
-  /* a4_workvector.push_back(glm::vec3(-1.0,0.0,-0.5));
-  a4_workvector.push_back(glm::vec3(-1.0,0.0,-0.25));
-  a4_workvector.push_back(glm::vec3(-1.0,00,0.0));
-  a4_workvector.push_back(glm::vec3(-1.0,0.0,0.25));
-  a4_workvector.push_back(glm::vec3(-1.0,0.0,0.5));
-*/
+
+
+
 
   a4_polyline = new CgPolyline(assign_id(),a4_workvector);
 
