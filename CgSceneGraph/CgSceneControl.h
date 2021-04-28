@@ -91,6 +91,7 @@ private:
 
   // A3 Objekte
   CgExampleTriangle* m_triangle;
+  //CgTriCube* m_triangle;
   CgTriCube* a3_tricube;
   std::vector<CgPolyline*> a3_triCube_Face_Nomral_polylines;
   std::vector<CgPolyline*> a3_triCube_Vertex_Nomral_polylines;
@@ -114,6 +115,8 @@ private:
   std::vector<glm::vec3> a5_rotationvector;
   CgRotationBody* a5_rotationBody;
   std::vector<CgPolyline*> a5_rotationNomral_polylines;
+  std::vector<CgPolyline*> a5_Face_Nomral_polylines;
+  std::vector<CgPolyline*> a5_Vertex_Nomral_polylines;
 
   // A6 Objekte
 

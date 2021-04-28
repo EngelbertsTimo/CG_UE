@@ -79,6 +79,10 @@ void CgExampleTriangle::init( std::string filename)
     loader.getPositionData(m_vertices);
     loader.getNormalData(m_vertex_normals);
     loader.getFaceIndexData(m_triangle_indices);
+
+    for (int i = 0; i < m_triangle_indices.size(); i=i+3) {
+        m_face_normals.push_back(normalize(glm::cross(m_vertices[m_triangle_indices[i]]-m_vertices[m_triangle_indices[i+1]],m_vertices[m_triangle_indices[i]]-m_vertices[m_triangle_indices[i+2]])));
+      }
 }
 
 const std::vector<glm::vec3>& CgExampleTriangle::getVertices() const
