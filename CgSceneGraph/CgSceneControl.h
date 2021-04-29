@@ -27,6 +27,7 @@ public:
 private:
 
   int assign_id();
+  int get_Id();
 
 
   // A3 Hilfsmethoden

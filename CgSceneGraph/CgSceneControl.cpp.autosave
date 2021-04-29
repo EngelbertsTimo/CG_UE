@@ -1138,7 +1138,7 @@ std::vector<CgPolyline*> CgSceneControl::m_FaceNormales(CgBaseTriangleMesh* work
 std::vector<CgPolyline*> CgSceneControl::m_VertexNormales(CgBaseTriangleMesh* workBody){
   std::vector<CgPolyline*> result;
   int zealer=0;
-  for (int j = 0; j < workBody->getVertices().size()&&j<60000; j=j+1) {
+  for (int j = 0; j < workBody->getVertices().size() j=j+1) {
       result.push_back(new CgPolyline(assign_id(),workBody->getVertices()[j],workBody->getVertexNormals()[j]));     
     //  std::cout<<"CcSceneControl;i;"<<j<<";x;"<<workBody->getVertices()[j][0]<<";y;"<<workBody->getVertices()[j][1]<<";z;"<<workBody->getVertices()[j][2]<<std::endl;
       zealer++;
