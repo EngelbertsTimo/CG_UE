@@ -10,9 +10,6 @@ CgPolyline::CgPolyline():
   m_vertices.push_back(glm::vec3(5.5,-0.5,0.0));
   /*m_vertices.push_back(glm::vec3(0.0,0.5,0.0));
    m_vertices.push_back(glm::vec3(0.0,0.5,0.5));*/
-
-
-
   m_lineWidth =1;
 
 }
@@ -24,13 +21,7 @@ CgPolyline::CgPolyline(int id,glm::vec3 startPoint,glm::vec3 direction):
   glm::vec3 endPoint = startPoint+direction;
   m_vertices.push_back(startPoint);
   m_vertices.push_back(endPoint);
-  /*m_vertices.push_back(glm::vec3(0.0,0.5,0.0));
-   m_vertices.push_back(glm::vec3(0.0,0.5,0.5));*/
-
-
-
   m_lineWidth =1;
-
 }
 
 CgPolyline::CgPolyline(int id,std::vector<glm::vec3> vectors):
@@ -40,13 +31,8 @@ CgPolyline::CgPolyline(int id,std::vector<glm::vec3> vectors):
   for(int i=0;i<vectors.size();i++){
        m_vertices.push_back(vectors[i]);
     }
-
-
-
   m_lineWidth =1;
-
 }
-
 
 CgPolyline::~CgPolyline()
 {
@@ -76,6 +62,8 @@ void CgPolyline::init( std::string filename)
 
     loader.getFaceIndexData(m_triangle_indices);
 }
+
+
 
 const std::vector<glm::vec3>& CgPolyline::getVertices() const
 {

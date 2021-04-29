@@ -24,9 +24,24 @@
 #include <string>
 #include <cmath>
 
+
+void CgSceneControl::setProgramPath(std::string m_programPath){
+   programPath=m_programPath;
+  std::cout<<"kontroll 1:"<<programPath<<std::endl;
+programPath=programPath.substr(0,programPath.rfind("/"));
+  std::cout<<"kontroll 2:"<<programPath<<std::endl;
+  programPath=programPath.append("/CgData");
+  std::cout<<"kontroll 3:"<<programPath<<std::endl;
+  programPath=programPath.append("/bunny.obj");
+  std::cout<<"kontroll 4:"<<programPath<<std::endl;
+}
+/*std::string CgSceneControl::getProgramPath(std::string programPath){
+  std::cout<<programPath<<std::endl;
+}*/
+
 CgSceneControl::CgSceneControl()
 {
-
+//std::cout<<test23<<std::endl;
   global_id =0;
 
   m_triangle=nullptr;
@@ -59,7 +74,8 @@ CgSceneControl::CgSceneControl()
   m_initial_color_a7 = m_color_a7 = glm::vec4(0.0,1.0,1.0,1.0);
   m_initial_color_a8 = m_color_a8 = glm::vec4(0.5,0.5,1.0,1.0);
 
-
+a3_object_initiation();
+a5_object_initiation();
 
   //m_triangle= new CgExampleTriangle(21);
 
@@ -85,16 +101,6 @@ CgSceneControl::CgSceneControl()
   a6_Vertex_normal_Vectors = false;
   a7_Vertex_normal_Vectors = false;
   a8_Vertex_normal_Vectors = false;
-
-  //Objecte Erstellen
-  a3_object_initiation();
-  a4_object_initiation();
-  a5_object_initiation();
-  a6_object_initiation();
-  a7_object_initiation();
-  a8_object_initiation();
-
-
 }
 
 
@@ -116,7 +122,7 @@ int CgSceneControl::assign_id(){
 }
 
 int CgSceneControl::get_Id(){
-    return global_id;
+  return global_id;
 }
 
 void CgSceneControl::setRenderer(CgBaseRenderer* r)
@@ -228,6 +234,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
         case 3:
           if(aufgaben_status){
               a3_active=true;
+              //a3_object_initiation();
               a3_Renderer_init();
             }
           else
@@ -236,6 +243,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
         case 4:
           if(aufgaben_status){
               a4_active=true;
+              a4_object_initiation();
               a4_Renderer_init();
             }
           else
@@ -244,6 +252,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
         case 5:
           if(aufgaben_status){
               a5_active=true;
+             //a5_object_initiation();
               a5_Renderer_init();
             }
           else
@@ -252,6 +261,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
         case 6:
           if(aufgaben_status){
               a6_active=true;
+              a6_object_initiation();
               a6_Renderer_init();
             }
           else
@@ -260,15 +270,16 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
         case 7:
           if(aufgaben_status){
               a7_active=true;
+              a7_object_initiation();
               a7_Renderer_init();
             }
           else
             a7_active=false;
           break;
         case 8:
-
           if(aufgaben_status){
               a8_active=true;
+              a8_object_initiation();
               a8_Renderer_init();
             }
           else
@@ -574,24 +585,27 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
 
       std::vector<unsigned int> indx;
       loader->getFaceIndexData(indx);
-
-       //a3_tricube->init(ev->FileName());
-       a3_tricube->init(pos,norm,indx);
+std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
+      //a3_tricube->init(ev->FileName());
+    a3_tricube=new CgTriCube(assign_id());
+      a3_tricube->init(pos,norm,indx);
       std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
-      a3_triCube_Face_Nomral_polylines=m_FaceNormales(a3_tricube);
+      a3_Face_Nomral_polylines=m_generateFaceNormales(a3_tricube);
       std::cout << "CgSCeneControl: file Loader a3; face normals init" << std::endl;
-      a3_triCube_Vertex_Nomral_polylines=m_VertexNormales(a3_tricube);
+      a3_Vertex_Nomral_polylines=m_generateVertexNormales(a3_tricube);
       std::cout << "CgSCeneControl: file Loader a3; vertex normals init" << std::endl;
 
       a3_Renderer_init();
 
-
       m_triangle = new CgExampleTriangle(assign_id());
-      m_triangle->init(ev->FileName());
+
+//  /CgViewer/..
+      m_triangle->init(programPath);
+      //m_triangle->init(ev->FileName());
       std::cout << "CgSCeneControl: file Loader a5; obj init" << std::endl;
-      a5_Face_Nomral_polylines=m_FaceNormales(m_triangle);
+      a5_Face_Nomral_polylines=m_generateFaceNormales(m_triangle);
       std::cout << "CgSCeneControl: file Loader a5; face normals init" << std::endl;
-       a5_Vertex_Nomral_polylines=m_VertexNormales(m_triangle);
+      a5_Vertex_Nomral_polylines=m_generateVertexNormales(m_triangle);
       std::cout << "CgSCeneControl: file Loader a5; vertex normals init" << std::endl;
 
       /*a5_ObjectBody= new CgExternObjectBody(assign_id(),ev->FileName());
@@ -614,9 +628,14 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
 // A3 Hilfsmethoden id:3000-3999
 void CgSceneControl::a3_object_initiation()
 {
-  a3_tricube = new CgTriCube(assign_id());
-  a3_triCube_Face_Nomral_polylines=m_FaceNormales(a3_tricube);
-  a3_triCube_Vertex_Nomral_polylines=m_VertexNormales(a3_tricube);
+  if(a3_tricube==NULL)
+    a3_tricube = new CgTriCube(assign_id());
+  a3_Face_Nomral_polylines.clear();
+  a3_Vertex_Nomral_polylines.clear();
+  if(a3_tricube!=NULL){
+      a3_Face_Nomral_polylines=m_generateFaceNormales(a3_tricube);
+      a3_Vertex_Nomral_polylines=m_generateVertexNormales(a3_tricube);
+    }
 }
 
 void CgSceneControl::a3_Renderer_render()
@@ -626,14 +645,14 @@ void CgSceneControl::a3_Renderer_render()
 
   m_renderer->setUniformValue("mycolor",m_color_a4);
   if(a3_Face_normal_Vectors){
-      for (int i = 0; i < a3_triCube_Face_Nomral_polylines.size(); ++i) {
-          m_renderer->render(a3_triCube_Face_Nomral_polylines[i]);
+      for (int i = 0; i < a3_Face_Nomral_polylines.size(); ++i) {
+          m_renderer->render(a3_Face_Nomral_polylines[i]);
         }
     }
   m_renderer->setUniformValue("mycolor",m_color_a8);
   if(a3_Vertex_normal_Vectors){
-      for (int i = 0; i < a3_triCube_Vertex_Nomral_polylines.size(); ++i) {
-          m_renderer->render(a3_triCube_Vertex_Nomral_polylines[i]);
+      for (int i = 0; i < a3_Vertex_Nomral_polylines.size(); ++i) {
+          m_renderer->render(a3_Vertex_Nomral_polylines[i]);
         }
     }
 }
@@ -644,13 +663,13 @@ void CgSceneControl::a3_Renderer_init()
     m_renderer->init(a3_tricube);
 
   if(a3_Face_normal_Vectors){
-      for (int i = 0; i < a3_triCube_Face_Nomral_polylines.size(); ++i) {
-          m_renderer->init(a3_triCube_Face_Nomral_polylines[i]);
+      for (int i = 0; i < a3_Face_Nomral_polylines.size(); ++i) {
+          m_renderer->init(a3_Face_Nomral_polylines[i]);
         }
     }
   if(a3_Vertex_normal_Vectors){
-      for (int i = 0; i < a3_triCube_Vertex_Nomral_polylines.size(); ++i) {
-          m_renderer->init(a3_triCube_Vertex_Nomral_polylines[i]);
+      for (int i = 0; i < a3_Vertex_Nomral_polylines.size(); ++i) {
+          m_renderer->init(a3_Vertex_Nomral_polylines[i]);
         }
     }
 }
@@ -667,7 +686,8 @@ void CgSceneControl::a3_delete(){
 
   if(a3_tricube!=NULL)
     delete a3_tricube;
-
+  a3_Face_Nomral_polylines.clear();
+  a3_Vertex_Nomral_polylines.clear();
 
 }
 
@@ -710,14 +730,10 @@ void CgSceneControl::a4_object_initiation()
   a4_workvector.push_back(glm::vec3(1.0,0.0,0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.5));
 
-
-
-
-
   a4_polyline = new CgPolyline(assign_id(),a4_workvector);
 
-  a4_rotation_Face_Nomral_polylines.clear();
-  a4_rotation_Vertex_Nomral_polylines.clear();
+  a4_Face_Nomral_polylines.clear();
+  a4_Vertex_Nomral_polylines.clear();
   a4_rotationBody = nullptr;
 
 }
@@ -730,13 +746,13 @@ void CgSceneControl::a4_Renderer_render()
   if(a4_rotationBody!=NULL)
     m_renderer->render(a4_rotationBody);
   if(a4_Face_normal_Vectors){
-      for (int i = 0; i < a4_rotation_Face_Nomral_polylines.size(); ++i) {
-          m_renderer->render(a4_rotation_Face_Nomral_polylines[i]);
+      for (int i = 0; i < a4_Face_Nomral_polylines.size(); ++i) {
+          m_renderer->render(a4_Face_Nomral_polylines[i]);
         }
     }
   if(a4_Vertex_normal_Vectors){
-      for (int i = 0; i < a4_rotation_Vertex_Nomral_polylines.size(); ++i) {
-          m_renderer->render(a4_rotation_Vertex_Nomral_polylines[i]);
+      for (int i = 0; i < a4_Vertex_Nomral_polylines.size(); ++i) {
+          m_renderer->render(a4_Vertex_Nomral_polylines[i]);
         }
     }
 }
@@ -748,13 +764,13 @@ void CgSceneControl::a4_Renderer_init()
   if(a4_rotationBody!=NULL)
     m_renderer->init(a4_rotationBody);
   if(a4_Face_normal_Vectors){
-      for (int i = 0; i < a4_rotation_Face_Nomral_polylines.size(); ++i) {
-          m_renderer->init(a4_rotation_Face_Nomral_polylines[i]);
+      for (int i = 0; i < a4_Face_Nomral_polylines.size(); ++i) {
+          m_renderer->init(a4_Face_Nomral_polylines[i]);
         }
     }
   if(a4_Vertex_normal_Vectors){
-      for (int i = 0; i < a4_rotation_Vertex_Nomral_polylines.size(); ++i) {
-          m_renderer->init(a4_rotation_Vertex_Nomral_polylines[i]);
+      for (int i = 0; i < a4_Vertex_Nomral_polylines.size(); ++i) {
+          m_renderer->init(a4_Vertex_Nomral_polylines[i]);
         }
     }
 }
@@ -774,13 +790,13 @@ void CgSceneControl::a4_delete(){
   if(a4_polyline!=NULL)
     delete a4_polyline;
 
-  for (int i = 0; i < a4_rotation_Face_Nomral_polylines.size(); ++i) {
-      if(a4_rotation_Face_Nomral_polylines[i]!=NULL)
-        delete a4_rotation_Face_Nomral_polylines[i];
+  for (int i = 0; i < a4_Face_Nomral_polylines.size(); ++i) {
+      if(a4_Face_Nomral_polylines[i]!=NULL)
+        delete a4_Face_Nomral_polylines[i];
     }
-  for (int i = 0; i < a4_rotation_Vertex_Nomral_polylines.size(); ++i) {
-      if(a4_rotation_Vertex_Nomral_polylines[i]!=NULL)
-        delete a4_rotation_Vertex_Nomral_polylines[i];
+  for (int i = 0; i < a4_Vertex_Nomral_polylines.size(); ++i) {
+      if(a4_Vertex_Nomral_polylines[i]!=NULL)
+        delete a4_Vertex_Nomral_polylines[i];
     }
 }
 
@@ -811,9 +827,9 @@ void CgSceneControl::a4_roteieren(int segmente, int rotationType)
     }
   //a4_rotationBody= m_roteieren_3(segmente,a4_workvector);//new CgRotationBody(assign_id(),segmente,a4_workvector.size(),a4_rotationvector);
 
-  a4_rotation_Face_Nomral_polylines = m_FaceNormales(a4_rotationBody);
+  a4_Face_Nomral_polylines = m_generateFaceNormales(a4_rotationBody);
 
-  a4_rotation_Vertex_Nomral_polylines = m_VertexNormales(a4_rotationBody);
+  a4_Vertex_Nomral_polylines = m_generateVertexNormales(a4_rotationBody);
 
   a4_Renderer_init();
   a4_Renderer_render();
@@ -834,30 +850,37 @@ void CgSceneControl::a5_Renderer_render()
 
   if(m_triangle!=NULL)
     m_renderer->render(m_triangle);
-  if(a5_ObjectBody!=NULL)
-    m_renderer->render(a5_ObjectBody);
+  /*if(a5_ObjectBody!=NULL)
+    m_renderer->render(a5_ObjectBody);*/
+
+
 
   m_renderer->setUniformValue("mycolor",m_color_a6);
   if(a5_Face_normal_Vectors){
-  for (int i = 0; i < a5_Face_Nomral_polylines.size(); ++i) {
-      m_renderer->render(a5_Face_Nomral_polylines[i]);
-    }
+      std::cout << "CgSCeneControl: a5 init schritt 0" <<std::endl;
+      for (int i = 0; i < a5_Face_Nomral_polylines.size(); ++i) {
+          m_renderer->render(a5_Face_Nomral_polylines[i]);
+        }
     }
   m_renderer->setUniformValue("mycolor",m_color_a7);
-   if(a5_Vertex_normal_Vectors){
-  for (int i = 0; i < a5_Vertex_Nomral_polylines.size(); ++i) {
-      m_renderer->render(a5_Vertex_Nomral_polylines[i]);
-    }
+  if(a5_Vertex_normal_Vectors){
+      std::cout << "CgSCeneControl: a5 vertex ausgabe" <<std::endl;
+      for (int i = 0; i < a5_Vertex_Nomral_polylines.size(); ++i) {
+          m_renderer->render(a5_Vertex_Nomral_polylines[i]);
+        }
     }
 }
 
 void CgSceneControl::a5_Renderer_init()
 {
+  std::cout << "CgSCeneControl: a5 init schritt 0" <<std::endl;
   if(m_triangle!=NULL)
     m_renderer->init(m_triangle);
+std::cout << "CgSCeneControl: a5 init schritt 0.5" <<std::endl;
+ /* if(a5_ObjectBody!=NULL)
+    m_renderer->init(a5_ObjectBody);*/
 
-  if(a5_ObjectBody!=NULL)
-    m_renderer->init(a5_ObjectBody);
+   std::cout << "CgSCeneControl: a5 init schritt 1" <<std::endl;
 
   if(a5_Face_normal_Vectors){
       for (int i = 0; i < a5_Face_Nomral_polylines.size(); ++i) {
@@ -1125,12 +1148,13 @@ CgRotationBody* CgSceneControl::m_roteieren_3(int segmente,std::vector<glm::vec3
 }
 
 
-std::vector<CgPolyline*> CgSceneControl::m_FaceNormales(CgBaseTriangleMesh* workBody){
+std::vector<CgPolyline*> CgSceneControl::m_generateFaceNormales(CgBaseTriangleMesh* workBody){
   std::vector<CgPolyline*> result;
 
   double x1,x2,x3,y1,y2,y3,z1,z2,z3=0;
   //result.push_back(new CgPolyline(assign_id(),glm::vec3(0.0,0.0,0.0),glm::vec3(1.0,1.0,1.0));
-  for (int i = 0; i < workBody->getTriangleIndices().size(); i=i+3) {      
+
+  for (int i = 0; i < workBody->getTriangleIndices().size(); i=i+3) {
       x1=workBody->getVertices()[workBody->getTriangleIndices()[i]][0];
       y1=workBody->getVertices()[workBody->getTriangleIndices()[i]][1];
       z1=workBody->getVertices()[workBody->getTriangleIndices()[i]][2];
@@ -1143,18 +1167,20 @@ std::vector<CgPolyline*> CgSceneControl::m_FaceNormales(CgBaseTriangleMesh* work
       y3=workBody->getVertices()[workBody->getTriangleIndices()[i+2]][1];
       z3=workBody->getVertices()[workBody->getTriangleIndices()[i+2]][2];
 
-      result.push_back(new CgPolyline(assign_id(),glm::vec3(((x1+x2+x3)/3),((y1+y2+y3)/3),((z1+z2+z3)/3)),workBody->getFaceNormals()[i/3]));    
+      result.push_back(new CgPolyline(assign_id(),glm::vec3(((x1+x2+x3)/3),((y1+y2+y3)/3),((z1+z2+z3)/3)),workBody->getFaceNormals()[i/3]));
     }
 
 
   return result;
 }
 
-std::vector<CgPolyline*> CgSceneControl::m_VertexNormales(CgBaseTriangleMesh* workBody){
+std::vector<CgPolyline*> CgSceneControl::m_generateVertexNormales(CgBaseTriangleMesh* workBody){
   std::vector<CgPolyline*> result;
+  CgPolyline* workLine = new CgPolyline();
   int zealer=0;
   for (int j = 0; j < workBody->getVertices().size(); j=j+1) {
-      result.push_back(new CgPolyline(assign_id(),workBody->getVertices()[j],workBody->getVertexNormals()[j]));     
+      result.push_back(new CgPolyline(assign_id(),workBody->getVertices()[j],workBody->getVertexNormals()[j]));
+
     //  std::cout<<"CcSceneControl;i;"<<j<<";x;"<<workBody->getVertices()[j][0]<<";y;"<<workBody->getVertices()[j][1]<<";z;"<<workBody->getVertices()[j][2]<<std::endl;
       zealer++;
     }

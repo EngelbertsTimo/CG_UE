@@ -20,7 +20,6 @@ public:
 
   void init (std::vector<glm::vec3> arg_verts, std::vector<unsigned int> arg_triangle_indices);
   void init( std::string filename);
-
   // inherited
   const std::vector<glm::vec3>& getVertices() const;
   glm::vec3 getColor() const;

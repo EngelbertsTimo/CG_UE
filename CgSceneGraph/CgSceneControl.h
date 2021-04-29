@@ -5,6 +5,7 @@
 #include "CgBase/CgBaseSceneControl.h"
 #include <glm/glm.hpp>
 #include <vector>
+#include <string>
 
 class CgBaseEvent;
 class CgBaseRenderer;
@@ -24,12 +25,13 @@ public:
   void setRenderer(CgBaseRenderer* r);
 
   void renderObjects();
-
+void setProgramPath(std::string m_programPath);
 private:
 
   int assign_id();
   int get_Id();
 
+  std::string programPath;
 
   // A3 Hilfsmethoden
   void a3_object_initiation();
@@ -82,8 +84,8 @@ private:
   CgRotationBody* m_roteieren_1(int segmente,std::vector<glm::vec3> r1_workVector);
   CgRotationBody* m_roteieren_2(int segmente,std::vector<glm::vec3> r2_workVector);
   CgRotationBody* m_roteieren_3(int segmente,std::vector<glm::vec3> r3_workVector);
-  std::vector<CgPolyline*> m_FaceNormales(CgBaseTriangleMesh* workBody);
-  std::vector<CgPolyline*> m_VertexNormales(CgBaseTriangleMesh* workBody);
+  std::vector<CgPolyline*> m_generateFaceNormales(CgBaseTriangleMesh* workBody);
+  std::vector<CgPolyline*> m_generateVertexNormales(CgBaseTriangleMesh* workBody);
 
   int global_id;
 
@@ -95,16 +97,17 @@ private:
   CgExampleTriangle* m_triangle;
   //CgTriCube* m_triangle;
   CgTriCube* a3_tricube;
-  std::vector<CgPolyline*> a3_triCube_Face_Nomral_polylines;
-  std::vector<CgPolyline*> a3_triCube_Vertex_Nomral_polylines;
+  std::vector<CgBaseTriangleMesh*> a3_TriangleMeshBody;
+  std::vector<CgPolyline*> a3_Face_Nomral_polylines;
+  std::vector<CgPolyline*> a3_Vertex_Nomral_polylines;
 
   // A4 Objekte
   CgPolyline* a4_polyline;
   std::vector<glm::vec3> a4_workvector;
   std::vector<glm::vec3> a4_rotationvector;
   CgRotationBody* a4_rotationBody;
-  std::vector<CgPolyline*> a4_rotation_Face_Nomral_polylines;
-  std::vector<CgPolyline*> a4_rotation_Vertex_Nomral_polylines;
+  std::vector<CgPolyline*> a4_Face_Nomral_polylines;
+  std::vector<CgPolyline*> a4_Vertex_Nomral_polylines;
   // A5 Objekte
 
  /* CgPolyline* m_A5_1_polyline;

@@ -9,9 +9,10 @@
 #include "CgQtViewer/CgQtGLRenderWidget.h"
 #include "CgQtViewer/CgQtGui.h"
 #include "CgSceneGraph/CgSceneControl.h"
+#include <iostream>
 
 int main(int argc, char **argv) {
-
+std::cout<<argv[0]<<std::endl;
 
 
 
@@ -70,6 +71,8 @@ int main(int argc, char **argv) {
     /*************************************************************************************/
 
        CgSceneControl* scene_control = new CgSceneControl();
+
+       scene_control->setProgramPath(argv[0]);
 
        // Controller und View über Observer Pattern verbinden
        mainApp.getGui()->attachObserver(scene_control);
