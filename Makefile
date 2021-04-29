@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = CgViewer1.0.0
-DISTDIR = /home/cguebung/Dokumente/CG/Source/.tmp/CgViewer1.0.0
+DISTDIR = /home/timo/Dokumente/FH/Source/.tmp/CgViewer1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5OpenGL.so /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
@@ -65,6 +65,7 @@ SOURCES       = main.cpp \
 		CgBase/CgObservable.cpp \
 		CgEvents/CgMouseEvent.cpp \
 		CgQtViewer/CgQtMainApplication.cpp \
+		CgSceneGraph/CgExternObjectBody.cpp \
 		CgSceneGraph/CgPolyline.cpp \
 		CgSceneGraph/CgRotationBody.cpp \
 		CgSceneGraph/CgSceneControl.cpp \
@@ -92,6 +93,7 @@ OBJECTS       = main.o \
 		CgObservable.o \
 		CgMouseEvent.o \
 		CgQtMainApplication.o \
+		CgExternObjectBody.o \
 		CgPolyline.o \
 		CgRotationBody.o \
 		CgSceneControl.o \
@@ -197,6 +199,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgBase/CgEnums.h \
 		CgEvents/CgMouseEvent.h \
 		CgQtViewer/CgQtMainApplication.h \
+		CgSceneGraph/CgExternObjectBody.h \
 		CgSceneGraph/CgPolyline.h \
 		CgSceneGraph/CgRotationBody.h \
 		CgSceneGraph/CgSceneControl.h \
@@ -229,6 +232,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgBase/CgObservable.cpp \
 		CgEvents/CgMouseEvent.cpp \
 		CgQtViewer/CgQtMainApplication.cpp \
+		CgSceneGraph/CgExternObjectBody.cpp \
 		CgSceneGraph/CgPolyline.cpp \
 		CgSceneGraph/CgRotationBody.cpp \
 		CgSceneGraph/CgSceneControl.cpp \
@@ -420,8 +424,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents CgEvents/CgAufgabenStatusEvent.h CgEvents/CgButtonEvent.h CgEvents/CgColorChangeEvent.h CgEvents/CgLRAglaetenEvent.h CgEvents/CgResetEvent.h CgEvents/CgRotationEvent.h CgEvents/CgShowNormalsEvent.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgPolyline.h CgSceneGraph/CgRotationBody.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgSceneGraph/CgExampleTriangle.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgEvents/CgLoadObjFileEvent.h CgSceneGraph/cgtricube.h CgUtils/ObjLoader.h CgBase/CgBaseImage.h CgEvents/CgTrackballEvent.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp CgEvents/CgAufgabenStatusEvent.cpp CgEvents/CgButtonEvent.cpp CgEvents/CgColorChangeEvent.cpp CgEvents/CgLRAglaetenEvent.cpp CgEvents/CgResetEvent.cpp CgEvents/CgRotationEvent.cpp CgEvents/CgShowNormalsEvent.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgPolyline.cpp CgSceneGraph/CgRotationBody.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgSceneGraph/CgExampleTriangle.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgEvents/CgLoadObjFileEvent.cpp CgSceneGraph/cgtricube.cpp CgUtils/ObjLoader.cpp CgEvents/CgTrackballEvent.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CgEvents/CgAufgabenStatusEvent.h CgEvents/CgButtonEvent.h CgEvents/CgColorChangeEvent.h CgEvents/CgLRAglaetenEvent.h CgEvents/CgResetEvent.h CgEvents/CgRotationEvent.h CgEvents/CgShowNormalsEvent.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgExternObjectBody.h CgSceneGraph/CgPolyline.h CgSceneGraph/CgRotationBody.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgSceneGraph/CgExampleTriangle.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgEvents/CgLoadObjFileEvent.h CgSceneGraph/cgtricube.h CgUtils/ObjLoader.h CgBase/CgBaseImage.h CgEvents/CgTrackballEvent.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp CgEvents/CgAufgabenStatusEvent.cpp CgEvents/CgButtonEvent.cpp CgEvents/CgColorChangeEvent.cpp CgEvents/CgLRAglaetenEvent.cpp CgEvents/CgResetEvent.cpp CgEvents/CgRotationEvent.cpp CgEvents/CgShowNormalsEvent.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgExternObjectBody.cpp CgSceneGraph/CgPolyline.cpp CgSceneGraph/CgRotationBody.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgSceneGraph/CgExampleTriangle.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgEvents/CgLoadObjFileEvent.cpp CgSceneGraph/cgtricube.cpp CgUtils/ObjLoader.cpp CgEvents/CgTrackballEvent.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -460,18 +464,18 @@ moc_CgQtGLRenderWidget.cpp: CgQtViewer/CgQtGLRenderWidget.h \
 		CgBase/CgBaseRenderer.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/cguebung/Dokumente/CG/Source/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/cguebung/Dokumente/CG/Source -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/timo/Dokumente/FH/Source/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/timo/Dokumente/FH/Source -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGLRenderWidget.h -o moc_CgQtGLRenderWidget.cpp
 
 moc_CgQtGui.cpp: CgQtViewer/CgQtGui.h \
 		CgBase/CgObservable.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/cguebung/Dokumente/CG/Source/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/cguebung/Dokumente/CG/Source -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/timo/Dokumente/FH/Source/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/timo/Dokumente/FH/Source -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtGui.h -o moc_CgQtGui.cpp
 
 moc_CgQtMainApplication.cpp: CgQtViewer/CgQtMainApplication.h \
 		moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/cguebung/Dokumente/CG/Source/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/cguebung/Dokumente/CG/Source -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/timo/Dokumente/FH/Source/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/timo/Dokumente/FH/Source -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include CgQtViewer/CgQtMainApplication.h -o moc_CgQtMainApplication.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -584,6 +588,14 @@ CgQtMainApplication.o: CgQtViewer/CgQtMainApplication.cpp CgQtViewer/CgQtMainApp
 		CgQtViewer/CgQtGui.h \
 		CgBase/CgObservable.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgQtMainApplication.o CgQtViewer/CgQtMainApplication.cpp
+
+CgExternObjectBody.o: CgSceneGraph/CgExternObjectBody.cpp CgSceneGraph/CgExternObjectBody.h \
+		CgBase/CgBaseTriangleMesh.h \
+		CgBase/CgBaseRenderableObject.h \
+		CgBase/CgEnums.h \
+		CgSceneGraph/cgtricube.h \
+		CgUtils/ObjLoader.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgExternObjectBody.o CgSceneGraph/CgExternObjectBody.cpp
 
 CgPolyline.o: CgSceneGraph/CgPolyline.cpp CgSceneGraph/CgPolyline.h \
 		CgBase/CgBasePolyline.h \

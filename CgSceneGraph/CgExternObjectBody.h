@@ -1,15 +1,16 @@
-#ifndef CGTRIANGLESHAPE_H
-#define CGTRIANGLESHAPE_H
+#ifndef CGEXTERNOBJECTBODY_H
+#define CGEXTERNOBJECTBODY_H
+
 #include <vector>
 #include <glm/glm.hpp>
 #include <string>
 #include "CgBase/CgBaseTriangleMesh.h"
 
-class CgRotationBody: public CgBaseTriangleMesh
+class CgExternObjectBody: public CgBaseTriangleMesh
 {
 public:
-  CgRotationBody(int id, int segmente, int pointNumber, std::vector<glm::vec3> workVector);
-  ~CgRotationBody();
+  CgExternObjectBody(int id, std::string filename);
+  ~CgExternObjectBody();
 
 
   //inherited from CgBaseRenderableObject
@@ -50,13 +51,9 @@ private:
   const unsigned int m_id;
 
 };
-inline Cg::ObjectType  CgRotationBody::getType() const {return m_type;}
-inline unsigned int CgRotationBody::getID() const {return m_id;}
+inline Cg::ObjectType  CgExternObjectBody::getType() const {return m_type;}
+inline unsigned int CgExternObjectBody::getID() const {return m_id;}
 
-#endif // CGTRIANGLESHAPE_H
+#endif // CGEXTERNOBJECTBODY_H
 
-/////////////////////////////////////////////////////////
-#ifndef CGTRICUBE_H
-#define CGTRICUBE_H
 
-#endif // CGTRICUBE_H

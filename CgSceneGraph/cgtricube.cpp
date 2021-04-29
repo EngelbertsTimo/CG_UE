@@ -148,6 +148,8 @@ void CgTriCube::init( std::vector<glm::vec3> arg_verts,  std::vector<glm::vec3> 
   m_vertices=arg_verts;
   m_vertex_normals=arg_normals;
   m_triangle_indices=arg_triangle_indices;
+
+  createNormals();
 }
 
 void CgTriCube::init( std::string filename)
@@ -163,7 +165,10 @@ void CgTriCube::init( std::string filename)
   loader.getNormalData(m_vertex_normals);
   loader.getFaceIndexData(m_triangle_indices);
 
- // createNormals();
+  for (int i = 0; i < m_triangle_indices.size(); i=i+3) {
+      m_face_normals.push_back(normalize(glm::cross(m_vertices[m_triangle_indices[i]]-m_vertices[m_triangle_indices[i+1]],m_vertices[m_triangle_indices[i]]-m_vertices[m_triangle_indices[i+2]])));
+    }
+ //
 }
 
 

@@ -17,6 +17,7 @@
 #include "cgtricube.h"
 #include "CgPolyline.h"
 #include "CgRotationBody.h"
+#include "CgExternObjectBody.h"
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 #include "CgUtils/ObjLoader.h"
@@ -574,6 +575,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
       std::vector<unsigned int> indx;
       loader->getFaceIndexData(indx);
 
+       //a3_tricube->init(ev->FileName());
        a3_tricube->init(pos,norm,indx);
       std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
       a3_triCube_Face_Nomral_polylines=m_FaceNormales(a3_tricube);
@@ -583,13 +585,21 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
 
       a3_Renderer_init();
 
-      m_triangle= new CgExampleTriangle(assign_id());
+
+      m_triangle = new CgExampleTriangle(assign_id());
       m_triangle->init(ev->FileName());
       std::cout << "CgSCeneControl: file Loader a5; obj init" << std::endl;
       a5_Face_Nomral_polylines=m_FaceNormales(m_triangle);
       std::cout << "CgSCeneControl: file Loader a5; face normals init" << std::endl;
        a5_Vertex_Nomral_polylines=m_VertexNormales(m_triangle);
       std::cout << "CgSCeneControl: file Loader a5; vertex normals init" << std::endl;
+
+      /*a5_ObjectBody= new CgExternObjectBody(assign_id(),ev->FileName());
+      std::cout << "CgSCeneControl: file Loader a5; obj init" << std::endl;
+      a5_Face_Nomral_polylines=m_FaceNormales(a5_ObjectBody);
+      std::cout << "CgSCeneControl: file Loader a5; face normals init" << std::endl;
+       a5_Vertex_Nomral_polylines=m_VertexNormales(a5_ObjectBody);
+      std::cout << "CgSCeneControl: file Loader a5; vertex normals init" << std::endl;*/
 
       a5_Renderer_init();
       m_renderer->redraw();
@@ -816,6 +826,7 @@ void CgSceneControl::a5_object_initiation()
   a5_Face_Nomral_polylines.clear();
   a5_Vertex_Nomral_polylines.clear();
   m_triangle=nullptr;
+  a5_ObjectBody = nullptr;
 }
 
 void CgSceneControl::a5_Renderer_render()
@@ -823,6 +834,8 @@ void CgSceneControl::a5_Renderer_render()
 
   if(m_triangle!=NULL)
     m_renderer->render(m_triangle);
+  if(a5_ObjectBody!=NULL)
+    m_renderer->render(a5_ObjectBody);
 
   m_renderer->setUniformValue("mycolor",m_color_a6);
   if(a5_Face_normal_Vectors){
@@ -843,6 +856,8 @@ void CgSceneControl::a5_Renderer_init()
   if(m_triangle!=NULL)
     m_renderer->init(m_triangle);
 
+  if(a5_ObjectBody!=NULL)
+    m_renderer->init(a5_ObjectBody);
 
   if(a5_Face_normal_Vectors){
       for (int i = 0; i < a5_Face_Nomral_polylines.size(); ++i) {
@@ -1138,7 +1153,7 @@ std::vector<CgPolyline*> CgSceneControl::m_FaceNormales(CgBaseTriangleMesh* work
 std::vector<CgPolyline*> CgSceneControl::m_VertexNormales(CgBaseTriangleMesh* workBody){
   std::vector<CgPolyline*> result;
   int zealer=0;
-  for (int j = 0; j < workBody->getVertices().size()&&j<60000; j=j+1) {
+  for (int j = 0; j < workBody->getVertices().size(); j=j+1) {
       result.push_back(new CgPolyline(assign_id(),workBody->getVertices()[j],workBody->getVertexNormals()[j]));     
     //  std::cout<<"CcSceneControl;i;"<<j<<";x;"<<workBody->getVertices()[j][0]<<";y;"<<workBody->getVertices()[j][1]<<";z;"<<workBody->getVertices()[j][2]<<std::endl;
       zealer++;

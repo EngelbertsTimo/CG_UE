@@ -17,6 +17,7 @@ SOURCES += main.cpp \
     CgBase/CgObservable.cpp \
     CgEvents/CgMouseEvent.cpp \
     CgQtViewer/CgQtMainApplication.cpp \
+    CgSceneGraph/CgExternObjectBody.cpp \
     CgSceneGraph/CgPolyline.cpp \
     CgSceneGraph/CgRotationBody.cpp \
     CgSceneGraph/CgSceneControl.cpp \
@@ -46,6 +47,7 @@ HEADERS += \
     CgBase/CgEnums.h \
     CgEvents/CgMouseEvent.h \
     CgQtViewer/CgQtMainApplication.h \
+    CgSceneGraph/CgExternObjectBody.h \
     CgSceneGraph/CgPolyline.h \
     CgSceneGraph/CgRotationBody.h \
     CgSceneGraph/CgSceneControl.h \

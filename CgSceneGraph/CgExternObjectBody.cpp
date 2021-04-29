@@ -1,46 +1,27 @@
-#include "CgRotationBody.h"
+#include "CgExternObjectBody.h"
 #include "cgtricube.h"
 #include "CgBase/CgEnums.h"
 #include "CgUtils/ObjLoader.h"
 #include <iostream>
 
-CgRotationBody::CgRotationBody(int id,int segmente,int pointNumber,std::vector<glm::vec3> workVector):
+CgExternObjectBody::CgExternObjectBody(int id,std::string filename):
   m_type(Cg::TriangleMesh),
   m_id(id)
 {
-  m_vertices=workVector;
-  //d1
-  for (int j = 0; j < segmente-1; ++j) {
-      for (int i = 0; i < pointNumber-1; ++i) {
-          m_triangle_indices.push_back(j*pointNumber+i+pointNumber);
-          m_triangle_indices.push_back(j*pointNumber+i+1);
-          m_triangle_indices.push_back(j*pointNumber+i);
-        }
+  m_vertices.clear();
+  m_vertex_normals.clear();
+  m_triangle_indices.clear();
 
-    }
-  for (int i = 0; i < pointNumber-1; ++i) {
-      m_triangle_indices.push_back(i);
-      m_triangle_indices.push_back((segmente-1)*pointNumber+i+1);
-      m_triangle_indices.push_back((segmente-1)*pointNumber+i);
-    }
-  //d2
-  for (int i = 0; i < pointNumber-1; ++i) {
-      m_triangle_indices.push_back(i+1);
-      m_triangle_indices.push_back((segmente-1)*pointNumber+i+1);
-      m_triangle_indices.push_back(i);
-    }
+  ObjLoader loader;
+  loader.load(filename);
 
-  for (int j = 1; j < segmente; ++j) {
-      for (int i = 0; i < pointNumber-1; ++i) {
-          m_triangle_indices.push_back(j*pointNumber+i+1);
-          m_triangle_indices.push_back(j*pointNumber+i-pointNumber+1);
-          m_triangle_indices.push_back(j*pointNumber+i);
-        }
+  loader.getPositionData(m_vertices);
+  //loader.getNormalData(m_vertex_normals);
+  loader.getFaceIndexData(m_triangle_indices);
 
-    }
   createNormals();
 }
-void CgRotationBody::createNormals(){
+void CgExternObjectBody::createNormals(){
   for (int i = 0; i < m_triangle_indices.size(); i=i+3) {
       m_face_normals.push_back(normalize(glm::cross(m_vertices[m_triangle_indices[i]]-m_vertices[m_triangle_indices[i+1]],m_vertices[m_triangle_indices[i]]-m_vertices[m_triangle_indices[i+2]])));
     }
@@ -79,7 +60,7 @@ void CgRotationBody::createNormals(){
 }
 
 
-CgRotationBody::~CgRotationBody()
+CgExternObjectBody::~CgExternObjectBody()
 {
   m_vertices.clear();
   m_vertex_normals.clear();
@@ -90,7 +71,7 @@ CgRotationBody::~CgRotationBody()
   m_face_colors.clear();
 }
 
-void CgRotationBody::init( std::vector<glm::vec3> arg_verts,  std::vector<glm::vec3> arg_normals, std::vector<unsigned int> arg_triangle_indices)
+void CgExternObjectBody::init( std::vector<glm::vec3> arg_verts,  std::vector<glm::vec3> arg_normals, std::vector<unsigned int> arg_triangle_indices)
 {
   m_vertices.clear();
   m_vertex_normals.clear();
@@ -100,7 +81,7 @@ void CgRotationBody::init( std::vector<glm::vec3> arg_verts,  std::vector<glm::v
   m_triangle_indices=arg_triangle_indices;
 }
 
-void CgRotationBody::init( std::string filename)
+void CgExternObjectBody::init( std::string filename)
 {
   m_vertices.clear();
   m_vertex_normals.clear();
@@ -115,37 +96,37 @@ void CgRotationBody::init( std::string filename)
 }
 
 
-const std::vector<glm::vec3>& CgRotationBody::getVertices() const
+const std::vector<glm::vec3>& CgExternObjectBody::getVertices() const
 {
   return m_vertices;
 }
 
-const std::vector<glm::vec3>& CgRotationBody::getVertexNormals() const
+const std::vector<glm::vec3>& CgExternObjectBody::getVertexNormals() const
 {
   return m_vertex_normals;
 }
 
-const std::vector<glm::vec3>& CgRotationBody::getVertexColors() const
+const std::vector<glm::vec3>& CgExternObjectBody::getVertexColors() const
 {
   return m_vertex_colors;
 }
 
-const std::vector<glm::vec2>& CgRotationBody:: getVertexTexCoords() const
+const std::vector<glm::vec2>& CgExternObjectBody:: getVertexTexCoords() const
 {
   return m_tex_coords;
 }
 
-const std::vector<unsigned int>& CgRotationBody::getTriangleIndices() const
+const std::vector<unsigned int>& CgExternObjectBody::getTriangleIndices() const
 {
   return m_triangle_indices;
 }
 
-const std::vector<glm::vec3>& CgRotationBody::getFaceNormals() const
+const std::vector<glm::vec3>& CgExternObjectBody::getFaceNormals() const
 {
   return m_face_normals;
 }
 
-const std::vector<glm::vec3>& CgRotationBody::getFaceColors() const
+const std::vector<glm::vec3>& CgExternObjectBody::getFaceColors() const
 {
   return m_face_colors;
 }

@@ -13,6 +13,7 @@ class CgTriCube;
 class CgPolyline;
 class CgRotationBody;
 class CgBaseTriangleMesh;
+class CgExternObjectBody;
 
 class CgSceneControl : public CgObserver, public CgBaseSceneControl
 {
@@ -106,7 +107,7 @@ private:
   std::vector<CgPolyline*> a4_rotation_Vertex_Nomral_polylines;
   // A5 Objekte
 
-  CgPolyline* m_A5_1_polyline;
+ /* CgPolyline* m_A5_1_polyline;
   CgPolyline* m_A5_2_polyline;
   CgPolyline* m_A5_3_polyline;
   CgPolyline* m_A5_4_polyline;
@@ -114,8 +115,10 @@ private:
   CgPolyline* m_A5_6_polyline;
   std::vector<glm::vec3> a5_workvector;
   std::vector<glm::vec3> a5_rotationvector;
-  CgRotationBody* a5_rotationBody;
-  std::vector<CgPolyline*> a5_rotationNomral_polylines;
+  CgTriangleMeshBody* a5_rotationBody;
+  std::vector<CgPolyline*> a5_rotationNomral_polylines;*/
+
+  CgExternObjectBody* a5_ObjectBody;
   std::vector<CgPolyline*> a5_Face_Nomral_polylines;
   std::vector<CgPolyline*> a5_Vertex_Nomral_polylines;
 
