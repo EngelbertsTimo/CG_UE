@@ -624,7 +624,7 @@ void CgSceneControl::a3_Renderer_render()
   if(a3_tricube!=NULL)
     m_renderer->render(a3_tricube);
 
-  m_renderer->setUniformValue("mycolor",m_color_a8);
+  m_renderer->setUniformValue("mycolor",m_color_a4);
   if(a3_Face_normal_Vectors){
       for (int i = 0; i < a3_triCube_Face_Nomral_polylines.size(); ++i) {
           m_renderer->render(a3_triCube_Face_Nomral_polylines[i]);
