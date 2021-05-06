@@ -32,6 +32,7 @@ namespace Cg{
     LRAglaetenEvent                 = 0x0010000,
     RotationEvent                   = 0x0020000,
     ShowNormalsEvent                = 0x0040000,
+    renderExternObjectEvent         = 0x0080000,
 
     // unused, may be changed to whatever
 

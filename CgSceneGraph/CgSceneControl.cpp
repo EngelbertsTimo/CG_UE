@@ -12,6 +12,7 @@
 #include "CgEvents/CgLRAglaetenEvent.h"
 #include "CgEvents/CgRotationEvent.h"
 #include "CgEvents/CgShowNormalsEvent.h"
+#include "CgEvents/CgRenderExternObjectEvent.h"
 #include "CgBase/CgBaseRenderer.h"
 #include "CgExampleTriangle.h"
 #include "cgtricube.h"
@@ -30,10 +31,10 @@ void CgSceneControl::setProgramPath(std::string m_programPath){
   std::cout<<"kontroll 1:"<<programPath<<std::endl;
 programPath=programPath.substr(0,programPath.rfind("/"));
   std::cout<<"kontroll 2:"<<programPath<<std::endl;
-  programPath=programPath.append("/CgData");
+  programPath=programPath.append("/CgData/");
   std::cout<<"kontroll 3:"<<programPath<<std::endl;
-  programPath=programPath.append("/bunny.obj");
-  std::cout<<"kontroll 4:"<<programPath<<std::endl;
+  //programPath=programPath.append("/bunny.obj");
+  //std::cout<<"kontroll 4:"<<programPath<<std::endl;
 }
 /*std::string CgSceneControl::getProgramPath(std::string programPath){
   std::cout<<programPath<<std::endl;
@@ -585,8 +586,10 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
 
       std::vector<unsigned int> indx;
       loader->getFaceIndexData(indx);
+
 std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
       //a3_tricube->init(ev->FileName());
+
     a3_tricube=new CgTriCube(assign_id());
       a3_tricube->init(pos,norm,indx);
       std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
@@ -600,7 +603,7 @@ std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
       m_triangle = new CgExampleTriangle(assign_id());
 
 //  /CgViewer/..
-      m_triangle->init(programPath);
+      m_triangle->init(programPath+"bunny.obj");
       //m_triangle->init(ev->FileName());
       std::cout << "CgSCeneControl: file Loader a5; obj init" << std::endl;
       a5_Face_Nomral_polylines=m_generateFaceNormales(m_triangle);
@@ -619,6 +622,34 @@ std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
       m_renderer->redraw();
     }
 
+  if(e->getType() & Cg::renderExternObjectEvent)
+    {
+      a5_delete();
+
+      CgRenderExternObjectEvent* ev = (CgRenderExternObjectEvent*)e;
+      std::cout << "CgSCeneControl: " << "Eventtype: " <<ev->getType()<<"; renderExternObjectEvent; Aufgabe: "<< ev->getAufagbenNummer()<<"; Object: "<<ev->getObjectName()<<std::endl;
+
+      std::string filename = programPath + ev->getObjectName();
+      switch (ev->getAufagbenNummer()) {
+        case 5:
+a5_ObjectBody= new CgExternObjectBody(assign_id(),filename);
+
+          //a5_ObjectBody->init(ev->FileName());
+          std::cout << "CgSCeneControl: file Loader a5; obj init" << std::endl;
+          a5_Face_Nomral_polylines=m_generateFaceNormales(a5_ObjectBody);
+          std::cout << "CgSCeneControl: file Loader a5; face normals init" << std::endl;
+          a5_Vertex_Nomral_polylines=m_generateVertexNormales(a5_ObjectBody);
+          std::cout << "CgSCeneControl: file Loader a5; vertex normals init" << std::endl;
+          a5_Renderer_init();
+          m_renderer->redraw();
+          break;
+
+        default:
+          break;
+        }
+
+
+    }
   // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
   delete e;
 
@@ -850,8 +881,8 @@ void CgSceneControl::a5_Renderer_render()
 
   if(m_triangle!=NULL)
     m_renderer->render(m_triangle);
-  /*if(a5_ObjectBody!=NULL)
-    m_renderer->render(a5_ObjectBody);*/
+  if(a5_ObjectBody!=NULL)
+    m_renderer->render(a5_ObjectBody);
 
 
 
@@ -877,8 +908,8 @@ void CgSceneControl::a5_Renderer_init()
   if(m_triangle!=NULL)
     m_renderer->init(m_triangle);
 std::cout << "CgSCeneControl: a5 init schritt 0.5" <<std::endl;
- /* if(a5_ObjectBody!=NULL)
-    m_renderer->init(a5_ObjectBody);*/
+  if(a5_ObjectBody!=NULL)
+    m_renderer->init(a5_ObjectBody);
 
    std::cout << "CgSCeneControl: a5 init schritt 1" <<std::endl;
 
@@ -904,7 +935,7 @@ void CgSceneControl::a5_Renderer_reset()
 }
 
 void CgSceneControl::a5_delete(){
-
+delete a5_ObjectBody;
 
 }
 

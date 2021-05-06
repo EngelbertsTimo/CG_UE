@@ -9,6 +9,7 @@ SOURCES += main.cpp \
     CgEvents/CgButtonEvent.cpp \
     CgEvents/CgColorChangeEvent.cpp \
     CgEvents/CgLRAglaetenEvent.cpp \
+    CgEvents/CgRenderExternObjectEvent.cpp \
     CgEvents/CgResetEvent.cpp \
     CgEvents/CgRotationEvent.cpp \
     CgEvents/CgShowNormalsEvent.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
     CgEvents/CgButtonEvent.h \
     CgEvents/CgColorChangeEvent.h \
     CgEvents/CgLRAglaetenEvent.h \
+    CgEvents/CgRenderExternObjectEvent.h \
     CgEvents/CgResetEvent.h \
     CgEvents/CgRotationEvent.h \
     CgEvents/CgShowNormalsEvent.h \

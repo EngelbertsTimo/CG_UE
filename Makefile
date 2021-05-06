@@ -57,6 +57,7 @@ SOURCES       = main.cpp \
 		CgEvents/CgButtonEvent.cpp \
 		CgEvents/CgColorChangeEvent.cpp \
 		CgEvents/CgLRAglaetenEvent.cpp \
+		CgEvents/CgRenderExternObjectEvent.cpp \
 		CgEvents/CgResetEvent.cpp \
 		CgEvents/CgRotationEvent.cpp \
 		CgEvents/CgShowNormalsEvent.cpp \
@@ -85,6 +86,7 @@ OBJECTS       = main.o \
 		CgButtonEvent.o \
 		CgColorChangeEvent.o \
 		CgLRAglaetenEvent.o \
+		CgRenderExternObjectEvent.o \
 		CgResetEvent.o \
 		CgRotationEvent.o \
 		CgShowNormalsEvent.o \
@@ -188,6 +190,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgEvents/CgButtonEvent.h \
 		CgEvents/CgColorChangeEvent.h \
 		CgEvents/CgLRAglaetenEvent.h \
+		CgEvents/CgRenderExternObjectEvent.h \
 		CgEvents/CgResetEvent.h \
 		CgEvents/CgRotationEvent.h \
 		CgEvents/CgShowNormalsEvent.h \
@@ -224,6 +227,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		CgEvents/CgButtonEvent.cpp \
 		CgEvents/CgColorChangeEvent.cpp \
 		CgEvents/CgLRAglaetenEvent.cpp \
+		CgEvents/CgRenderExternObjectEvent.cpp \
 		CgEvents/CgResetEvent.cpp \
 		CgEvents/CgRotationEvent.cpp \
 		CgEvents/CgShowNormalsEvent.cpp \
@@ -424,8 +428,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents CgEvents/CgAufgabenStatusEvent.h CgEvents/CgButtonEvent.h CgEvents/CgColorChangeEvent.h CgEvents/CgLRAglaetenEvent.h CgEvents/CgResetEvent.h CgEvents/CgRotationEvent.h CgEvents/CgShowNormalsEvent.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgExternObjectBody.h CgSceneGraph/CgPolyline.h CgSceneGraph/CgRotationBody.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgSceneGraph/CgExampleTriangle.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgEvents/CgLoadObjFileEvent.h CgSceneGraph/cgtricube.h CgUtils/ObjLoader.h CgBase/CgBaseImage.h CgEvents/CgTrackballEvent.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp CgEvents/CgAufgabenStatusEvent.cpp CgEvents/CgButtonEvent.cpp CgEvents/CgColorChangeEvent.cpp CgEvents/CgLRAglaetenEvent.cpp CgEvents/CgResetEvent.cpp CgEvents/CgRotationEvent.cpp CgEvents/CgShowNormalsEvent.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgExternObjectBody.cpp CgSceneGraph/CgPolyline.cpp CgSceneGraph/CgRotationBody.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgSceneGraph/CgExampleTriangle.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgEvents/CgLoadObjFileEvent.cpp CgSceneGraph/cgtricube.cpp CgUtils/ObjLoader.cpp CgEvents/CgTrackballEvent.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents CgEvents/CgAufgabenStatusEvent.h CgEvents/CgButtonEvent.h CgEvents/CgColorChangeEvent.h CgEvents/CgLRAglaetenEvent.h CgEvents/CgRenderExternObjectEvent.h CgEvents/CgResetEvent.h CgEvents/CgRotationEvent.h CgEvents/CgShowNormalsEvent.h CgQtViewer/CgQtGLRenderWidget.h CgQtViewer/CgQtGui.h CgBase/CgObserver.h CgBase/CgObservable.h CgBase/CgBaseEvent.h CgBase/CgEnums.h CgEvents/CgMouseEvent.h CgQtViewer/CgQtMainApplication.h CgSceneGraph/CgExternObjectBody.h CgSceneGraph/CgPolyline.h CgSceneGraph/CgRotationBody.h CgSceneGraph/CgSceneControl.h CgEvents/CgKeyEvent.h CgBase/CgBaseRenderer.h CgBase/CgBaseRenderableObject.h CgSceneGraph/CgExampleTriangle.h CgBase/CgBasePointCloud.h CgBase/CgBaseTriangleMesh.h CgBase/CgBasePolygonMesh.h CgBase/CgBasePolyline.h CgBase/CgBaseSceneControl.h CgQtViewer/CgQtGlBufferObject.h CgQtViewer/CgTrackball.h CgEvents/CgWindowResizeEvent.h CgEvents/CgLoadObjFileEvent.h CgSceneGraph/cgtricube.h CgUtils/ObjLoader.h CgBase/CgBaseImage.h CgEvents/CgTrackballEvent.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp CgEvents/CgAufgabenStatusEvent.cpp CgEvents/CgButtonEvent.cpp CgEvents/CgColorChangeEvent.cpp CgEvents/CgLRAglaetenEvent.cpp CgEvents/CgRenderExternObjectEvent.cpp CgEvents/CgResetEvent.cpp CgEvents/CgRotationEvent.cpp CgEvents/CgShowNormalsEvent.cpp CgQtViewer/CGQtGLRenderWidget.cpp CgQtViewer/CgQtGui.cpp CgBase/CgObservable.cpp CgEvents/CgMouseEvent.cpp CgQtViewer/CgQtMainApplication.cpp CgSceneGraph/CgExternObjectBody.cpp CgSceneGraph/CgPolyline.cpp CgSceneGraph/CgRotationBody.cpp CgSceneGraph/CgSceneControl.cpp CgEvents/CgKeyEvent.cpp CgSceneGraph/CgExampleTriangle.cpp CgQtViewer/CgQtGlBufferObject.cpp CgQtViewer/CgTrackball.cpp CgEvents/CgWindowResizeEvent.cpp CgEvents/CgLoadObjFileEvent.cpp CgSceneGraph/cgtricube.cpp CgUtils/ObjLoader.cpp CgEvents/CgTrackballEvent.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -525,6 +529,11 @@ CgLRAglaetenEvent.o: CgEvents/CgLRAglaetenEvent.cpp CgEvents/CgLRAglaetenEvent.h
 		CgBase/CgEnums.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgLRAglaetenEvent.o CgEvents/CgLRAglaetenEvent.cpp
 
+CgRenderExternObjectEvent.o: CgEvents/CgRenderExternObjectEvent.cpp CgEvents/CgRenderExternObjectEvent.h \
+		CgBase/CgBaseEvent.h \
+		CgBase/CgEnums.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgRenderExternObjectEvent.o CgEvents/CgRenderExternObjectEvent.cpp
+
 CgResetEvent.o: CgEvents/CgResetEvent.cpp CgEvents/CgResetEvent.h \
 		CgBase/CgBaseEvent.h \
 		CgBase/CgEnums.h
@@ -570,7 +579,8 @@ CgQtGui.o: CgQtViewer/CgQtGui.cpp CgQtViewer/CgQtGLRenderWidget.h \
 		CgEvents/CgResetEvent.h \
 		CgEvents/CgShowNormalsEvent.h \
 		CgEvents/CgLRAglaetenEvent.h \
-		CgEvents/CgRotationEvent.h
+		CgEvents/CgRotationEvent.h \
+		CgEvents/CgRenderExternObjectEvent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgQtGui.o CgQtViewer/CgQtGui.cpp
 
 CgObservable.o: CgBase/CgObservable.cpp CgBase/CgObservable.h \
@@ -629,6 +639,7 @@ CgSceneControl.o: CgSceneGraph/CgSceneControl.cpp CgSceneGraph/CgSceneControl.h 
 		CgEvents/CgLRAglaetenEvent.h \
 		CgEvents/CgRotationEvent.h \
 		CgEvents/CgShowNormalsEvent.h \
+		CgEvents/CgRenderExternObjectEvent.h \
 		CgBase/CgBaseRenderer.h \
 		CgSceneGraph/CgExampleTriangle.h \
 		CgBase/CgBaseTriangleMesh.h \
@@ -637,6 +648,7 @@ CgSceneControl.o: CgSceneGraph/CgSceneControl.cpp CgSceneGraph/CgSceneControl.h 
 		CgSceneGraph/CgPolyline.h \
 		CgBase/CgBasePolyline.h \
 		CgSceneGraph/CgRotationBody.h \
+		CgSceneGraph/CgExternObjectBody.h \
 		CgUtils/ObjLoader.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgSceneControl.o CgSceneGraph/CgSceneControl.cpp
 

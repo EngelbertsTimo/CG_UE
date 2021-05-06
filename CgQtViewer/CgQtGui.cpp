@@ -16,6 +16,7 @@
 #include "../CgEvents/CgShowNormalsEvent.h"
 #include "../CgEvents/CgLRAglaetenEvent.h"
 #include "../CgEvents/CgRotationEvent.h"
+#include "../CgEvents/CgRenderExternObjectEvent.h"
 #include <QSlider>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -52,6 +53,16 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
 
   QVBoxLayout *mainLayout = new QVBoxLayout;
   QHBoxLayout *container = new QHBoxLayout;
+
+  external_ObjectNames.push_back("Bishop.obj");
+  external_ObjectNames.push_back("bunny.obj");
+  external_ObjectNames.push_back("King.obj");
+  external_ObjectNames.push_back("Knight.obj");
+  external_ObjectNames.push_back("Man_sitting.obj");
+  external_ObjectNames.push_back("porsche.obj");
+  external_ObjectNames.push_back("Queen.obj");
+  external_ObjectNames.push_back("Rook.obj");
+  external_ObjectNames.push_back("tyra.obj");
 
   // Tabs erstellen
   // A3
@@ -436,9 +447,32 @@ void CgQtGui::createOptionPanelA5(QWidget* parent)
   connect(a5VertexNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA5VertexNormalStatusCheckBoxChanged()) );
   a5_control->addWidget(a5VertexNormalStatusCheckBox);
 
+  //Objectauswahl
+  QLabel *object_label = new QLabel("Objectauswahl");
+  a5_control->addWidget(object_label);
+
+  for (int i = 0; i < external_ObjectNames.size(); ++i) {
+      QString test=QString::number(i) +": "+external_ObjectNames[i];
+      object_label = new QLabel(test);
+        a5_control->addWidget(object_label);
+    }
+
+  a5_objectSpinnBox = new QSpinBox();
+  a5_control->addWidget(a5_objectSpinnBox);
+  a5_objectSpinnBox->setMinimum(0);
+  a5_objectSpinnBox->setMaximum(external_ObjectNames.size());
+  a5_objectSpinnBox->setValue(4);
+  a5_objectSpinnBox->setPrefix("object: ");
+
+
+    QPushButton* externObjectButton = new QPushButton("init Extern Object");
+    a5_control->addWidget(externObjectButton);
+    connect(externObjectButton, SIGNAL( clicked() ), this, SLOT(soltA5ExternObjectInit()) );
+
   //Farb wahl
   QLabel *farb_label = new QLabel("Farbwahl");
   a5_control->addWidget(farb_label);
+
 
   colorSpinBoxredA5 = new QSpinBox();
   a5_control->addWidget(colorSpinBoxredA5);
@@ -464,7 +498,6 @@ void CgQtGui::createOptionPanelA5(QWidget* parent)
 
   QPushButton* colorButton = new QPushButton("change Color");
   a5_control->addWidget(colorButton);
-
   connect(colorButton, SIGNAL( clicked() ), this, SLOT(slotChangeColorButtonA5()) );
 
 
@@ -671,7 +704,6 @@ void CgQtGui::createOptionPanelA8(QWidget* parent)
 
 // Slots
 
-
 // A3
 void CgQtGui::slotA3StatusCheckBoxChanged()
 {
@@ -697,8 +729,6 @@ void CgQtGui::slotA3VertexNormalStatusCheckBoxChanged()
   notifyObserver(e);
 }
 
-
-
 void CgQtGui::slotChangeColorButtonA3()
 {
   int16_t redValue = colorSpinBoxredA3->value();
@@ -709,13 +739,13 @@ void CgQtGui::slotChangeColorButtonA3()
 
   notifyObserver(e);
 }
+
 void CgQtGui::slotA3Reset()
 {
   std::cout << "CgQtGui: " << "A3 Reset " << std::endl;
   CgBaseEvent* e = new CgResetEvent(Cg::ResetEvent,3);
   notifyObserver(e);
 }
-
 
 // A4
 void CgQtGui::slotA4StatusCheckBoxChanged()
@@ -752,13 +782,13 @@ void CgQtGui::slotChangeColorButtonA4()
 
   notifyObserver(e);
 }
+
 void CgQtGui::slotA4Reset()
 {
   std::cout << "CgQtGui: " << "A4 Reset " << std::endl;
   CgBaseEvent* e = new CgResetEvent(Cg::ResetEvent,4);
   notifyObserver(e);
 }
-
 
 void CgQtGui::soltA4LRAglaetenButton()
 {
@@ -776,7 +806,6 @@ void CgQtGui::slotA4RotationButton()
   CgBaseEvent* e = new CgRotationEvent(Cg::RotationEvent,4,1,rotation_Segemente);
   notifyObserver(e);
 }
-
 
 // A5
 void CgQtGui::slotA5StatusCheckBoxChanged()
@@ -812,12 +841,21 @@ void CgQtGui::slotChangeColorButtonA5()
 
   notifyObserver(e);
 }
+
 void CgQtGui::slotA5Reset()
 {
   std::cout << "CgQtGui: " << "A5 Reset " << std::endl;
   CgBaseEvent* e = new CgResetEvent(Cg::ResetEvent,5);
   notifyObserver(e);
 }
+
+void CgQtGui::soltA5ExternObjectInit()
+{
+  std::cout << "CgQtGui: " << "A5 Render Extern Object " << external_ObjectNames[a5_objectSpinnBox->value()].toStdString() <<std::endl;
+  CgBaseEvent* e = new CgRenderExternObjectEvent(Cg::renderExternObjectEvent,5,external_ObjectNames[a5_objectSpinnBox->value()].toStdString());
+  notifyObserver(e);
+}
+
 // A6
 void CgQtGui::slotA6StatusCheckBoxChanged()
 {

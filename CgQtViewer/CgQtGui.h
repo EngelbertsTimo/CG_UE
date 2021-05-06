@@ -43,6 +43,8 @@
 
 #include <QWidget>
 #include "../CgBase/CgObservable.h"
+#include <vector>
+
 
 
 QT_BEGIN_NAMESPACE
@@ -162,6 +164,9 @@ private:
   QSpinBox* a4_LRA_Iterationen;
   QSpinBox* a4_rotation_segmente;
 
+  // Aufgabe5 Tab
+  QSpinBox* a5_objectSpinnBox;
+std::vector<QString> external_ObjectNames;
 
 private slots:
 
@@ -223,6 +228,8 @@ private slots:
   void soltA4LRAglaetenButton();
   void slotA4RotationButton();
 
+  //Aufagbe 5 Slots
+  void soltA5ExternObjectInit();
 
 };
 
