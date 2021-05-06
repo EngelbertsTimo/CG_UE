@@ -126,7 +126,7 @@ private:
   std::vector<CgPolyline*> a5_Vertex_Nomral_polylines;
 
   // A6 Objekte
-
+CgPolyline* a6_polyline;
   // A7 Objekte
 
   // A8 Objekte

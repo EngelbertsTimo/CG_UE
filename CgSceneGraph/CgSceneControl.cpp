@@ -49,6 +49,7 @@ CgSceneControl::CgSceneControl()
   a3_tricube=nullptr;
   a4_polyline=nullptr;
   a4_rotationBody = nullptr;
+  a6_polyline=nullptr;
   // a5_Face_Nomral_polylines = nullptr;
   //  a5_Vertex_Nomral_polylines = nullptr;
   // ?
@@ -942,11 +943,15 @@ delete a5_ObjectBody;
 // A6 Hilfsmethoden id:6000-6999
 void CgSceneControl::a6_object_initiation()
 {
-
-}
+  if(a6_polyline==nullptr){
+    std::vector<glm::vec3> vectoooor = {glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0),glm::vec3(1.0,1.0,0.0),glm::vec3(1.0,0.0,0.0)};
+    a6_polyline = new  CgPolyline(assign_id(),vectoooor);
+}}
 
 void CgSceneControl::a6_Renderer_render()
 {
+  if(a6_polyline!=nullptr)
+    m_renderer->render(a6_polyline);
   if(a6_Face_normal_Vectors){
 
     }
@@ -957,6 +962,8 @@ void CgSceneControl::a6_Renderer_render()
 
 void CgSceneControl::a6_Renderer_init()
 {
+  if(a6_polyline!=nullptr)
+    m_renderer->init(a6_polyline);
   if(a6_Face_normal_Vectors){
 
     }
