@@ -27,9 +27,9 @@
 
 
 void CgSceneControl::setProgramPath(std::string m_programPath){
-   programPath=m_programPath;
+  programPath=m_programPath;
   std::cout<<"kontroll 1:"<<programPath<<std::endl;
-programPath=programPath.substr(0,programPath.rfind("/"));
+  programPath=programPath.substr(0,programPath.rfind("/"));
   std::cout<<"kontroll 2:"<<programPath<<std::endl;
   programPath=programPath.append("/CgData/");
   std::cout<<"kontroll 3:"<<programPath<<std::endl;
@@ -42,7 +42,7 @@ programPath=programPath.substr(0,programPath.rfind("/"));
 
 CgSceneControl::CgSceneControl()
 {
-//std::cout<<test23<<std::endl;
+  //std::cout<<test23<<std::endl;
   global_id =0;
 
   m_triangle=nullptr;
@@ -70,14 +70,31 @@ CgSceneControl::CgSceneControl()
 
   // Aufgaben Fraben vorbestimmen
   m_initial_color_a3 = m_color_a3 = glm::vec4(1.0,0.0,0.0,1.0);
-  m_initial_color_a4 = m_color_a4 = glm::vec4(0.0,1.0,0.0,1.0);
-  m_initial_color_a5 =  m_color_a5 = glm::vec4(0.0,0.0,1.0,1.0);
-  m_initial_color_a6 = m_color_a6 = glm::vec4(1.0,0.0,1.0,1.0);
-  m_initial_color_a7 = m_color_a7 = glm::vec4(0.0,1.0,1.0,1.0);
-  m_initial_color_a8 = m_color_a8 = glm::vec4(0.5,0.5,1.0,1.0);
+  m_initial_face_normal_color_a3 = glm::vec4(1.0,0.5,0.0,1.0);
+  m_initial_vertex_normal_color_a3 = glm::vec4(1.0,0.0,0.5,1.0);
 
-a3_object_initiation();
-a5_object_initiation();
+  m_initial_color_a4 = m_color_a4 = glm::vec4(0.0,1.0,0.0,1.0);
+  m_initial_face_normal_color_a4 = glm::vec4(0.5,1.0,0.0,1.0);
+  m_initial_vertex_normal_color_a4 = glm::vec4(0.0,1.0,0.5,1.0);
+
+  m_initial_color_a5 =  m_color_a5 = glm::vec4(0.0,0.0,1.0,1.0);
+  m_initial_face_normal_color_a5 = glm::vec4(0.5,0.0,1.0,1.0);
+  m_initial_vertex_normal_color_a5 = glm::vec4(0.0,0.5,1.0,1.0);
+
+  m_initial_color_a6 = m_color_a6 = glm::vec4(1.0,0.0,1.0,1.0);
+  m_initial_face_normal_color_a6 = glm::vec4(1.0,0.5,0.0,1.0);
+  m_initial_vertex_normal_color_a6 = glm::vec4(1.0,0.0,0.5,1.0);
+
+  m_initial_color_a7 = m_color_a7 = glm::vec4(0.0,1.0,1.0,1.0);
+  m_initial_face_normal_color_a7 = glm::vec4(0.1,1.0,1.0,1.0);
+  m_initial_vertex_normal_color_a7 = glm::vec4(0.5,1.0,1.0,1.0);
+
+  m_initial_color_a8 = m_color_a8 = glm::vec4(0.5,0.5,1.0,1.0);
+  m_initial_face_normal_color_a8 = glm::vec4(0.5,0.5,0.5,1.0);
+  m_initial_vertex_normal_color_a8 = glm::vec4(0.5,0.5,0.0,1.0);
+
+  a3_object_initiation();
+  a5_object_initiation();
 
   //m_triangle= new CgExampleTriangle(21);
 
@@ -254,7 +271,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
         case 5:
           if(aufgaben_status){
               a5_active=true;
-             //a5_object_initiation();
+              //a5_object_initiation();
               a5_Renderer_init();
             }
           else
@@ -532,7 +549,6 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
 
     }
 
-
   // die Enums sind so gebaut, dass man alle Arten von KeyEvents über CgEvent::CgKeyEvent abprüfen kann,
   // siehe dazu die CgEvent enums im CgEnums.h
   // momentan werden nur KeyPressEvents gefangen.
@@ -588,10 +604,10 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
       std::vector<unsigned int> indx;
       loader->getFaceIndexData(indx);
 
-std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
+      std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
       //a3_tricube->init(ev->FileName());
 
-    a3_tricube=new CgTriCube(assign_id());
+      a3_tricube=new CgTriCube(assign_id());
       a3_tricube->init(pos,norm,indx);
       std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
       a3_Face_Nomral_polylines=m_generateFaceNormales(a3_tricube);
@@ -603,7 +619,7 @@ std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
 
       m_triangle = new CgExampleTriangle(assign_id());
 
-//  /CgViewer/..
+      //  /CgViewer/..
       m_triangle->init(programPath+"bunny.obj");
       //m_triangle->init(ev->FileName());
       std::cout << "CgSCeneControl: file Loader a5; obj init" << std::endl;
@@ -633,7 +649,10 @@ std::cout << "CgSCeneControl: file Loader a3; obj init" << std::endl;
       std::string filename = programPath + ev->getObjectName();
       switch (ev->getAufagbenNummer()) {
         case 5:
-a5_ObjectBody= new CgExternObjectBody(assign_id(),filename);
+          std::cout << "                                                          CgSCeneControl: a5; vor delete" << std::endl;
+          a5_delete();
+std::cout << "                                                          CgSCeneControl: a5; delte durch" << std::endl;
+          a5_ObjectBody= new CgExternObjectBody(assign_id(),filename);
 
           //a5_ObjectBody->init(ev->FileName());
           std::cout << "CgSCeneControl: file Loader a5; obj init" << std::endl;
@@ -653,7 +672,6 @@ a5_ObjectBody= new CgExternObjectBody(assign_id(),filename);
     }
   // an der Stelle an der ein Event abgearbeitet ist wird es auch gelöscht.
   delete e;
-
 
 }
 
@@ -675,13 +693,13 @@ void CgSceneControl::a3_Renderer_render()
   if(a3_tricube!=NULL)
     m_renderer->render(a3_tricube);
 
-  m_renderer->setUniformValue("mycolor",m_color_a4);
+  m_renderer->setUniformValue("mycolor",m_initial_face_normal_color_a3);
   if(a3_Face_normal_Vectors){
       for (int i = 0; i < a3_Face_Nomral_polylines.size(); ++i) {
           m_renderer->render(a3_Face_Nomral_polylines[i]);
         }
     }
-  m_renderer->setUniformValue("mycolor",m_color_a8);
+  m_renderer->setUniformValue("mycolor",m_initial_vertex_normal_color_a3);
   if(a3_Vertex_normal_Vectors){
       for (int i = 0; i < a3_Vertex_Nomral_polylines.size(); ++i) {
           m_renderer->render(a3_Vertex_Nomral_polylines[i]);
@@ -777,11 +795,13 @@ void CgSceneControl::a4_Renderer_render()
 
   if(a4_rotationBody!=NULL)
     m_renderer->render(a4_rotationBody);
+  m_renderer->setUniformValue("mycolor",m_initial_face_normal_color_a4);
   if(a4_Face_normal_Vectors){
       for (int i = 0; i < a4_Face_Nomral_polylines.size(); ++i) {
           m_renderer->render(a4_Face_Nomral_polylines[i]);
         }
     }
+  m_renderer->setUniformValue("mycolor",m_initial_vertex_normal_color_a4);
   if(a4_Vertex_normal_Vectors){
       for (int i = 0; i < a4_Vertex_Nomral_polylines.size(); ++i) {
           m_renderer->render(a4_Vertex_Nomral_polylines[i]);
@@ -886,15 +906,17 @@ void CgSceneControl::a5_Renderer_render()
     m_renderer->render(a5_ObjectBody);
 
 
+  m_renderer->setUniformValue("mycolor",m_initial_face_normal_color_a5);
 
-  m_renderer->setUniformValue("mycolor",m_color_a6);
   if(a5_Face_normal_Vectors){
       std::cout << "CgSCeneControl: a5 init schritt 0" <<std::endl;
       for (int i = 0; i < a5_Face_Nomral_polylines.size(); ++i) {
           m_renderer->render(a5_Face_Nomral_polylines[i]);
         }
     }
-  m_renderer->setUniformValue("mycolor",m_color_a7);
+
+  m_renderer->setUniformValue("mycolor",m_initial_vertex_normal_color_a5);
+
   if(a5_Vertex_normal_Vectors){
       std::cout << "CgSCeneControl: a5 vertex ausgabe" <<std::endl;
       for (int i = 0; i < a5_Vertex_Nomral_polylines.size(); ++i) {
@@ -908,11 +930,11 @@ void CgSceneControl::a5_Renderer_init()
   std::cout << "CgSCeneControl: a5 init schritt 0" <<std::endl;
   if(m_triangle!=NULL)
     m_renderer->init(m_triangle);
-std::cout << "CgSCeneControl: a5 init schritt 0.5" <<std::endl;
+  std::cout << "CgSCeneControl: a5 init schritt 0.5" <<std::endl;
   if(a5_ObjectBody!=NULL)
     m_renderer->init(a5_ObjectBody);
 
-   std::cout << "CgSCeneControl: a5 init schritt 1" <<std::endl;
+  std::cout << "CgSCeneControl: a5 init schritt 1" <<std::endl;
 
   if(a5_Face_normal_Vectors){
       for (int i = 0; i < a5_Face_Nomral_polylines.size(); ++i) {
@@ -936,17 +958,25 @@ void CgSceneControl::a5_Renderer_reset()
 }
 
 void CgSceneControl::a5_delete(){
-delete a5_ObjectBody;
+  std::cout << "                                                          CgSCeneControl: a5; in delete 1" << std::endl;
+  if(a5_ObjectBody!=nullptr){
+       std::cout << "                                                          CgSCeneControl: a5; in delete if 1" << std::endl;
+    a5_ObjectBody =nullptr;
+       std::cout << "                                                          CgSCeneControl: a5; in delete if 2" << std::endl;
+    }
+ std::cout << "                                                          CgSCeneControl: a5; in delete 2" << std::endl;
+  //a5_Face_Nomral_polylines.clear();
 
+  // a5_Vertex_Nomral_polylines.clear();
 }
 
 // A6 Hilfsmethoden id:6000-6999
 void CgSceneControl::a6_object_initiation()
 {
   if(a6_polyline==nullptr){
-    std::vector<glm::vec3> vectoooor = {glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0),glm::vec3(1.0,1.0,0.0),glm::vec3(1.0,0.0,0.0)};
-    a6_polyline = new  CgPolyline(assign_id(),vectoooor);
-}}
+      std::vector<glm::vec3> vectoooor = {glm::vec3(0.0,0.0,0.0),glm::vec3(0.0,1.0,0.0),glm::vec3(1.0,1.0,0.0),glm::vec3(1.0,0.0,0.0)};
+      a6_polyline = new  CgPolyline(assign_id(),vectoooor);
+    }}
 
 void CgSceneControl::a6_Renderer_render()
 {
@@ -985,7 +1015,7 @@ void CgSceneControl::a6_delete(){
 
 }
 
-// A7 Hilfsmethoden id:7000-7999
+// A7 Hilfsmethoden
 void CgSceneControl::a7_object_initiation()
 {
 
@@ -1024,7 +1054,7 @@ void CgSceneControl::a7_delete(){
 
 }
 
-// A8 Hilfsmethoden id:8000-8999
+// A8 Hilfsmethoden
 void CgSceneControl::a8_object_initiation()
 {
 
@@ -1214,15 +1244,13 @@ std::vector<CgPolyline*> CgSceneControl::m_generateFaceNormales(CgBaseTriangleMe
 
 std::vector<CgPolyline*> CgSceneControl::m_generateVertexNormales(CgBaseTriangleMesh* workBody){
   std::vector<CgPolyline*> result;
-  CgPolyline* workLine = new CgPolyline();
   int zealer=0;
   for (int j = 0; j < workBody->getVertices().size(); j=j+1) {
       result.push_back(new CgPolyline(assign_id(),workBody->getVertices()[j],workBody->getVertexNormals()[j]));
-
-    //  std::cout<<"CcSceneControl;i;"<<j<<";x;"<<workBody->getVertices()[j][0]<<";y;"<<workBody->getVertices()[j][1]<<";z;"<<workBody->getVertices()[j][2]<<std::endl;
+      //  std::cout<<"CcSceneControl;i;"<<j<<";x;"<<workBody->getVertices()[j][0]<<";y;"<<workBody->getVertices()[j][1]<<";z;"<<workBody->getVertices()[j][2]<<std::endl;
       zealer++;
     }
-
   std::cout<<"CgSeneControl: erzeugte Vertex Polylines: "<<zealer<<std::endl;
+  //delete workBody;
   return result;
 }

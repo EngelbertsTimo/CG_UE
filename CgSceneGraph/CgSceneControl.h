@@ -172,6 +172,21 @@ CgPolyline* a6_polyline;
   glm::vec4 m_initial_color_a6;
   glm::vec4 m_initial_color_a7;
   glm::vec4 m_initial_color_a8;
+
+  glm::vec4 m_initial_face_normal_color_a3;
+  glm::vec4 m_initial_face_normal_color_a4;
+  glm::vec4 m_initial_face_normal_color_a5;
+  glm::vec4 m_initial_face_normal_color_a6;
+  glm::vec4 m_initial_face_normal_color_a7;
+  glm::vec4 m_initial_face_normal_color_a8;
+
+  glm::vec4 m_initial_vertex_normal_color_a3;
+  glm::vec4 m_initial_vertex_normal_color_a4;
+  glm::vec4 m_initial_vertex_normal_color_a5;
+  glm::vec4 m_initial_vertex_normal_color_a6;
+  glm::vec4 m_initial_vertex_normal_color_a7;
+  glm::vec4 m_initial_vertex_normal_color_a8;
+
   std::vector<CgPolyline*> m_render_lines;
 
 };
