@@ -64,20 +64,6 @@ private:
   void a6_Renderer_reset();
   void a6_delete();
 
-  // A7 Hilfsmethoden
-  void a7_object_initiation();
-  void a7_Renderer_render();
-  void a7_Renderer_init();
-  void a7_Renderer_reset();
-  void a7_delete();
-
-  // A8 Hilfsmethoden
-  void a8_object_initiation();
-  void a8_Renderer_render();
-  void a8_Renderer_init();
-  void a8_Renderer_reset();
-  void a8_delete();
-
   // Arbeits methoden
   std::vector<glm::vec3> m_LRA_mitteln(int schritte, int iterationen, std::vector<glm::vec3> lra_workVector_input);
 
@@ -127,9 +113,7 @@ private:
 
   // A6 Objekte
 CgPolyline* a6_polyline;
-  // A7 Objekte
 
-  // A8 Objekte
 
 
   // Globale Objekte
@@ -137,22 +121,19 @@ CgPolyline* a6_polyline;
   bool a4_active;
   bool a5_active;
   bool a6_active;
-  bool a7_active;
-  bool a8_active;
+
 
   bool a3_Face_normal_Vectors;
   bool a4_Face_normal_Vectors;
   bool a5_Face_normal_Vectors;
   bool a6_Face_normal_Vectors;
-  bool a7_Face_normal_Vectors;
-  bool a8_Face_normal_Vectors;
+
 
   bool a3_Vertex_normal_Vectors;
   bool a4_Vertex_normal_Vectors;
   bool a5_Vertex_normal_Vectors;
   bool a6_Vertex_normal_Vectors;
-  bool a7_Vertex_normal_Vectors;
-  bool a8_Vertex_normal_Vectors;
+
 
   glm::mat4 m_current_transformation;
   glm::mat4 m_trackball_rotation;
@@ -163,29 +144,25 @@ CgPolyline* a6_polyline;
   glm::vec4 m_color_a4;
   glm::vec4 m_color_a5;
   glm::vec4 m_color_a6;
-  glm::vec4 m_color_a7;
-  glm::vec4 m_color_a8;
+
 
   glm::vec4 m_initial_color_a3;
   glm::vec4 m_initial_color_a4;
   glm::vec4 m_initial_color_a5;
   glm::vec4 m_initial_color_a6;
-  glm::vec4 m_initial_color_a7;
-  glm::vec4 m_initial_color_a8;
+
 
   glm::vec4 m_initial_face_normal_color_a3;
   glm::vec4 m_initial_face_normal_color_a4;
   glm::vec4 m_initial_face_normal_color_a5;
   glm::vec4 m_initial_face_normal_color_a6;
-  glm::vec4 m_initial_face_normal_color_a7;
-  glm::vec4 m_initial_face_normal_color_a8;
+
 
   glm::vec4 m_initial_vertex_normal_color_a3;
   glm::vec4 m_initial_vertex_normal_color_a4;
   glm::vec4 m_initial_vertex_normal_color_a5;
   glm::vec4 m_initial_vertex_normal_color_a6;
-  glm::vec4 m_initial_vertex_normal_color_a7;
-  glm::vec4 m_initial_vertex_normal_color_a8;
+
 
   std::vector<CgPolyline*> m_render_lines;
 

@@ -50,7 +50,4 @@ void CgScenegraphEnity::setChildren(const std::vector<CgScenegraphEnity *> &chil
   m_children = children;
 }
 
-CgScenegraphEnity::CgScenegraphEnity()
-{
 
-}

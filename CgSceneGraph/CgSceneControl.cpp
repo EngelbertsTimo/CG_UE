@@ -19,6 +19,9 @@
 #include "CgPolyline.h"
 #include "CgRotationBody.h"
 #include "CgExternObjectBody.h"
+#include "CgScenegraph.h"
+#include "CgScenegraphEnity.h"
+#include "CgAppearance.h"
 #include <iostream>
 #include <glm/gtc/matrix_transform.hpp>
 #include "CgUtils/ObjLoader.h"
@@ -85,13 +88,7 @@ CgSceneControl::CgSceneControl()
   m_initial_face_normal_color_a6 = glm::vec4(1.0,0.5,0.0,1.0);
   m_initial_vertex_normal_color_a6 = glm::vec4(1.0,0.0,0.5,1.0);
 
-  m_initial_color_a7 = m_color_a7 = glm::vec4(0.0,1.0,1.0,1.0);
-  m_initial_face_normal_color_a7 = glm::vec4(0.1,1.0,1.0,1.0);
-  m_initial_vertex_normal_color_a7 = glm::vec4(0.5,1.0,1.0,1.0);
 
-  m_initial_color_a8 = m_color_a8 = glm::vec4(0.5,0.5,1.0,1.0);
-  m_initial_face_normal_color_a8 = glm::vec4(0.5,0.5,0.5,1.0);
-  m_initial_vertex_normal_color_a8 = glm::vec4(0.5,0.5,0.0,1.0);
 
   a3_object_initiation();
   a5_object_initiation();
@@ -103,23 +100,19 @@ CgSceneControl::CgSceneControl()
   a4_active = false;
   a5_active = false;
   a6_active = false;
-  a7_active = false;
-  a8_active = false;
 
   //Aufgaben nomralen status initierieren
   a3_Face_normal_Vectors = false;
   a4_Face_normal_Vectors = false;
   a5_Face_normal_Vectors = false;
   a6_Face_normal_Vectors = false;
-  a7_Face_normal_Vectors = false;
-  a8_Face_normal_Vectors = false;
+
 
   a3_Vertex_normal_Vectors = false;
   a4_Vertex_normal_Vectors = false;
   a5_Vertex_normal_Vectors = false;
   a6_Vertex_normal_Vectors = false;
-  a7_Vertex_normal_Vectors = false;
-  a8_Vertex_normal_Vectors = false;
+
 }
 
 
@@ -129,8 +122,7 @@ CgSceneControl::~CgSceneControl()
   a4_delete();
   a5_delete();
   a6_delete();
-  a7_delete();
-  a8_delete();
+
 
 
 }
@@ -163,10 +155,7 @@ void CgSceneControl::setRenderer(CgBaseRenderer* r)
     a5_Renderer_init();
   if(a6_active)
     a6_Renderer_init();
-  if(a7_active)
-    a7_Renderer_init();
-  if(a8_active)
-    a8_Renderer_init();
+
 
 }
 
@@ -216,21 +205,13 @@ void CgSceneControl::renderObjects()
       m_renderer->setUniformValue("mycolor",m_color_a5);
       a5_Renderer_render();
     }
+
   if(a6_active)
     {
       m_renderer->setUniformValue("mycolor",m_color_a6);
+
       a6_Renderer_render();
-    }
-  if(a7_active)
-    {
-      m_renderer->setUniformValue("mycolor",m_color_a7);
-      a7_Renderer_render();
-    }
-  if(a8_active)
-    {
-      m_renderer->setUniformValue("mycolor",m_color_a8);
-      a8_Renderer_render();
-    }
+    }  
 }
 
 
@@ -285,25 +266,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
             }
           else
             a6_active=false;
-          break;
-        case 7:
-          if(aufgaben_status){
-              a7_active=true;
-              a7_object_initiation();
-              a7_Renderer_init();
-            }
-          else
-            a7_active=false;
-          break;
-        case 8:
-          if(aufgaben_status){
-              a8_active=true;
-              a8_object_initiation();
-              a8_Renderer_init();
-            }
-          else
-            a8_active=false;
-          break;
+          break;        
         default:
           break;
         }
@@ -375,33 +338,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
               break;
             }
           a6_Renderer_init();
-          break;
-        case 7:
-          switch (normal_type) {
-            case 1:
-              a7_Face_normal_Vectors=normal_status;
-              break;
-            case 2:
-              a7_Vertex_normal_Vectors=normal_status;
-              break;
-            default:
-              break;
-            }
-          a7_Renderer_init();
-          break;
-        case 8:
-          switch (normal_type) {
-            case 1:
-              a8_Face_normal_Vectors=normal_status;
-              break;
-            case 2:
-              a8_Vertex_normal_Vectors=normal_status;
-              break;
-            default:
-              break;
-            }
-          a8_Renderer_init();
-          break;
+          break;        
         default:
           break;
         }
@@ -425,13 +362,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
           break;
         case 6:
           a6_Renderer_reset();
-          break;
-        case 7:
-          a7_Renderer_reset();
-          break;
-        case 8:
-          a8_Renderer_reset();
-          break;
+          break;        
         default:
           break;
         }
@@ -475,13 +406,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
           break;
         case 6:
           m_color_a6 = glm::vec4(redPart,greenPart,bluePart,1.0);
-          break;
-        case 7:
-          m_color_a7 = glm::vec4(redPart,greenPart,bluePart,1.0);
-          break;
-        case 8:
-          m_color_a8 = glm::vec4(redPart,greenPart,bluePart,1.0);
-          break;
+          break;       
         default:
           break;
         }
@@ -651,7 +576,7 @@ void CgSceneControl::handleEvent(CgBaseEvent* e)
         case 5:
           std::cout << "                                                          CgSCeneControl: a5; vor delete" << std::endl;
           a5_delete();
-std::cout << "                                                          CgSCeneControl: a5; delte durch" << std::endl;
+          std::cout << "                                                          CgSCeneControl: a5; delte durch" << std::endl;
           a5_ObjectBody= new CgExternObjectBody(assign_id(),filename);
 
           //a5_ObjectBody->init(ev->FileName());
@@ -690,6 +615,7 @@ void CgSceneControl::a3_object_initiation()
 
 void CgSceneControl::a3_Renderer_render()
 {
+
   if(a3_tricube!=NULL)
     m_renderer->render(a3_tricube);
 
@@ -765,14 +691,14 @@ void CgSceneControl::a4_object_initiation()
   a4_workvector.push_back(glm::vec3(0.75,0.0,0.0));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.25));
 
-
+*/
 
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.25));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.0));
   a4_workvector.push_back(glm::vec3(0.5,0.0,0.25));
 
-*/
+
 
   a4_workvector.push_back(glm::vec3(1.0,0.0,-0.5));
   a4_workvector.push_back(glm::vec3(0.5,0.0,-0.25));
@@ -960,14 +886,15 @@ void CgSceneControl::a5_Renderer_reset()
 void CgSceneControl::a5_delete(){
   std::cout << "                                                          CgSCeneControl: a5; in delete 1" << std::endl;
   if(a5_ObjectBody!=nullptr){
-       std::cout << "                                                          CgSCeneControl: a5; in delete if 1" << std::endl;
-    a5_ObjectBody =nullptr;
-       std::cout << "                                                          CgSCeneControl: a5; in delete if 2" << std::endl;
+      std::cout << "                                                          CgSCeneControl: a5; in delete if 1" << std::endl;
+    //  delete &a5_ObjectBody;
+      std::cout << "                                                          CgSCeneControl: a5; in delete if 2" << std::endl;
     }
- std::cout << "                                                          CgSCeneControl: a5; in delete 2" << std::endl;
-  //a5_Face_Nomral_polylines.clear();
-
-  // a5_Vertex_Nomral_polylines.clear();
+  std::cout << "                                                          CgSCeneControl: a5; in delete 2" << std::endl;
+  if(!a5_Face_Nomral_polylines.empty())
+    a5_Face_Nomral_polylines.clear();
+  if(!a5_Vertex_Nomral_polylines.empty())
+    a5_Vertex_Nomral_polylines.clear();
 }
 
 // A6 Hilfsmethoden id:6000-6999
@@ -980,6 +907,21 @@ void CgSceneControl::a6_object_initiation()
 
 void CgSceneControl::a6_Renderer_render()
 {
+  /*std::cout << "CgSCeneControl: a6 render" <<std::endl;
+  std::vector<CgBaseRenderableObject *> objectVec = {a6_polyline};
+  CgScenegraphEnity* e1 = new CgScenegraphEnity();
+  e1->setList_of_Objects(objectVec);
+  CgScenegraphEnity* e2 = new CgScenegraphEnity();
+  e2->setList_of_Objects(objectVec);
+
+  e1->setChildren(std::vector<CgScenegraphEnity*> {e2});
+
+  std::cout << "CgSCeneControl: a6 render e1"<<e1 <<std::endl;
+  CgScenegraph* s = new CgScenegraph();
+
+  s->setRoot_node(e2);
+s->render(m_renderer);*/
+
   if(a6_polyline!=nullptr)
     m_renderer->render(a6_polyline);
   if(a6_Face_normal_Vectors){
@@ -1015,83 +957,6 @@ void CgSceneControl::a6_delete(){
 
 }
 
-// A7 Hilfsmethoden
-void CgSceneControl::a7_object_initiation()
-{
-
-}
-
-void CgSceneControl::a7_Renderer_render()
-{
-  if(a7_Face_normal_Vectors){
-
-    }
-  if(a7_Vertex_normal_Vectors){
-
-    }
-}
-
-void CgSceneControl::a7_Renderer_init()
-{
-  if(a7_Face_normal_Vectors){
-
-    }
-  if(a7_Vertex_normal_Vectors){
-
-    }
-}
-
-void CgSceneControl::a7_Renderer_reset()
-{
-  m_color_a7=m_initial_color_a7;
-  a7_object_initiation();
-  a7_Renderer_init();
-  m_renderer->redraw();
-}
-
-void CgSceneControl::a7_delete(){
-
-
-}
-
-// A8 Hilfsmethoden
-void CgSceneControl::a8_object_initiation()
-{
-
-}
-
-void CgSceneControl::a8_Renderer_render()
-{
-  if(a8_Face_normal_Vectors){
-
-    }
-  if(a8_Vertex_normal_Vectors){
-
-    }
-}
-
-void CgSceneControl::a8_Renderer_init()
-{
-  if(a8_Face_normal_Vectors){
-
-    }
-  if(a8_Vertex_normal_Vectors){
-
-    }
-}
-
-void CgSceneControl::a8_Renderer_reset()
-{
-  m_color_a8=m_initial_color_a8;
-  a8_object_initiation();
-  a8_Renderer_init();
-  m_renderer->redraw();
-}
-
-void CgSceneControl::a8_delete(){
-
-
-}
 
 //Arbeitsmethoden
 

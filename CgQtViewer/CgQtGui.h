@@ -104,8 +104,7 @@ private:
   void createOptionPanelA4(QWidget* panel);
   void createOptionPanelA5(QWidget* panel);
   void createOptionPanelA6(QWidget* panel);
-  void createOptionPanelA7(QWidget* panel);
-  void createOptionPanelA8(QWidget* panel);
+
 
   QButtonGroup* myButtonGroup;
   QCheckBox* myCheckBox1;
@@ -127,13 +126,6 @@ private:
   QSpinBox* colorSpinBoxgreenA6;
   QSpinBox* colorSpinBoxblueA6;
 
-  QSpinBox* colorSpinBoxredA7;
-  QSpinBox* colorSpinBoxgreenA7;
-  QSpinBox* colorSpinBoxblueA7;
-
-  QSpinBox* colorSpinBoxredA8;
-  QSpinBox* colorSpinBoxgreenA8;
-  QSpinBox* colorSpinBoxblueA8;
 
 
   // Aufgaben Status CheckBox
@@ -141,9 +133,6 @@ private:
   QCheckBox* a4StatusCheckBox;
   QCheckBox* a5StatusCheckBox;
   QCheckBox* a6StatusCheckBox;
-  QCheckBox* a7StatusCheckBox;
-  QCheckBox* a8StatusCheckBox;
-
 
   // Normal Anzeige Status CheckBox
   QCheckBox* a3FaceNormalStatusCheckBox;
@@ -154,10 +143,6 @@ private:
   QCheckBox* a5VertexNormalStatusCheckBox;
   QCheckBox* a6FaceNormalStatusCheckBox;
   QCheckBox* a6VertexNormalStatusCheckBox;
-  QCheckBox* a7FaceNormalStatusCheckBox;
-  QCheckBox* a7VertexNormalStatusCheckBox;
-  QCheckBox* a8FaceNormalStatusCheckBox;
-  QCheckBox* a8VertexNormalStatusCheckBox;
 
   // Aufgabe4 Tab
   QSpinBox* a4_LRA_Mittlunsgschritte;
@@ -191,24 +176,21 @@ private slots:
   void slotChangeColorButtonA4();
   void slotChangeColorButtonA5();
   void slotChangeColorButtonA6();
-  void slotChangeColorButtonA7();
-  void slotChangeColorButtonA8();
+
 
   // Aufgaben Status Slots
   void slotA3StatusCheckBoxChanged();
   void slotA4StatusCheckBoxChanged();
   void slotA5StatusCheckBoxChanged();
   void slotA6StatusCheckBoxChanged();
-  void slotA7StatusCheckBoxChanged();
-  void slotA8StatusCheckBoxChanged();
+
 
   // Aufagben Reset Slots
   void slotA3Reset();
   void slotA4Reset();
   void slotA5Reset();
   void slotA6Reset();
-  void slotA7Reset();
-  void slotA8Reset();
+
 
   // Normal Anzeige Status Slots
   void slotA3FaceNormalStatusCheckBoxChanged();
@@ -219,10 +201,6 @@ private slots:
   void slotA5VertexNormalStatusCheckBoxChanged();
   void slotA6FaceNormalStatusCheckBoxChanged();
   void slotA6VertexNormalStatusCheckBoxChanged();
-  void slotA7FaceNormalStatusCheckBoxChanged();
-  void slotA7VertexNormalStatusCheckBoxChanged();
-  void slotA8FaceNormalStatusCheckBoxChanged();
-  void slotA8VertexNormalStatusCheckBoxChanged();
 
   //Aufagbe 4 Slots
   void soltA4LRAglaetenButton();

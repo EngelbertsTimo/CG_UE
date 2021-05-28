@@ -81,21 +81,12 @@ CgQtGui::CgQtGui(CgQtMainApplication *mw)
   QWidget *a6_opt = new QWidget;
   createOptionPanelA6(a6_opt);
 
-  // A7
-  QWidget *a7_opt = new QWidget;
-  createOptionPanelA7(a7_opt);
-
-  // A8
-  QWidget *a8_opt = new QWidget;
-  createOptionPanelA8(a8_opt);
-
   QTabWidget* m_tabs = new QTabWidget();
   m_tabs->addTab(a3_opt,"Aufgabe 3");
   m_tabs->addTab(a4_opt,"Aufgabe 4");
   m_tabs->addTab(a5_opt,"Aufgabe 5");
   m_tabs->addTab(a6_opt,"Aufgabe 6");
-  m_tabs->addTab(a7_opt,"Aufgabe 7");
-  m_tabs->addTab(a8_opt,"Aufgabe 8");
+
   container->addWidget(m_tabs);
 
   m_tabs->setMaximumWidth(400);
@@ -574,134 +565,6 @@ void CgQtGui::createOptionPanelA6(QWidget* parent)
 
 }
 
-// A7
-void CgQtGui::createOptionPanelA7(QWidget* parent)
-{
-  QVBoxLayout *a7_control = new QVBoxLayout();
-  a7StatusCheckBox = new QCheckBox("enable Aufagbe 7 Ausgabe");
-  a7StatusCheckBox->setCheckable(true);
-  a7StatusCheckBox->setChecked(false);
-  connect(a7StatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA7StatusCheckBoxChanged()) );
-  a7_control->addWidget(a7StatusCheckBox);
-
-  a7FaceNormalStatusCheckBox = new QCheckBox("enable Aufagbe 7 Face Normales");
-  a7FaceNormalStatusCheckBox->setCheckable(true);
-  a7FaceNormalStatusCheckBox->setChecked(false);
-  connect(a7FaceNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA7FaceNormalStatusCheckBoxChanged()) );
-  a7_control->addWidget(a7FaceNormalStatusCheckBox);
-
-  a7VertexNormalStatusCheckBox = new QCheckBox("enable Aufagbe 7 Vertex Normales");
-  a7VertexNormalStatusCheckBox->setCheckable(true);
-  a7VertexNormalStatusCheckBox->setChecked(false);
-  connect(a7VertexNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA7VertexNormalStatusCheckBoxChanged()) );
-  a7_control->addWidget(a7VertexNormalStatusCheckBox);
-
-  //Farb wahl
-  QLabel *farb_label = new QLabel("Farbwahl");
-  a7_control->addWidget(farb_label);
-
-  colorSpinBoxredA7 = new QSpinBox();
-  a7_control->addWidget(colorSpinBoxredA7);
-  colorSpinBoxredA7->setMinimum(0);
-  colorSpinBoxredA7->setMaximum(256);
-  colorSpinBoxredA7->setValue(128);
-  colorSpinBoxredA7->setPrefix("red: ");
-
-  colorSpinBoxgreenA7 = new QSpinBox();
-  a7_control->addWidget(colorSpinBoxgreenA7);
-  colorSpinBoxgreenA7->setMinimum(0);
-  colorSpinBoxgreenA7->setMaximum(256);
-  colorSpinBoxgreenA7->setValue(128);
-  colorSpinBoxgreenA7->setPrefix("green: ");
-
-
-  colorSpinBoxblueA7 = new QSpinBox();
-  a7_control->addWidget(colorSpinBoxblueA7);
-  colorSpinBoxblueA7->setMinimum(0);
-  colorSpinBoxblueA7->setMaximum(256);
-  colorSpinBoxblueA7->setValue(128);
-  colorSpinBoxblueA7->setPrefix("blue: ");
-
-  QPushButton* colorButton = new QPushButton("change Color");
-  a7_control->addWidget(colorButton);
-
-  connect(colorButton, SIGNAL( clicked() ), this, SLOT(slotChangeColorButtonA7()) );
-
-
-  // reset Button
-  QPushButton* resetButtonA7 = new QPushButton("Reset");
-  a7_control->addWidget(resetButtonA7);
-  connect(resetButtonA7, SIGNAL( clicked() ), this, SLOT(slotA7Reset()) );
-
-
-  parent->setLayout(a7_control);
-
-}
-
-// A8
-void CgQtGui::createOptionPanelA8(QWidget* parent)
-{
-  QVBoxLayout *a8_control = new QVBoxLayout();
-  a8StatusCheckBox = new QCheckBox("enable Aufagbe 8 Ausgabe");
-  a8StatusCheckBox->setCheckable(true);
-  a8StatusCheckBox->setChecked(false);
-  connect(a8StatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA8StatusCheckBoxChanged()) );
-  a8_control->addWidget(a8StatusCheckBox);
-
-  a8FaceNormalStatusCheckBox = new QCheckBox("enable Aufagbe 8 Face Normales");
-  a8FaceNormalStatusCheckBox->setCheckable(true);
-  a8FaceNormalStatusCheckBox->setChecked(false);
-  connect(a8FaceNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA8FaceNormalStatusCheckBoxChanged()) );
-  a8_control->addWidget(a8FaceNormalStatusCheckBox);
-
-  a8VertexNormalStatusCheckBox = new QCheckBox("enable Aufagbe 8 Vertex Normales");
-  a8VertexNormalStatusCheckBox->setCheckable(true);
-  a8VertexNormalStatusCheckBox->setChecked(false);
-  connect(a8VertexNormalStatusCheckBox, SIGNAL( clicked() ), this, SLOT(slotA8VertexNormalStatusCheckBoxChanged()) );
-  a8_control->addWidget(a8VertexNormalStatusCheckBox);
-
-  //Farb wahl
-  QLabel *farb_label = new QLabel("Farbwahl");
-  a8_control->addWidget(farb_label);
-
-  colorSpinBoxredA8 = new QSpinBox();
-  a8_control->addWidget(colorSpinBoxredA8);
-  colorSpinBoxredA8->setMinimum(0);
-  colorSpinBoxredA8->setMaximum(256);
-  colorSpinBoxredA8->setValue(128);
-  colorSpinBoxredA8->setPrefix("red: ");
-
-  colorSpinBoxgreenA8 = new QSpinBox();
-  a8_control->addWidget(colorSpinBoxgreenA8);
-  colorSpinBoxgreenA8->setMinimum(0);
-  colorSpinBoxgreenA8->setMaximum(256);
-  colorSpinBoxgreenA8->setValue(128);
-  colorSpinBoxgreenA8->setPrefix("green: ");
-
-
-  colorSpinBoxblueA8 = new QSpinBox();
-  a8_control->addWidget(colorSpinBoxblueA8);
-  colorSpinBoxblueA8->setMinimum(0);
-  colorSpinBoxblueA8->setMaximum(256);
-  colorSpinBoxblueA8->setValue(128);
-  colorSpinBoxblueA8->setPrefix("blue: ");
-
-  QPushButton* colorButton = new QPushButton("change Color");
-  a8_control->addWidget(colorButton);
-
-  connect(colorButton, SIGNAL( clicked() ), this, SLOT(slotChangeColorButtonA8()) );
-
-
-  // reset Button
-  QPushButton* resetButtonA8 = new QPushButton("Reset");
-  a8_control->addWidget(resetButtonA8);
-  connect(resetButtonA8, SIGNAL( clicked() ), this, SLOT(slotA8Reset()) );
-
-
-  parent->setLayout(a8_control);
-
-}
-
 // Slots
 
 // A3
@@ -894,86 +757,6 @@ void CgQtGui::slotA6Reset()
 {
   std::cout << "CgQtGui: " << "A6 Reset " << std::endl;
   CgBaseEvent* e = new CgResetEvent(Cg::ResetEvent,6);
-  notifyObserver(e);
-}
-// A7
-void CgQtGui::slotA7StatusCheckBoxChanged()
-{
-  std::cout << "CgQtGui: " << "Aufgabe 7 Status changed to "<< a7StatusCheckBox->checkState() << std::endl;
-  CgBaseEvent* e = new CgAufgabenStatusEvent(Cg::AufagbenStatusEvent,7,a7StatusCheckBox->checkState());
-
-  notifyObserver(e);
-}
-void CgQtGui::slotA7FaceNormalStatusCheckBoxChanged()
-{
-  std::cout << "CgQtGui: " << "Aufgabe 7 Face Normal Status changed to "<< a7FaceNormalStatusCheckBox->checkState() << std::endl;
-  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,7,a7FaceNormalStatusCheckBox->checkState(),1);
-
-  notifyObserver(e);
-}
-
-void CgQtGui::slotA7VertexNormalStatusCheckBoxChanged()
-{
-  std::cout << "CgQtGui: " << "Aufgabe 7 Vertex Normal Status changed to "<< a7VertexNormalStatusCheckBox->checkState() << std::endl;
-  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,7,a7VertexNormalStatusCheckBox->checkState(),2);
-
-  notifyObserver(e);
-}
-
-void CgQtGui::slotChangeColorButtonA7()
-{
-  int16_t redValue = colorSpinBoxredA7->value();
-  int16_t greenValue = colorSpinBoxgreenA7->value();
-  int16_t blueValue = colorSpinBoxblueA7->value();
-  std::cout << "CgQtGui: " << "Color Changed"<< std::endl;
-  CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,7,redValue,greenValue,blueValue);
-
-  notifyObserver(e);
-}
-void CgQtGui::slotA7Reset()
-{
-  std::cout << "CgQtGui: " << "A7 Reset " << std::endl;
-  CgBaseEvent* e = new CgResetEvent(Cg::ResetEvent,7);
-  notifyObserver(e);
-}
-// A8
-void CgQtGui::slotA8StatusCheckBoxChanged()
-{
-  std::cout << "CgQtGui: " << "Aufgabe 8 Status changed to "<< a8StatusCheckBox->checkState() << std::endl;
-  CgBaseEvent* e = new CgAufgabenStatusEvent(Cg::AufagbenStatusEvent,8,a8StatusCheckBox->checkState());
-
-  notifyObserver(e);
-}
-void CgQtGui::slotA8FaceNormalStatusCheckBoxChanged()
-{
-  std::cout << "CgQtGui: " << "Aufgabe 8 Face Normal Status changed to "<< a8FaceNormalStatusCheckBox->checkState() << std::endl;
-  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,8,a8FaceNormalStatusCheckBox->checkState(),1);
-
-  notifyObserver(e);
-}
-
-void CgQtGui::slotA8VertexNormalStatusCheckBoxChanged()
-{
-  std::cout << "CgQtGui: " << "Aufgabe 8 Vertex Normal Status changed to "<< a8VertexNormalStatusCheckBox->checkState() << std::endl;
-  CgBaseEvent* e = new CgShowNormalsEvent(Cg::ShowNormalsEvent,8,a8VertexNormalStatusCheckBox->checkState(),2);
-
-  notifyObserver(e);
-}
-
-void CgQtGui::slotChangeColorButtonA8()
-{
-  int16_t redValue = colorSpinBoxredA8->value();
-  int16_t greenValue = colorSpinBoxgreenA8->value();
-  int16_t blueValue = colorSpinBoxblueA8->value();
-  std::cout << "CgQtGui: " << "Color Changed"<< std::endl;
-  CgBaseEvent* e = new CgColorChangeEvent(Cg::ColorChangeEvent,8,redValue,greenValue,blueValue);
-
-  notifyObserver(e);
-}
-void CgQtGui::slotA8Reset()
-{
-  std::cout << "CgQtGui: " << "A8 Reset " << std::endl;
-  CgBaseEvent* e = new CgResetEvent(Cg::ResetEvent,8);
   notifyObserver(e);
 }
 

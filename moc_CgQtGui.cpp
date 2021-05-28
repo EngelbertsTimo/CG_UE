@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_CgQtGui_t {
-    QByteArrayData data[45];
-    char stringdata0[1110];
+    QByteArrayData data[35];
+    char stringdata0[826];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -47,35 +47,25 @@ QT_MOC_LITERAL(12, 191, 23), // "slotChangeColorButtonA3"
 QT_MOC_LITERAL(13, 215, 23), // "slotChangeColorButtonA4"
 QT_MOC_LITERAL(14, 239, 23), // "slotChangeColorButtonA5"
 QT_MOC_LITERAL(15, 263, 23), // "slotChangeColorButtonA6"
-QT_MOC_LITERAL(16, 287, 23), // "slotChangeColorButtonA7"
-QT_MOC_LITERAL(17, 311, 23), // "slotChangeColorButtonA8"
-QT_MOC_LITERAL(18, 335, 27), // "slotA3StatusCheckBoxChanged"
-QT_MOC_LITERAL(19, 363, 27), // "slotA4StatusCheckBoxChanged"
-QT_MOC_LITERAL(20, 391, 27), // "slotA5StatusCheckBoxChanged"
-QT_MOC_LITERAL(21, 419, 27), // "slotA6StatusCheckBoxChanged"
-QT_MOC_LITERAL(22, 447, 27), // "slotA7StatusCheckBoxChanged"
-QT_MOC_LITERAL(23, 475, 27), // "slotA8StatusCheckBoxChanged"
-QT_MOC_LITERAL(24, 503, 11), // "slotA3Reset"
-QT_MOC_LITERAL(25, 515, 11), // "slotA4Reset"
-QT_MOC_LITERAL(26, 527, 11), // "slotA5Reset"
-QT_MOC_LITERAL(27, 539, 11), // "slotA6Reset"
-QT_MOC_LITERAL(28, 551, 11), // "slotA7Reset"
-QT_MOC_LITERAL(29, 563, 11), // "slotA8Reset"
-QT_MOC_LITERAL(30, 575, 37), // "slotA3FaceNormalStatusCheckBo..."
-QT_MOC_LITERAL(31, 613, 39), // "slotA3VertexNormalStatusCheck..."
-QT_MOC_LITERAL(32, 653, 37), // "slotA4FaceNormalStatusCheckBo..."
-QT_MOC_LITERAL(33, 691, 39), // "slotA4VertexNormalStatusCheck..."
-QT_MOC_LITERAL(34, 731, 37), // "slotA5FaceNormalStatusCheckBo..."
-QT_MOC_LITERAL(35, 769, 39), // "slotA5VertexNormalStatusCheck..."
-QT_MOC_LITERAL(36, 809, 37), // "slotA6FaceNormalStatusCheckBo..."
-QT_MOC_LITERAL(37, 847, 39), // "slotA6VertexNormalStatusCheck..."
-QT_MOC_LITERAL(38, 887, 37), // "slotA7FaceNormalStatusCheckBo..."
-QT_MOC_LITERAL(39, 925, 39), // "slotA7VertexNormalStatusCheck..."
-QT_MOC_LITERAL(40, 965, 37), // "slotA8FaceNormalStatusCheckBo..."
-QT_MOC_LITERAL(41, 1003, 39), // "slotA8VertexNormalStatusCheck..."
-QT_MOC_LITERAL(42, 1043, 22), // "soltA4LRAglaetenButton"
-QT_MOC_LITERAL(43, 1066, 20), // "slotA4RotationButton"
-QT_MOC_LITERAL(44, 1087, 22) // "soltA5ExternObjectInit"
+QT_MOC_LITERAL(16, 287, 27), // "slotA3StatusCheckBoxChanged"
+QT_MOC_LITERAL(17, 315, 27), // "slotA4StatusCheckBoxChanged"
+QT_MOC_LITERAL(18, 343, 27), // "slotA5StatusCheckBoxChanged"
+QT_MOC_LITERAL(19, 371, 27), // "slotA6StatusCheckBoxChanged"
+QT_MOC_LITERAL(20, 399, 11), // "slotA3Reset"
+QT_MOC_LITERAL(21, 411, 11), // "slotA4Reset"
+QT_MOC_LITERAL(22, 423, 11), // "slotA5Reset"
+QT_MOC_LITERAL(23, 435, 11), // "slotA6Reset"
+QT_MOC_LITERAL(24, 447, 37), // "slotA3FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(25, 485, 39), // "slotA3VertexNormalStatusCheck..."
+QT_MOC_LITERAL(26, 525, 37), // "slotA4FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(27, 563, 39), // "slotA4VertexNormalStatusCheck..."
+QT_MOC_LITERAL(28, 603, 37), // "slotA5FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(29, 641, 39), // "slotA5VertexNormalStatusCheck..."
+QT_MOC_LITERAL(30, 681, 37), // "slotA6FaceNormalStatusCheckBo..."
+QT_MOC_LITERAL(31, 719, 39), // "slotA6VertexNormalStatusCheck..."
+QT_MOC_LITERAL(32, 759, 22), // "soltA4LRAglaetenButton"
+QT_MOC_LITERAL(33, 782, 20), // "slotA4RotationButton"
+QT_MOC_LITERAL(34, 803, 22) // "soltA5ExternObjectInit"
 
     },
     "CgQtGui\0mouseEvent\0\0QMouseEvent*\0event\0"
@@ -85,16 +75,12 @@ QT_MOC_LITERAL(44, 1087, 22) // "soltA5ExternObjectInit"
     "slotButtonGroupSelectionChanged\0"
     "slotLoadMeshFile\0slotChangeColorButtonA3\0"
     "slotChangeColorButtonA4\0slotChangeColorButtonA5\0"
-    "slotChangeColorButtonA6\0slotChangeColorButtonA7\0"
-    "slotChangeColorButtonA8\0"
+    "slotChangeColorButtonA6\0"
     "slotA3StatusCheckBoxChanged\0"
     "slotA4StatusCheckBoxChanged\0"
     "slotA5StatusCheckBoxChanged\0"
-    "slotA6StatusCheckBoxChanged\0"
-    "slotA7StatusCheckBoxChanged\0"
-    "slotA8StatusCheckBoxChanged\0slotA3Reset\0"
+    "slotA6StatusCheckBoxChanged\0slotA3Reset\0"
     "slotA4Reset\0slotA5Reset\0slotA6Reset\0"
-    "slotA7Reset\0slotA8Reset\0"
     "slotA3FaceNormalStatusCheckBoxChanged\0"
     "slotA3VertexNormalStatusCheckBoxChanged\0"
     "slotA4FaceNormalStatusCheckBoxChanged\0"
@@ -103,10 +89,6 @@ QT_MOC_LITERAL(44, 1087, 22) // "soltA5ExternObjectInit"
     "slotA5VertexNormalStatusCheckBoxChanged\0"
     "slotA6FaceNormalStatusCheckBoxChanged\0"
     "slotA6VertexNormalStatusCheckBoxChanged\0"
-    "slotA7FaceNormalStatusCheckBoxChanged\0"
-    "slotA7VertexNormalStatusCheckBoxChanged\0"
-    "slotA8FaceNormalStatusCheckBoxChanged\0"
-    "slotA8VertexNormalStatusCheckBoxChanged\0"
     "soltA4LRAglaetenButton\0slotA4RotationButton\0"
     "soltA5ExternObjectInit"
 };
@@ -118,7 +100,7 @@ static const uint qt_meta_data_CgQtGui[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      41,   14, // methods
+      31,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -126,61 +108,41 @@ static const uint qt_meta_data_CgQtGui[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  219,    2, 0x08 /* Private */,
-       5,    2,  222,    2, 0x08 /* Private */,
-       6,    0,  227,    2, 0x08 /* Private */,
-       7,    0,  228,    2, 0x08 /* Private */,
-       8,    0,  229,    2, 0x08 /* Private */,
-       9,    0,  230,    2, 0x08 /* Private */,
-      10,    0,  231,    2, 0x08 /* Private */,
-      11,    0,  232,    2, 0x08 /* Private */,
-      12,    0,  233,    2, 0x08 /* Private */,
-      13,    0,  234,    2, 0x08 /* Private */,
-      14,    0,  235,    2, 0x08 /* Private */,
-      15,    0,  236,    2, 0x08 /* Private */,
-      16,    0,  237,    2, 0x08 /* Private */,
-      17,    0,  238,    2, 0x08 /* Private */,
-      18,    0,  239,    2, 0x08 /* Private */,
-      19,    0,  240,    2, 0x08 /* Private */,
-      20,    0,  241,    2, 0x08 /* Private */,
-      21,    0,  242,    2, 0x08 /* Private */,
-      22,    0,  243,    2, 0x08 /* Private */,
-      23,    0,  244,    2, 0x08 /* Private */,
-      24,    0,  245,    2, 0x08 /* Private */,
-      25,    0,  246,    2, 0x08 /* Private */,
-      26,    0,  247,    2, 0x08 /* Private */,
-      27,    0,  248,    2, 0x08 /* Private */,
-      28,    0,  249,    2, 0x08 /* Private */,
-      29,    0,  250,    2, 0x08 /* Private */,
-      30,    0,  251,    2, 0x08 /* Private */,
-      31,    0,  252,    2, 0x08 /* Private */,
-      32,    0,  253,    2, 0x08 /* Private */,
-      33,    0,  254,    2, 0x08 /* Private */,
-      34,    0,  255,    2, 0x08 /* Private */,
-      35,    0,  256,    2, 0x08 /* Private */,
-      36,    0,  257,    2, 0x08 /* Private */,
-      37,    0,  258,    2, 0x08 /* Private */,
-      38,    0,  259,    2, 0x08 /* Private */,
-      39,    0,  260,    2, 0x08 /* Private */,
-      40,    0,  261,    2, 0x08 /* Private */,
-      41,    0,  262,    2, 0x08 /* Private */,
-      42,    0,  263,    2, 0x08 /* Private */,
-      43,    0,  264,    2, 0x08 /* Private */,
-      44,    0,  265,    2, 0x08 /* Private */,
+       1,    1,  169,    2, 0x08 /* Private */,
+       5,    2,  172,    2, 0x08 /* Private */,
+       6,    0,  177,    2, 0x08 /* Private */,
+       7,    0,  178,    2, 0x08 /* Private */,
+       8,    0,  179,    2, 0x08 /* Private */,
+       9,    0,  180,    2, 0x08 /* Private */,
+      10,    0,  181,    2, 0x08 /* Private */,
+      11,    0,  182,    2, 0x08 /* Private */,
+      12,    0,  183,    2, 0x08 /* Private */,
+      13,    0,  184,    2, 0x08 /* Private */,
+      14,    0,  185,    2, 0x08 /* Private */,
+      15,    0,  186,    2, 0x08 /* Private */,
+      16,    0,  187,    2, 0x08 /* Private */,
+      17,    0,  188,    2, 0x08 /* Private */,
+      18,    0,  189,    2, 0x08 /* Private */,
+      19,    0,  190,    2, 0x08 /* Private */,
+      20,    0,  191,    2, 0x08 /* Private */,
+      21,    0,  192,    2, 0x08 /* Private */,
+      22,    0,  193,    2, 0x08 /* Private */,
+      23,    0,  194,    2, 0x08 /* Private */,
+      24,    0,  195,    2, 0x08 /* Private */,
+      25,    0,  196,    2, 0x08 /* Private */,
+      26,    0,  197,    2, 0x08 /* Private */,
+      27,    0,  198,    2, 0x08 /* Private */,
+      28,    0,  199,    2, 0x08 /* Private */,
+      29,    0,  200,    2, 0x08 /* Private */,
+      30,    0,  201,    2, 0x08 /* Private */,
+      31,    0,  202,    2, 0x08 /* Private */,
+      32,    0,  203,    2, 0x08 /* Private */,
+      33,    0,  204,    2, 0x08 /* Private */,
+      34,    0,  205,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    2,    2,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -232,35 +194,25 @@ void CgQtGui::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 9: _t->slotChangeColorButtonA4(); break;
         case 10: _t->slotChangeColorButtonA5(); break;
         case 11: _t->slotChangeColorButtonA6(); break;
-        case 12: _t->slotChangeColorButtonA7(); break;
-        case 13: _t->slotChangeColorButtonA8(); break;
-        case 14: _t->slotA3StatusCheckBoxChanged(); break;
-        case 15: _t->slotA4StatusCheckBoxChanged(); break;
-        case 16: _t->slotA5StatusCheckBoxChanged(); break;
-        case 17: _t->slotA6StatusCheckBoxChanged(); break;
-        case 18: _t->slotA7StatusCheckBoxChanged(); break;
-        case 19: _t->slotA8StatusCheckBoxChanged(); break;
-        case 20: _t->slotA3Reset(); break;
-        case 21: _t->slotA4Reset(); break;
-        case 22: _t->slotA5Reset(); break;
-        case 23: _t->slotA6Reset(); break;
-        case 24: _t->slotA7Reset(); break;
-        case 25: _t->slotA8Reset(); break;
-        case 26: _t->slotA3FaceNormalStatusCheckBoxChanged(); break;
-        case 27: _t->slotA3VertexNormalStatusCheckBoxChanged(); break;
-        case 28: _t->slotA4FaceNormalStatusCheckBoxChanged(); break;
-        case 29: _t->slotA4VertexNormalStatusCheckBoxChanged(); break;
-        case 30: _t->slotA5FaceNormalStatusCheckBoxChanged(); break;
-        case 31: _t->slotA5VertexNormalStatusCheckBoxChanged(); break;
-        case 32: _t->slotA6FaceNormalStatusCheckBoxChanged(); break;
-        case 33: _t->slotA6VertexNormalStatusCheckBoxChanged(); break;
-        case 34: _t->slotA7FaceNormalStatusCheckBoxChanged(); break;
-        case 35: _t->slotA7VertexNormalStatusCheckBoxChanged(); break;
-        case 36: _t->slotA8FaceNormalStatusCheckBoxChanged(); break;
-        case 37: _t->slotA8VertexNormalStatusCheckBoxChanged(); break;
-        case 38: _t->soltA4LRAglaetenButton(); break;
-        case 39: _t->slotA4RotationButton(); break;
-        case 40: _t->soltA5ExternObjectInit(); break;
+        case 12: _t->slotA3StatusCheckBoxChanged(); break;
+        case 13: _t->slotA4StatusCheckBoxChanged(); break;
+        case 14: _t->slotA5StatusCheckBoxChanged(); break;
+        case 15: _t->slotA6StatusCheckBoxChanged(); break;
+        case 16: _t->slotA3Reset(); break;
+        case 17: _t->slotA4Reset(); break;
+        case 18: _t->slotA5Reset(); break;
+        case 19: _t->slotA6Reset(); break;
+        case 20: _t->slotA3FaceNormalStatusCheckBoxChanged(); break;
+        case 21: _t->slotA3VertexNormalStatusCheckBoxChanged(); break;
+        case 22: _t->slotA4FaceNormalStatusCheckBoxChanged(); break;
+        case 23: _t->slotA4VertexNormalStatusCheckBoxChanged(); break;
+        case 24: _t->slotA5FaceNormalStatusCheckBoxChanged(); break;
+        case 25: _t->slotA5VertexNormalStatusCheckBoxChanged(); break;
+        case 26: _t->slotA6FaceNormalStatusCheckBoxChanged(); break;
+        case 27: _t->slotA6VertexNormalStatusCheckBoxChanged(); break;
+        case 28: _t->soltA4LRAglaetenButton(); break;
+        case 29: _t->slotA4RotationButton(); break;
+        case 30: _t->soltA5ExternObjectInit(); break;
         default: ;
         }
     }
@@ -297,13 +249,13 @@ int CgQtGui::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 41)
+        if (_id < 31)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 41;
+        _id -= 31;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 41)
+        if (_id < 31)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 41;
+        _id -= 31;
     }
     return _id;
 }
