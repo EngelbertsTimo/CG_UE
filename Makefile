@@ -664,6 +664,9 @@ CgSceneControl.o: CgSceneGraph/CgSceneControl.cpp CgSceneGraph/CgSceneControl.h 
 		CgBase/CgBasePolyline.h \
 		CgSceneGraph/CgRotationBody.h \
 		CgSceneGraph/CgExternObjectBody.h \
+		CgSceneGraph/CgScenegraph.h \
+		CgSceneGraph/CgScenegraphEnity.h \
+		CgSceneGraph/CgAppearance.h \
 		CgUtils/ObjLoader.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgSceneControl.o CgSceneGraph/CgSceneControl.cpp
 
@@ -701,7 +704,12 @@ CgLoadObjFileEvent.o: CgEvents/CgLoadObjFileEvent.cpp CgEvents/CgLoadObjFileEven
 		CgBase/CgEnums.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgLoadObjFileEvent.o CgEvents/CgLoadObjFileEvent.cpp
 
-CgScenegraph.o: CgSceneGraph/CgScenegraph.cpp CgSceneGraph/CgScenegraph.h
+CgScenegraph.o: CgSceneGraph/CgScenegraph.cpp CgSceneGraph/CgScenegraph.h \
+		CgBase/CgBaseRenderer.h \
+		CgSceneGraph/CgScenegraphEnity.h \
+		CgBase/CgBaseRenderableObject.h \
+		CgBase/CgEnums.h \
+		CgSceneGraph/CgAppearance.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CgScenegraph.o CgSceneGraph/CgScenegraph.cpp
 
 CgScenegraphEnity.o: CgSceneGraph/CgScenegraphEnity.cpp CgSceneGraph/CgScenegraphEnity.h \
